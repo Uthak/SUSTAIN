@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8470516784929516624}
   - component: {fileID: 8988898713332135154}
   - component: {fileID: 425810624235593605}
+  - component: {fileID: 8925332913275731402}
   m_Layer: 0
   m_Name: TSTfactory1
   m_TagString: factory
@@ -111,5 +112,19 @@ MonoBehaviour:
   prosperityStat: 0
   happinessStat: 0
   environmentStat: 0
+  wasPlaced: 0
   minStatsPerTile: 3
   maxStatsPerTile: 6
+--- !u!114 &8925332913275731402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2791156752653590590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d5b233cd8c5c64e9c7b34a01564568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setFix: 0

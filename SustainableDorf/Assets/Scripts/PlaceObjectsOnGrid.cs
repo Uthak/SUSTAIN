@@ -17,7 +17,10 @@ public class PlaceObjectsOnGrid : MonoBehaviour
 
     //My Var.
     [SerializeField] ObjFollowMouse ObjFollowMouse;
-    bool setFix = false;
+    [SerializeField] Stats Stats;
+    //bool setFix = false;
+    public bool isOnGrid;
+    GameObject curObject;
 
     void Start()
     {
@@ -29,6 +32,13 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     void Update()
     {
         GetMousePositionOnGrid();
+        if (!isOnGrid)
+        {
+            if (curObject != null)
+            {
+                curObject.transform.position = smoothMousePosition + new Vector3(x: 0, y: 0.5f, z: 0);
+            }
+        }
     }
 
     void GetMousePositionOnGrid()
@@ -53,11 +63,12 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                         if (onMousePrefab != null)
                         {
                             // hier update Stats aufrufen
-                            setFix = true;
+                            curObject.GetComponent<Stats>().UpdateStats();
+                            curObject.GetComponent<ClickTile>().setFix = true;
                             Debug.Log("DDDD");
                             node.isPlaceable = false;
-                            onMousePrefab.GetComponent<ObjFollowMouse>().isOnGrid = true;
-                            onMousePrefab.position = node.cellPosition + new Vector3(x: 0, y: 0.5f, z: 0);
+                            isOnGrid = true;
+                            curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.5f, z: 0);
                             onMousePrefab = null;
                         }
                     }
@@ -66,11 +77,12 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public void OnMouse(GameObject clickObject)
     {
-        if (onMousePrefab == null && setFix == false)
+        if (onMousePrefab == null && clickObject.GetComponent<ClickTile>().setFix == false)
         {
-            ObjFollowMouse.isOnGrid = false;
+            curObject = clickObject;
+            isOnGrid = false;
             onMousePrefab = gameObject.transform;
             //onMousePrefab = Instantiate(cube, mousePosition, Quaternion.identity);
         }
