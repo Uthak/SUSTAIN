@@ -15,6 +15,10 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     private Node[,] nodes;
     private Plane plane;
 
+    //My Var.
+    [SerializeField] ObjFollowMouse ObjFollowMouse;
+    bool setFix = false;
+
     void Start()
     {
         CreateGrid();
@@ -33,6 +37,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         
         if (plane.Raycast(ray,out var enter))
         {
+            //Debug.Log("AAAA");
             mousePosition = ray.GetPoint(enter);
             smoothMousePosition = mousePosition;
             mousePosition.y = 0;
@@ -41,23 +46,33 @@ public class PlaceObjectsOnGrid : MonoBehaviour
             {
                 if (node.cellPosition == mousePosition && node.isPlaceable)
                 {
-                    if (Input.GetMouseButtonUp(0) && onMousePrefab != null)
+                    //Debug.Log("BBBB");
+                    if (Input.GetMouseButtonUp(0))
                     {
-                        node.isPlaceable = false;
-                        onMousePrefab.GetComponent<ObjFollowMouse>().isOnGrid = true;
-                        onMousePrefab.position = node.cellPosition + new Vector3(x: 0, y: 0.5f, z: 0);
-                        onMousePrefab = null;
+                        Debug.Log("CCCC");
+                        if (onMousePrefab != null)
+                        {
+                            // hier update Stats aufrufen
+                            setFix = true;
+                            Debug.Log("DDDD");
+                            node.isPlaceable = false;
+                            onMousePrefab.GetComponent<ObjFollowMouse>().isOnGrid = true;
+                            onMousePrefab.position = node.cellPosition + new Vector3(x: 0, y: 0.5f, z: 0);
+                            onMousePrefab = null;
+                        }
                     }
                 }
             }
         }
     }
 
-    public void OnMouseClickOnUI()
+    public void OnMouseDown()
     {
-        if (onMousePrefab == null)
+        if (onMousePrefab == null && setFix == false)
         {
-            onMousePrefab = Instantiate(cube, mousePosition, Quaternion.identity);
+            ObjFollowMouse.isOnGrid = false;
+            onMousePrefab = gameObject.transform;
+            //onMousePrefab = Instantiate(cube, mousePosition, Quaternion.identity);
         }
     }
 
