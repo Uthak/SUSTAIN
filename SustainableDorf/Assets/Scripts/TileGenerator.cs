@@ -4,16 +4,80 @@ using UnityEngine;
 
 public class TileGenerator : MonoBehaviour
 {
-    //list/array of maptile-classe
-    //list/array of maptiles inside said classes
-    //list/array of characteristics [1-3],
+    public GameObject[] tile1Spawnees;
+    public GameObject[] tile2Spawnees;
+    public GameObject[] tile3Spawnees;
 
-    public void GenerateTile(/*characteristic1, characteristic2, characteristic3*/)
+    public Transform spawnPos1;
+    public Transform spawnPos2;
+    public Transform spawnPos3;
+    int randomInt;
+
+    public GameObject tile1;
+    public GameObject tile2;
+    public GameObject tile3;
+
+    private void Start() // for testing
     {
-        //get random tile (mesh) from rondom class (nature, factory, sustainability, social)
-        //give this tile random values of the three characteristics 
-        // if class A, majority of characteritics would be in Need1; etc 
-        // --> it could happen that you get 3 factory tiles, and have to chose based on their stats that most suit your need
+        GenerateTile1();
+        GenerateTile2();
+        GenerateTile3();
+    }
+
+    private void Update() // for testing 
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            tile1.GetComponent<Stats>().UpdateStats();
+            Debug.Log("Mouse was pressed");
+        }
+    }
+    public void NextSet()
+    {
+        GenerateTile1();
+        GenerateTile2();
+        GenerateTile3();
+    }
+
+    public void GenerateTile1()
+    {
+        randomInt = Random.Range(0, tile1Spawnees.Length);
+        tile1 = Instantiate(tile1Spawnees[randomInt], spawnPos1.position, spawnPos1.rotation);
+        tile1.GetComponent<Stats>().RandomizeStats(tile1);
+
         Debug.Log("a tile was created");
+    }
+    public void GenerateTile2()
+    {
+        randomInt = Random.Range(0, tile2Spawnees.Length);
+        tile2 = Instantiate(tile2Spawnees[randomInt], spawnPos2.position, spawnPos2.rotation);
+        tile2.GetComponent<Stats>().RandomizeStats(tile2);
+
+        Debug.Log("a tile was created");
+    }
+    public void GenerateTile3()
+    {
+        randomInt = Random.Range(0, tile3Spawnees.Length);
+        tile3 = Instantiate(tile3Spawnees[randomInt], spawnPos3.position, spawnPos3.rotation);
+        tile3.GetComponent<Stats>().RandomizeStats(tile3);
+
+        Debug.Log("a tile was created");
+    }
+    public void DestroyRemainingTiles()
+    {
+        if(tile1.GetComponent<Stats>().wasPlaced == false)
+        {
+            //Destroy(tile1);
+            tile1 = null;
+        }
+        if (tile2.GetComponent<Stats>().wasPlaced == false)
+        {
+            Destroy(tile2);
+        }
+        if (tile3.GetComponent<Stats>().wasPlaced == false)
+        {
+            Destroy(tile3);
+        }
+        return;
     }
 }

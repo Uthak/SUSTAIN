@@ -7,7 +7,7 @@ public class NeedsManager : MonoBehaviour
     public float prosperityValue = 10f;
     public float happinessValue = 10f;
     public float environmentValue = 10f;
-    [SerializeField] float degenerationRate = 0.05f;
+    [SerializeField] float degenerationRate = 0.0005f;
     float degenerationThreshold;
 
     void Start()
