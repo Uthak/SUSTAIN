@@ -6,6 +6,9 @@ TagManager:
   tags:
   - factory
   - nature
+  - social
+  - sustainable
+  - city
   layers:
   - Default
   - TransparentFX
