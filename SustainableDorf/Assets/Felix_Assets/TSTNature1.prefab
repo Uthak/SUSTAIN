@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3033954033639798899}
   - component: {fileID: 8108543196386562335}
   - component: {fileID: 7510705994836816547}
+  - component: {fileID: 1221033591758904359}
   m_Layer: 0
   m_Name: TSTNature1
   m_TagString: nature
@@ -111,5 +112,19 @@ MonoBehaviour:
   prosperityStat: 0
   happinessStat: 0
   environmentStat: 0
+  wasPlaced: 0
   minStatsPerTile: 3
   maxStatsPerTile: 6
+--- !u!114 &1221033591758904359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625019745783484069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d5b233cd8c5c64e9c7b34a01564568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setFix: 0

@@ -65,9 +65,22 @@ public class Stats : MonoBehaviour
     {
         wasPlaced = true;
         GameObject SceneManager = GameObject.Find("SceneManager");
+        
         SceneManager.GetComponent<NeedsManager>().prosperityValue += prosperityStat;
+        if (SceneManager.GetComponent<NeedsManager>().prosperityValue > 10f)
+        {
+            SceneManager.GetComponent<NeedsManager>().prosperityValue = 10f;
+        }
         SceneManager.GetComponent<NeedsManager>().environmentValue += environmentStat;
+        if (SceneManager.GetComponent<NeedsManager>().environmentValue > 10f)
+        {
+            SceneManager.GetComponent<NeedsManager>().environmentValue = 10f;
+        }
         SceneManager.GetComponent<NeedsManager>().happinessValue += happinessStat;
+        if (SceneManager.GetComponent<NeedsManager>().happinessValue > 10f)
+        {
+            SceneManager.GetComponent<NeedsManager>().happinessValue = 10f;
+        }
 
         SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
 
