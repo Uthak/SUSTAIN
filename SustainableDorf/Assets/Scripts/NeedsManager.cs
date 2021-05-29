@@ -37,7 +37,6 @@ public class NeedsManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if(environmentValue >= degenerationThreshold)
         {
             prosperityValue = prosperityValue - degenerationRate;
@@ -101,33 +100,5 @@ public class NeedsManager : MonoBehaviour
         {
             envImg.color = new Color32(188, 0, 0, 200);
         }
-        /*
-        if (happinessValue <= degenerationThreshold)
-        {
-            hapImg.color = new Color32(255, 116, 0, 150);
-            //Debug.Log("the happinessValue would now be red");
-        }else if (happinessValue <= degenerationThreshold / 2)
-        {
-            hapImg.color = new Color32(188, 0, 0, 200);
-            //Debug.Log("the prosperityValue would now be red");
-        }else
-        {
-            hapImg.color = hapImgBaseColor;
-            //Debug.Log("the prosperityValue would now be red");
-        }
-
-        if (environmentValue <= degenerationThreshold)
-        {
-            envImg.color = new Color32(255, 116, 0, 150);
-            //Debug.Log("the environmentValue would now be red");
-        }else if (environmentValue <= degenerationThreshold / 2)
-        {
-            envImg.color = new Color32(188, 0, 0, 200);
-            //Debug.Log("the prosperityValue would now be red");
-        }
-        else
-        {
-            envImg.color = envImgBaseColor;
-        }*/
     }
 }

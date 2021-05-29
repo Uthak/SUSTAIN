@@ -58,3 +58,5 @@ SustainableDorf/sysinfo.txt
 # Crashlytics generated file
 SustainableDorf/crashlytics-build.properties
 
+SustainableDorf/echo .DS_Store >> ~/.gitignore_global
+SustainableDorf/git config --global core.excludesfile ~/.gitignore_global
