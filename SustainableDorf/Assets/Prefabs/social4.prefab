@@ -423,6 +423,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4182787811723323158}
   - component: {fileID: 4951990395466996801}
+  - component: {fileID: 6002850555928112939}
+  - component: {fileID: -5896957619390415354}
   m_Layer: 0
   m_Name: social4
   m_TagString: social
@@ -480,6 +482,32 @@ MonoBehaviour:
   wasPlaced: 0
   minStatsPerTile: 3
   maxStatsPerTile: 6
+--- !u!114 &6002850555928112939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551070674840354220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d5b233cd8c5c64e9c7b34a01564568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setFix: 0
+--- !u!65 &-5896957619390415354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551070674840354220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.51, y: 1, z: 1.51}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3894177350478557849
 GameObject:
   m_ObjectHideFlags: 0

@@ -591,6 +591,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7048807052622573407}
   - component: {fileID: 8473474713969263304}
+  - component: {fileID: -5407350418057388253}
+  - component: {fileID: 7990553947403866712}
   m_Layer: 0
   m_Name: sustainable2
   m_TagString: sustainable
@@ -640,6 +642,32 @@ MonoBehaviour:
   wasPlaced: 0
   minStatsPerTile: 3
   maxStatsPerTile: 6
+--- !u!114 &-5407350418057388253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681368584154936805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d5b233cd8c5c64e9c7b34a01564568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setFix: 0
+--- !u!65 &7990553947403866712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681368584154936805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.51, y: 1, z: 1.51}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7750039260605871545
 GameObject:
   m_ObjectHideFlags: 0

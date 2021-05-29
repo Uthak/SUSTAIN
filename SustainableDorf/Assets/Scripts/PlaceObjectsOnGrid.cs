@@ -68,7 +68,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                             Debug.Log("DDDD");
                             node.isPlaceable = false;
                             isOnGrid = true;
-                            curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.5f, z: 0);
+                            curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
                             onMousePrefab = null;
                         }
                     }
