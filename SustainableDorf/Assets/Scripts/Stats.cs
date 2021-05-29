@@ -36,7 +36,7 @@ public class Stats : MonoBehaviour
             environmentStat = randomStat2;
             Debug.Log("I am " + tile + "I am a factory: prosperity " + prosperityStat + ", happiness " + happinessStat + ", environment " + environmentStat);
         }
-        else if (tag == "natur")
+        else if (tag == "nature")
         {
             prosperityStat = randomFloat * Random.Range(0f, -1f); // nature always costs money
             happinessStat = randomFloat * Random.Range(0f, .5f); // nature always makes people happy
@@ -71,8 +71,7 @@ public class Stats : MonoBehaviour
 
         SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
 
-        SceneManager.GetComponent<TileGenerator>().NextSet();
-        
+        SceneManager.GetComponent<TileGenerator>().NextSet();        
         return;
     }
 }

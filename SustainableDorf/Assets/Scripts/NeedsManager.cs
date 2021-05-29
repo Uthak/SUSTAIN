@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NeedsManager : MonoBehaviour
 {
     public float prosperityValue = 10f;
     public float happinessValue = 10f;
     public float environmentValue = 10f;
-    [SerializeField] float degenerationRate = 0.0005f;
+    [SerializeField] float degenerationRate = 0.001f;
     float degenerationThreshold;
+
+    [SerializeField] Slider prosperityBar;
+    [SerializeField] Slider happinessBar;
+    [SerializeField] Slider environmentBar;
+    [SerializeField] Image proImg;
+    [SerializeField] Image hapImg;
+    [SerializeField] Image envImg;
+
+    Color proImgBaseColor;
+    Color hapImgBaseColor;
+    Color envImgBaseColor;
 
     void Start()
     {
         degenerationThreshold = environmentValue / 2; // is reached when environement is at 50% or lower
+        //prosperityBar.maxValue = prosperityValue;
+        //happinessBar.maxValue = happinessValue;
+        //environmentBar.maxValue = environmentValue;
+        proImgBaseColor = proImg.color;
+        hapImgBaseColor = hapImg.color;
+        envImgBaseColor = envImg.color;
         Debug.Log("the degenerationThreshold is now: " + degenerationThreshold);
     }
 
@@ -25,7 +43,11 @@ public class NeedsManager : MonoBehaviour
             prosperityValue = prosperityValue - degenerationRate;
             happinessValue = happinessValue - degenerationRate;
             environmentValue = environmentValue - degenerationRate;
-            Debug.Log("the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
+            
+            prosperityBar.value = prosperityValue;
+            happinessBar.value = happinessValue;
+            environmentBar.value = environmentValue;
+            //Debug.Log("the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
         }
         else // faster decline of prosperity and happiness if environment-Rate is red
         {
@@ -34,24 +56,78 @@ public class NeedsManager : MonoBehaviour
             prosperityValue = prosperityValue - degenerationRate * 2;
             happinessValue = happinessValue - degenerationRate * 2;
             environmentValue = environmentValue - degenerationRate; // stays the same
-            Debug.Log("Threshold breached = the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
+
+            prosperityBar.value = prosperityValue;
+            happinessBar.value = happinessValue;
+            environmentBar.value = environmentValue;
+            //Debug.Log("Threshold breached = the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
         }
         
-        // these 3 IF'S 
-        if(prosperityValue <= prosperityValue * .5f)
+        //color changes:
+        //PROSPERITY
+        if(prosperityValue > degenerationThreshold)
         {
-            //turn prosperityValue Powerbar red
-            Debug.Log("the prosperityValue would now be red");
-        }
-        if (happinessValue <= happinessValue * .5f)
+            proImg.color = proImgBaseColor;
+        }else if(prosperityValue <= degenerationThreshold && prosperityValue > degenerationThreshold / 2)
         {
-            //turn happinessValue Powerbar red
-            Debug.Log("the happinessValue would now be red");
-        }
-        if (environmentValue <= environmentValue * .5f)
+            proImg.color = new Color32(255, 116, 0, 150);
+        }else if (prosperityValue <= degenerationThreshold / 2)
         {
-            //turn environmentValue Powerbar red
-            Debug.Log("the environmentValue would now be red");
+            proImg.color = new Color32(188, 0, 0, 200);
         }
+        //HAPPINESS
+        if (happinessValue > degenerationThreshold)
+        {
+            hapImg.color = hapImgBaseColor;
+        }
+        else if (happinessValue <= degenerationThreshold && happinessValue > degenerationThreshold / 2)
+        {
+            hapImg.color = new Color32(255, 116, 0, 150);
+        }
+        else if (happinessValue <= degenerationThreshold / 2)
+        {
+            hapImg.color = new Color32(188, 0, 0, 200);
+        }
+        //ENVIRONMENT
+        if (environmentValue > degenerationThreshold)
+        {
+            envImg.color = envImgBaseColor;
+        }
+        else if (environmentValue <= degenerationThreshold && environmentValue > degenerationThreshold / 2)
+        {
+            envImg.color = new Color32(255, 116, 0, 150);
+        }
+        else if (environmentValue <= degenerationThreshold / 2)
+        {
+            envImg.color = new Color32(188, 0, 0, 200);
+        }
+        /*
+        if (happinessValue <= degenerationThreshold)
+        {
+            hapImg.color = new Color32(255, 116, 0, 150);
+            //Debug.Log("the happinessValue would now be red");
+        }else if (happinessValue <= degenerationThreshold / 2)
+        {
+            hapImg.color = new Color32(188, 0, 0, 200);
+            //Debug.Log("the prosperityValue would now be red");
+        }else
+        {
+            hapImg.color = hapImgBaseColor;
+            //Debug.Log("the prosperityValue would now be red");
+        }
+
+        if (environmentValue <= degenerationThreshold)
+        {
+            envImg.color = new Color32(255, 116, 0, 150);
+            //Debug.Log("the environmentValue would now be red");
+        }else if (environmentValue <= degenerationThreshold / 2)
+        {
+            envImg.color = new Color32(188, 0, 0, 200);
+            //Debug.Log("the prosperityValue would now be red");
+        }
+        else
+        {
+            envImg.color = envImgBaseColor;
+        }*/
     }
 }

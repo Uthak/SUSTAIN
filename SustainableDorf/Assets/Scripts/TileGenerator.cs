@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class TileGenerator : MonoBehaviour
 {
-    public GameObject[] tile1Spawnees;
-    public GameObject[] tile2Spawnees;
-    public GameObject[] tile3Spawnees;
+    public GameObject[] arrayOfAllTilePrefabs;
 
     public Transform spawnPos1;
     public Transform spawnPos2;
@@ -16,12 +14,14 @@ public class TileGenerator : MonoBehaviour
     public GameObject tile1;
     public GameObject tile2;
     public GameObject tile3;
+    [SerializeField] float respawnDelay = 2f;
 
-    private void Start() // for testing
+    private void Start()
     {
-        GenerateTile1();
-        GenerateTile2();
-        GenerateTile3();
+
+        Invoke("GenerateTile1", respawnDelay);
+        Invoke("GenerateTile2", respawnDelay);
+        Invoke("GenerateTile3", respawnDelay);
     }
 
     private void Update() // for testing 
@@ -34,31 +34,31 @@ public class TileGenerator : MonoBehaviour
     }
     public void NextSet()
     {
-        GenerateTile1();
-        GenerateTile2();
-        GenerateTile3();
+        Invoke("GenerateTile1", respawnDelay);
+        Invoke("GenerateTile2", respawnDelay);
+        Invoke("GenerateTile3", respawnDelay);
     }
 
     public void GenerateTile1()
     {
-        randomInt = Random.Range(0, tile1Spawnees.Length);
-        tile1 = Instantiate(tile1Spawnees[randomInt], spawnPos1.position, spawnPos1.rotation);
+        randomInt = Random.Range(0, arrayOfAllTilePrefabs.Length);
+        tile1 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos1.position, spawnPos1.rotation);
         tile1.GetComponent<Stats>().RandomizeStats(tile1);
 
         Debug.Log("a tile was created");
     }
     public void GenerateTile2()
     {
-        randomInt = Random.Range(0, tile2Spawnees.Length);
-        tile2 = Instantiate(tile2Spawnees[randomInt], spawnPos2.position, spawnPos2.rotation);
+        randomInt = Random.Range(0, arrayOfAllTilePrefabs.Length);
+        tile2 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos2.position, spawnPos2.rotation);
         tile2.GetComponent<Stats>().RandomizeStats(tile2);
 
         Debug.Log("a tile was created");
     }
     public void GenerateTile3()
     {
-        randomInt = Random.Range(0, tile3Spawnees.Length);
-        tile3 = Instantiate(tile3Spawnees[randomInt], spawnPos3.position, spawnPos3.rotation);
+        randomInt = Random.Range(0, arrayOfAllTilePrefabs.Length);
+        tile3 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos3.position, spawnPos3.rotation);
         tile3.GetComponent<Stats>().RandomizeStats(tile3);
 
         Debug.Log("a tile was created");
