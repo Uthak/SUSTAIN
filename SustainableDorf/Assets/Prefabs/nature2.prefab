@@ -317,6 +317,12 @@ MonoBehaviour:
   wasPlaced: 0
   minStatsPerTile: 3
   maxStatsPerTile: 6
+  prosperityBar: {fileID: 0}
+  happinessBar: {fileID: 0}
+  environmentBar: {fileID: 0}
+  NEGprosperityBar: {fileID: 0}
+  NEGhappinessBar: {fileID: 0}
+  NEGenvironmentBar: {fileID: 0}
 --- !u!114 &5482477169938681821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +360,6 @@ GameObject:
   - component: {fileID: 6710461056560437660}
   - component: {fileID: 2656289627542777602}
   - component: {fileID: 5898313343770407901}
-  - component: {fileID: 5202081888892198122}
   m_Layer: 0
   m_Name: Cube
   m_TagString: nature
@@ -425,19 +430,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5202081888892198122
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7302345609604945782}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.021, y: 0.01, z: 0.021}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7866948264978358437
 GameObject:
   m_ObjectHideFlags: 0

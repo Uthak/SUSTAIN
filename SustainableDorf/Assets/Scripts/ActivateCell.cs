@@ -11,7 +11,7 @@ public class ActivateCell : MonoBehaviour
     {
         Debug.Log("hey");
         Active = true;
+        //gameObject.GetComponent<Renderer>().material = placeable;
         gameObject.GetComponent<Renderer>().material = placeable;
-
     }
 }

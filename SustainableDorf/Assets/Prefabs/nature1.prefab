@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 2850547390035425420}
   - component: {fileID: 6805638528805309970}
   - component: {fileID: 3131252731188826829}
-  - component: {fileID: 3647621656437030394}
   m_Layer: 0
   m_Name: Cube
   m_TagString: nature
@@ -163,19 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3647621656437030394
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2303681218538387046}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.021, y: 0.01, z: 0.021}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7085146836414391601
 GameObject:
   m_ObjectHideFlags: 0

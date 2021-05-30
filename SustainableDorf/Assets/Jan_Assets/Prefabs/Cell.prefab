@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeable: {fileID: 2100000, guid: ea888df225f880e4da0fce5feeca7acb, type: 2}
+  Active: 0
 --- !u!54 &8659909799071928631
 Rigidbody:
   m_ObjectHideFlags: 0
