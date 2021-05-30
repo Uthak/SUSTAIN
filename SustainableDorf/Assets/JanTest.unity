@@ -151,7 +151,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 190907737}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -347,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297344705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.23, y: 0.03000015, z: -2.4500003}
+  m_LocalPosition: {x: -9.23, y: 0.03000015, z: -7.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -651,7 +651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236935463}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5128964, y: 0.03000015, z: -2.4500003}
+  m_LocalPosition: {x: 1.5128964, y: 0.03000015, z: -7.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -697,6 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b181b62f396d48408bab8c3a48c4736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  City: {fileID: 0}
   gridCellPrefab: {fileID: 2955194374348223477, guid: 545347ff7c0068345ae6f15219d4fa03, type: 3}
   cube: {fileID: 210743861044911314, guid: 8471bd7437fc7bc4e8ec8d400d5c66c7, type: 3}
   onMousePrefab: {fileID: 0}
@@ -755,7 +756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768068554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.87, y: 0.03, z: -2.45}
+  m_LocalPosition: {x: 10.87, y: 0.03, z: -7.8599997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -912,7 +913,6 @@ MonoBehaviour:
   - {fileID: 152648867737269182, guid: c3159b8f119b4b941a73be11cde8bf64, type: 3}
   - {fileID: 2430686181568878280, guid: 63fed7f8566646c4bad00c6199bb4274, type: 3}
   - {fileID: 3778890166634214613, guid: fc9ea1feb58333f47a54e2d6636de3b9, type: 3}
-  - {fileID: 5205196194216705319, guid: 468466efd735b454a8ab00aa7a780b43, type: 3}
   spawnPos1: {fileID: 297344706}
   spawnPos2: {fileID: 1236935464}
   spawnPos3: {fileID: 1768068555}
@@ -946,6 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b181b62f396d48408bab8c3a48c4736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  City: {fileID: 4861427924083943325, guid: 468466efd735b454a8ab00aa7a780b43, type: 3}
   gridCellPrefab: {fileID: 2955194374348223477, guid: 545347ff7c0068345ae6f15219d4fa03, type: 3}
   cube: {fileID: 210743861044911314, guid: 8471bd7437fc7bc4e8ec8d400d5c66c7, type: 3}
   onMousePrefab: {fileID: 0}

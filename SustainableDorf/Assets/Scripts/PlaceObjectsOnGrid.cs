@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlaceObjectsOnGrid : MonoBehaviour
 {
+    public Transform City;
     public Transform gridCellPrefab;
     public Transform cube;
     public Transform onMousePrefab;
@@ -18,9 +19,12 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     //My Var.
     [SerializeField] ObjFollowMouse ObjFollowMouse;
     [SerializeField] Stats Stats;
+    //[SerializeField] Material placeable;
     //bool setFix = false;
     public bool isOnGrid;
+    //bool activeFix = false;
     GameObject curObject;
+
 
     void Start()
     {
@@ -37,6 +41,19 @@ public class PlaceObjectsOnGrid : MonoBehaviour
             if (curObject != null)
             {
                 curObject.transform.position = smoothMousePosition + new Vector3(x: 0, y: 0.5f, z: 0);
+                curObject.GetComponent<BoxCollider>().enabled = false;
+            }
+        }
+
+        foreach (var node in nodes)
+        {
+            if (node.activeFix == false)
+            {
+                if (node.obj.GetComponent<ActivateCell>().Active == true)
+                {
+                    node.isPlaceable = true;
+                    node.activeFix = true;
+                }
             }
         }
     }
@@ -54,25 +71,28 @@ public class PlaceObjectsOnGrid : MonoBehaviour
             mousePosition = Vector3Int.RoundToInt(mousePosition);
             foreach (var node in nodes)
             {
-                if (node.cellPosition == mousePosition && node.isPlaceable)
-                {
-                    //Debug.Log("BBBB");
-                    if (Input.GetMouseButtonUp(0))
+                
+                    if (node.cellPosition == mousePosition && node.isPlaceable)
                     {
-                        Debug.Log("CCCC");
-                        if (onMousePrefab != null)
+                        //Debug.Log("BBBB");
+                        if (Input.GetMouseButtonUp(0))
                         {
-                            // hier update Stats aufrufen
-                            curObject.GetComponent<Stats>().UpdateStats();
-                            curObject.GetComponent<ClickTile>().setFix = true;
-                            Debug.Log("DDDD");
-                            node.isPlaceable = false;
-                            isOnGrid = true;
-                            curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
-                            onMousePrefab = null;
+                            //Debug.Log("CCCC");
+                            if (onMousePrefab != null)
+                            {
+                                // hier update Stats aufrufen
+                                curObject.GetComponent<BoxCollider>().enabled = true;
+                                curObject.GetComponent<Stats>().UpdateStats();
+                                curObject.GetComponent<ClickTile>().setFix = true;
+                                Debug.Log("DDDD");
+                                node.isPlaceable = false;
+                                isOnGrid = true;
+                                curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
+                                onMousePrefab = null;
+                            }
                         }
                     }
-                }
+                
             }
         }
     }
@@ -89,6 +109,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     }
 
 
+
     private void CreateGrid()
     {
         nodes = new Node[width, height];
@@ -97,13 +118,22 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                Vector3 worldPosition = new Vector3(x: i, y: 0, z: j);
+                Vector3 worldPosition = new Vector3(x: i - width/2, y: 0, z: j - height/2);
                 Transform obj = Instantiate(gridCellPrefab, worldPosition, Quaternion.identity);
                 obj.name = "Cell" + name;
-                nodes[i, j] = new Node(isPlaceable: true, worldPosition, obj);
+                nodes[i, j] = new Node(isPlaceable: false, worldPosition, obj, activeFix: false);
                 name++;
             }
         }
+
+        //setze city in die mitte
+        int half = width * height / 2;
+        GameObject middle = GameObject.Find("Cell" + half);
+        Debug.Log(middle);
+        Instantiate(City, new Vector3(0,0,0) /*new Vector3(x: width/2, y: 0, z: height/2)*/, Quaternion.identity);
+        nodes[width / 2, height / 2].isPlaceable = false;
+        nodes[width / 2, height / 2].activeFix = true;
+        City.GetComponent<ClickTile>().setFix = true;
     }
 }
 
@@ -114,11 +144,13 @@ public class Node
     public bool isPlaceable;
     public Vector3 cellPosition;
     public Transform obj;
+    public bool activeFix;
 
-    public Node(bool isPlaceable, Vector3 cellPosition, Transform obj)
+    public Node(bool isPlaceable, Vector3 cellPosition, Transform obj, bool activeFix)
     {
         this.isPlaceable = isPlaceable;
         this.cellPosition = cellPosition;
         this.obj = obj;
+        this.activeFix = activeFix;
     }
 }
