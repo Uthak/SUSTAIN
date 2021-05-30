@@ -6,7 +6,8 @@ public class ClickTile : MonoBehaviour
 {
     private GameObject Object;
     public bool setFix = false;
-    private GameObject statsDisplay;
+    private GameObject StatsDisplay;
+    public GameObject Over;
 
 
     public void OnMouseDown()
@@ -18,17 +19,35 @@ public class ClickTile : MonoBehaviour
 
     private void OnMouseOver()
     {
-        GameObject Over = gameObject;
-        Debug.Log(Over);
-        //Debug.Log("OnMouseOver");
-        statsDisplay = GameObject.Find("Stats_UI");
-        statsDisplay.transform.GetChild(0).gameObject.SetActive(true);
-        statsDisplay.GetComponent<StatUIDisplay>().CastStatsToUI();
+        if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable"))
+        {
+            Over = gameObject;
+            //Debug.Log("mS " + Over.GetComponent<Stats>().mainStat + "hS " + Over.GetComponent<Stats>().randomStat1 + "eS " + Over.GetComponent<Stats>().randomStat2);
+            //Debug.Log("mS " + Over.GetComponent<Stats>().prosperityStat + "hS " + Over.GetComponent<Stats>().environmentStat + "eS " + Over.GetComponent<Stats>().happinessStat);
+            //Debug.Log(Over);
+            //Debug.Log("OnMouseOver");
+            StatsDisplay = GameObject.Find("Stats_UI");
+            Debug.Log(StatsDisplay);
+            //statsDisplay.transform.GetChild(0).gameObject.SetActive(true);
+
+            float a = Over.GetComponent<Stats>().prosperityStat;
+            float b = Over.GetComponent<Stats>().environmentStat;
+            float c = Over.GetComponent<Stats>().happinessStat;
+
+
+
+
+            StatsDisplay.GetComponent<StatUIDisplay>().CastStatsToUI(Over, a, b, c);
+            StatsDisplay.GetComponentInChildren<StatUIDisplay>().CastStatsToUI(Over, a, b, c);
+            StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, a, b, c);
+        }
     }
     private void OnMouseExit()
     {
         //Debug.Log("OnMouseExit");
-        statsDisplay.transform.GetChild(0).gameObject.SetActive(false);
-        statsDisplay = null;
+        //statsDisplay.transform.GetChild(0).gameObject.SetActive(false);
+        //statsDisplay = null;
+
+        StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
     }
 }

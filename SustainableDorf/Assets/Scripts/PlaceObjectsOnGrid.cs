@@ -80,7 +80,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                             //Debug.Log("CCCC");
                             if (onMousePrefab != null)
                             {
-                                // hier update Stats aufrufen
+                                // wird gesetzt
                                 curObject.GetComponent<BoxCollider>().enabled = true;
                                 curObject.GetComponent<Stats>().UpdateStats();
                                 curObject.GetComponent<ClickTile>().setFix = true;
@@ -89,6 +89,9 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                                 isOnGrid = true;
                                 curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
                                 onMousePrefab = null;
+
+                                GameObject Cam = GameObject.Find("Main Camera");
+                                AudioSource audioData = Cam.GetComponent<AudioSource>();
                             }
                         }
                     }

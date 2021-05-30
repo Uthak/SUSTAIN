@@ -11,9 +11,9 @@ public class Stats : MonoBehaviour
     public float environmentStat;
 
     float randomFloat;
-    float mainStat;
-    float randomStat1;
-    float randomStat2;
+    public float mainStat;
+    public float randomStat1;
+    public float randomStat2;
 
     public bool wasPlaced = false;
 
@@ -44,7 +44,8 @@ public class Stats : MonoBehaviour
             prosperityStat = mainStat;
             happinessStat = randomStat1;
             environmentStat = randomStat2;
-            Debug.Log("mS " + mainStat + "hS " + randomStat1 + "eS " + randomStat2);
+            //Debug.Log("mS " + mainStat + "hS " + randomStat1 + "eS " + randomStat2);
+            /*
             if(mainStat > 0)
             {
                 prosperityBar.value = prosperityStat;
@@ -75,6 +76,7 @@ public class Stats : MonoBehaviour
                 NEGenvironmentBar.value = flippedStat;
 
             }
+            */
             //Debug.Log("I am " + tile + "I am a factory: prosperity " + prosperityStat + ", happiness " + happinessStat + ", environment " + environmentStat);
         }
         else if (tag == "nature")
@@ -83,9 +85,9 @@ public class Stats : MonoBehaviour
             happinessStat = randomFloat * Random.Range(0f, .5f); // nature always makes people happy
             environmentStat = mainStat;
 
-            prosperityBar.value = prosperityStat;
+            /*prosperityBar.value = prosperityStat;
             happinessBar.value = happinessStat;
-            environmentBar.value = environmentStat;
+            environmentBar.value = environmentStat;*/
             //Debug.Log("I am " + tile + "I am nature: prosperity " + prosperityStat + ", happiness " + happinessStat + ", environment " + environmentStat);
         }
         else if (tag == "social")
@@ -94,9 +96,9 @@ public class Stats : MonoBehaviour
             happinessStat = mainStat;
             environmentStat = randomStat2;
 
-            prosperityBar.value = prosperityStat;
+            /*prosperityBar.value = prosperityStat;
             happinessBar.value = happinessStat;
-            environmentBar.value = environmentStat;
+            environmentBar.value = environmentStat;*/
             //Debug.Log("I am " + tile + "I am a social structure: prosperity " + prosperityStat + ", happiness " + happinessStat + ", environment " + environmentStat);
         }
         else if (tag == "sustainable")
@@ -105,9 +107,9 @@ public class Stats : MonoBehaviour
             happinessStat = randomStat1;
             environmentStat = randomFloat; // maximum environment +
 
-            prosperityBar.value = prosperityStat;
+            /*prosperityBar.value = prosperityStat;
             happinessBar.value = happinessStat;
-            environmentBar.value = environmentStat;
+            environmentBar.value = environmentStat;*/
             //Debug.Log("I am " + tile + "I am a sustainability structure: prosperity " + prosperityStat + ", happiness " + happinessStat + ", environment " + environmentStat);
         }
     }

@@ -16,11 +16,16 @@ public class StatUIDisplay : MonoBehaviour
     float pS;
     float hS;
     float eS;
-    public void CastStatsToUI(GameObject gO)
+    public void CastStatsToUI(GameObject gO, float a, float b, float c)
     {
-        pS = gO.GetComponent<Stats>().prosperityStat;
+        /*pS = gO.GetComponent<Stats>().prosperityStat;
         hS = gO.GetComponent<Stats>().happinessStat;
-        eS = gO.GetComponent<Stats>().environmentStat;
+        eS = gO.GetComponent<Stats>().environmentStat;*/
+        pS = a; //gO.GetComponent<Stats>().prosperityStat;
+        hS = c; //gO.GetComponent<Stats>().happinessStat;
+        eS = b; //gO.GetComponent<Stats>().environmentStat;
+
+        Debug.Log(a + b + c);
 
         if (hS > 0f) // show happiness
         {
@@ -52,5 +57,16 @@ public class StatUIDisplay : MonoBehaviour
             environmentBar.value = 0f;
             NEGenvironmentBar.value = eS * -1;
         }
+    }
+
+    public void ResetStatBars()
+    {
+        prosperityBar.value = 0f;
+        happinessBar.value = 0f;
+        environmentBar.value = 0f;
+
+        NEGprosperityBar.value = 0f;
+        NEGhappinessBar.value = 0f;
+        NEGenvironmentBar.value = 0f;
     }
 }
