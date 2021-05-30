@@ -17,6 +17,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     private Plane plane;
 
     //My Var.
+    [SerializeField] AudioSource PlopSound;
     [SerializeField] ObjFollowMouse ObjFollowMouse;
     [SerializeField] Stats Stats;
     //[SerializeField] Material placeable;
@@ -24,6 +25,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     public bool isOnGrid;
     //bool activeFix = false;
     GameObject curObject;
+
 
 
     void Start()
@@ -90,8 +92,8 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                                 curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
                                 onMousePrefab = null;
 
-                                GameObject Cam = GameObject.Find("Main Camera");
-                                AudioSource audioData = Cam.GetComponent<AudioSource>();
+                                
+                                PlopSound.Play();
                             }
                         }
                     }
