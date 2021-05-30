@@ -59,6 +59,10 @@ public class NeedsManager : MonoBehaviour
             prosperityBar.value = prosperityValue;
             happinessBar.value = happinessValue;
             environmentBar.value = environmentValue;
+            if(prosperityValue <= 0f || happinessValue == 0f || environmentValue == 0f)
+            {
+                GetComponent<Looser>().YouLose();
+            }
             //Debug.Log("Threshold breached = the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
         }
         

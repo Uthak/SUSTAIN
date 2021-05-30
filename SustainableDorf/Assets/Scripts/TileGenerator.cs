@@ -67,8 +67,7 @@ public class TileGenerator : MonoBehaviour
     {
         if(tile1.GetComponent<Stats>().wasPlaced == false)
         {
-            //Destroy(tile1);
-            tile1 = null;
+            Destroy(tile1);
         }
         if (tile2.GetComponent<Stats>().wasPlaced == false)
         {
