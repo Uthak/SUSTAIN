@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StatUIDisplay : MonoBehaviour
 {
@@ -13,10 +14,13 @@ public class StatUIDisplay : MonoBehaviour
     [SerializeField] Slider NEGhappinessBar;
     [SerializeField] Slider NEGenvironmentBar;
 
+    [SerializeField] TextMeshProUGUI nameField;
+
+
     float pS;
     float hS;
     float eS;
-    public void CastStatsToUI(GameObject gO, float a, float b, float c)
+    public void CastStatsToUI(GameObject gO, string t, float a, float b, float c)
     {
         /*pS = gO.GetComponent<Stats>().prosperityStat;
         hS = gO.GetComponent<Stats>().happinessStat;
@@ -24,6 +28,28 @@ public class StatUIDisplay : MonoBehaviour
         pS = a; //gO.GetComponent<Stats>().prosperityStat;
         hS = c; //gO.GetComponent<Stats>().happinessStat;
         eS = b; //gO.GetComponent<Stats>().environmentStat;
+
+        if(t == "nature")
+        {
+            nameField.text = "Nature";
+        }
+        if (t == "factory")
+        {
+            nameField.text = "Factory";
+        }
+        if (t == "social")
+        {
+            nameField.text = "Social";
+        }
+        if (t == "sustainable")
+        {
+            nameField.text = "Sustainable";
+        }
+        if (t == "city")
+        {
+            nameField.text = "Pagotopia/" +
+                "we hope you're enjoying yourself!";
+        }
 
         Debug.Log(a + b + c);
 
@@ -68,5 +94,7 @@ public class StatUIDisplay : MonoBehaviour
         NEGprosperityBar.value = 0f;
         NEGhappinessBar.value = 0f;
         NEGenvironmentBar.value = 0f;
+
+        nameField.text = null;
     }
 }

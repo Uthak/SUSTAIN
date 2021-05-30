@@ -20,6 +20,9 @@ public class Stats : MonoBehaviour
     [SerializeField] float minStatsPerTile = 3f;
     [SerializeField] float maxStatsPerTile = 6f;
 
+    public bool isCow = false;
+
+    /*
     [SerializeField] Slider prosperityBar;
     [SerializeField] Slider happinessBar;
     [SerializeField] Slider environmentBar;
@@ -27,7 +30,7 @@ public class Stats : MonoBehaviour
     [SerializeField] Slider NEGprosperityBar;
     [SerializeField] Slider NEGhappinessBar;
     [SerializeField] Slider NEGenvironmentBar;
-
+    */
     public void RandomizeStats(GameObject tile)
     {
         /*randomFloat = Random.Range(minStatsPerTile, maxStatsPerTile);

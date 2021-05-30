@@ -22,6 +22,7 @@ public class ClickTile : MonoBehaviour
         if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable"))
         {
             Over = gameObject;
+            tag = Over.tag;
             //Debug.Log("mS " + Over.GetComponent<Stats>().mainStat + "hS " + Over.GetComponent<Stats>().randomStat1 + "eS " + Over.GetComponent<Stats>().randomStat2);
             //Debug.Log("mS " + Over.GetComponent<Stats>().prosperityStat + "hS " + Over.GetComponent<Stats>().environmentStat + "eS " + Over.GetComponent<Stats>().happinessStat);
             //Debug.Log(Over);
@@ -34,12 +35,7 @@ public class ClickTile : MonoBehaviour
             float b = Over.GetComponent<Stats>().environmentStat;
             float c = Over.GetComponent<Stats>().happinessStat;
 
-
-
-
-            StatsDisplay.GetComponent<StatUIDisplay>().CastStatsToUI(Over, a, b, c);
-            StatsDisplay.GetComponentInChildren<StatUIDisplay>().CastStatsToUI(Over, a, b, c);
-            StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, a, b, c);
+            StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, tag, a, b, c);
         }
     }
     private void OnMouseExit()

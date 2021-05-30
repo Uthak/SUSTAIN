@@ -18,6 +18,8 @@ public class PlaceObjectsOnGrid : MonoBehaviour
 
     //My Var.
     [SerializeField] AudioSource PlopSound;
+    [SerializeField] AudioSource moohSound;
+
     [SerializeField] ObjFollowMouse ObjFollowMouse;
     [SerializeField] Stats Stats;
     //[SerializeField] Material placeable;
@@ -86,7 +88,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                                 curObject.GetComponent<BoxCollider>().enabled = true;
                                 curObject.GetComponent<Stats>().UpdateStats();
                                 curObject.GetComponent<ClickTile>().setFix = true;
-                                Debug.Log("DDDD");
+                                //Debug.Log("DDDD");
                                 node.isPlaceable = false;
                                 isOnGrid = true;
                                 curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
@@ -94,6 +96,10 @@ public class PlaceObjectsOnGrid : MonoBehaviour
 
                                 
                                 PlopSound.Play();
+                            if(curObject.GetComponent<Stats>().isCow == true)
+                            {
+                                moohSound.Play();
+                            }
                             }
                         }
                     }
