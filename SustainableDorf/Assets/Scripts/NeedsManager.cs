@@ -59,16 +59,17 @@ public class NeedsManager : MonoBehaviour
             prosperityBar.value = prosperityValue;
             happinessBar.value = happinessValue;
             environmentBar.value = environmentValue;
-            if(prosperityValue <= 0f || happinessValue == 0f || environmentValue == 0f)
-            {
-                GetComponent<Looser>().YouLose();
-            }
             //Debug.Log("Threshold breached = the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
         }
-        
+        // call LOOSER-function
+        if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
+        {
+            GetComponent<Looser>().YouLose();
+        }
+
         //color changes:
         //PROSPERITY
-        if(prosperityValue > degenerationThreshold)
+        if (prosperityValue > degenerationThreshold)
         {
             proImg.color = proImgBaseColor;
         }else if(prosperityValue <= degenerationThreshold && prosperityValue > degenerationThreshold / 2)
