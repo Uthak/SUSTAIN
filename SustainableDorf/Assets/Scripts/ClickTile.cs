@@ -19,7 +19,7 @@ public class ClickTile : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable"))
+        if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
         {
             Over = gameObject;
             tag = Over.tag;

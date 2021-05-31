@@ -47,22 +47,19 @@ public class StatUIDisplay : MonoBehaviour
         }
         if (t == "city")
         {
-            nameField.text = "Pagotopia/" +
-                "we hope you're enjoying yourself!";
+            nameField.text = "Pagotopia"; // "\n" to add another line 
         }
-
-        Debug.Log(a + b + c);
 
         if (hS > 0f) // show happiness
         {
             happinessBar.value = hS;
             NEGhappinessBar.value = 0f;
-        }
-        else
+        }else
         {
             happinessBar.value = 0f;
             NEGhappinessBar.value = hS * -1;
         }
+        
         if (pS > 0f) // show prosperity
         {
             prosperityBar.value = pS;
@@ -71,14 +68,14 @@ public class StatUIDisplay : MonoBehaviour
         else
         {
             prosperityBar.value = 0f;
-            NEGprosperityBar.value = hS * -1;
+            NEGprosperityBar.value = pS * -1;
         }
+        
         if (eS > 0f) // show environment
         {
             environmentBar.value = eS;
             NEGenvironmentBar.value = 0f;
-        }
-        else
+        }else
         {
             environmentBar.value = 0f;
             NEGenvironmentBar.value = eS * -1;

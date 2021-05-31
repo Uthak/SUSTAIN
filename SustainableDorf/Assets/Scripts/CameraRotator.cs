@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
-    //[SerializeField] private Vector3 rotationVector = Vector3.up;
     [SerializeField] float Y = 1f;
-    Vector3 rotationVector;
     [SerializeField] float speed = 1f;
+    
     [SerializeField] bool isCow = false;
+    
+    Vector3 rotationVector;
     float randomFloat;
     private void Start()
     {

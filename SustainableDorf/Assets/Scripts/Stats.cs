@@ -84,7 +84,7 @@ public class Stats : MonoBehaviour
         }
         else if (tag == "nature")
         {
-            prosperityStat = randomFloat * Random.Range(0f, -1f); // nature always costs money
+            prosperityStat = randomFloat * Random.Range(-1f, 0f); // nature always costs money
             happinessStat = randomFloat * Random.Range(0f, .5f); // nature always makes people happy
             environmentStat = mainStat;
 
