@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38051518262297085}
   m_LocalRotation: {x: 0.000000057560527, y: 0.7075947, z: -0.000000057640037, w: 0.70661855}
-  m_LocalPosition: {x: -0.021660492, y: 0.005731702, z: 0.006455317}
+  m_LocalPosition: {x: 0, y: 0.005731702, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8340961276828051443}
@@ -190,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909101422345568264}
   m_LocalRotation: {x: 0.000000057560527, y: 0.7075947, z: -0.000000057640037, w: 0.70661855}
-  m_LocalPosition: {x: -0.021660492, y: -0.038270324, z: 0.006455317}
+  m_LocalPosition: {x: 0, y: -0.038270324, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8340961276828051443}
@@ -682,6 +682,7 @@ MonoBehaviour:
   wasPlaced: 0
   minStatsPerTile: 3
   maxStatsPerTile: 6
+  isCow: 0
 --- !u!114 &5389830731617372308
 MonoBehaviour:
   m_ObjectHideFlags: 0

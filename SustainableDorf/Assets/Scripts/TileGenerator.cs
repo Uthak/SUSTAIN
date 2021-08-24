@@ -16,15 +16,17 @@ public class TileGenerator : MonoBehaviour
     public GameObject tile3;
     [SerializeField] float respawnDelay = 2f;
 
+    int minOrientation = 1;
+    int maxOrientation = 4;
+
     private void Start()
     {
-
         Invoke("GenerateTile1", respawnDelay);
         Invoke("GenerateTile2", respawnDelay);
         Invoke("GenerateTile3", respawnDelay);
     }
 
-    private void Update() // for testing 
+    private void Update() // for testing //delete me?! (spawns new on rightclick)
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -32,6 +34,7 @@ public class TileGenerator : MonoBehaviour
             Debug.Log("Mouse was pressed");
         }
     }
+
     public void NextSet()
     {
         Invoke("GenerateTile1", respawnDelay);
@@ -41,28 +44,41 @@ public class TileGenerator : MonoBehaviour
 
     public void GenerateTile1()
     {
+        int randomOrientation = Random.Range(minOrientation, maxOrientation);
+        Vector3 rot = transform.rotation.eulerAngles;
+        rot = new Vector3(rot.x, rot.y - ((randomOrientation - 1) * 90), rot.z);
+
         randomInt = Random.Range(0, arrayOfAllTilePrefabs.Length);
-        tile1 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos1.position, spawnPos1.rotation);
+        tile1 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos1.position, Quaternion.Euler(rot));
         tile1.GetComponent<Stats>().RandomizeStats(tile1);
 
         Debug.Log("a tile was created");
     }
     public void GenerateTile2()
     {
+        int randomOrientation = Random.Range(minOrientation, maxOrientation);
+        Vector3 rot = transform.rotation.eulerAngles;
+        rot = new Vector3(rot.x, rot.y - ((randomOrientation - 1) * 90), rot.z);
+
         randomInt = Random.Range(0, arrayOfAllTilePrefabs.Length);
-        tile2 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos2.position, spawnPos2.rotation);
+        tile2 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos2.position, Quaternion.Euler(rot));
         tile2.GetComponent<Stats>().RandomizeStats(tile2);
 
         Debug.Log("a tile was created");
     }
     public void GenerateTile3()
     {
+        int randomOrientation = Random.Range(minOrientation, maxOrientation);
+        Vector3 rot = transform.rotation.eulerAngles;
+        rot = new Vector3(rot.x, rot.y - ((randomOrientation - 1) * 90), rot.z);
+
         randomInt = Random.Range(0, arrayOfAllTilePrefabs.Length);
-        tile3 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos3.position, spawnPos3.rotation);
+        tile3 = Instantiate(arrayOfAllTilePrefabs[randomInt], spawnPos3.position, Quaternion.Euler(rot));
         tile3.GetComponent<Stats>().RandomizeStats(tile3);
 
         Debug.Log("a tile was created");
     }
+
     public void DestroyRemainingTiles()
     {
         if(tile1.GetComponent<Stats>().wasPlaced == false)

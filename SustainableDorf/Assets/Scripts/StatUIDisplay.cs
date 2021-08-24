@@ -16,7 +16,6 @@ public class StatUIDisplay : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI nameField;
 
-
     float pS;
     float hS;
     float eS;
