@@ -11,6 +11,7 @@ public class ClickTile : MonoBehaviour
 
 
     public void OnMouseDown()
+        //übergibt angeklicktes Object an OnMouse Funktion aus PlaceObjectsOnGrid
     {
         Object = gameObject;
         GameObject SceneManager = GameObject.Find("SceneManager");
@@ -18,6 +19,7 @@ public class ClickTile : MonoBehaviour
     }
 
     private void OnMouseOver()
+        // Liest Stats von MapTile beim Hovern aus 
     {
         if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
         {
@@ -39,6 +41,7 @@ public class ClickTile : MonoBehaviour
         }
     }
     private void OnMouseExit()
+        //setzt die Angezeigten Stats auf null zurück
     {
         //Debug.Log("OnMouseExit");
         //statsDisplay.transform.GetChild(0).gameObject.SetActive(false);
