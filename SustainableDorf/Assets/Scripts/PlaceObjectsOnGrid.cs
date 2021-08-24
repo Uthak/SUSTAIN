@@ -62,17 +62,32 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         }
     }
 
+    RaycastHit hit;
+
     void GetMousePositionOnGrid()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        if (plane.Raycast(ray,out var enter))
+        if (plane.Raycast(ray,out var enter) )        
         {
-            //Debug.Log("AAAA");
+            Debug.Log("AAAA");
             mousePosition = ray.GetPoint(enter);
             smoothMousePosition = mousePosition;
             mousePosition.y = 0;
             mousePosition = Vector3Int.RoundToInt(mousePosition);
+
+            
+
+            /*GameObject[] podest = GameObject.FindGameObjectsWithTag("podest");
+            foreach (var i in podest)
+            {
+                if (i.transform.position == mousePosition)
+                {
+                    Debug.Log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                }
+            }*/
+
+
             foreach (var node in nodes)
             {
                 
@@ -102,6 +117,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                             }
                             }
                         }
+                        
                     }
                 
             }
@@ -141,7 +157,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         int half = width * height / 2;
         GameObject middle = GameObject.Find("Cell" + half);
         Debug.Log(middle);
-        Instantiate(City, new Vector3(0,0,0) /*new Vector3(x: width/2, y: 0, z: height/2)*/, Quaternion.identity);
+        Instantiate(City, new Vector3(0, 0.1f,0) /*new Vector3(x: width/2, y: 0, z: height/2)*/, Quaternion.identity);
         nodes[width / 2, height / 2].isPlaceable = false;
         nodes[width / 2, height / 2].activeFix = true;
         City.GetComponent<ClickTile>().setFix = true;
