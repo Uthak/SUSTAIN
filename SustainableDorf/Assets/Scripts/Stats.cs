@@ -6,39 +6,44 @@ using TMPro;
 
 public class Stats : MonoBehaviour
 {
-public float prosperityStat;
-public float happinessStat;
-public float environmentStat;
+    public Transform myPosition;
 
-float randomFloat;
-public float mainStat;
-public float randomStat1;
-public float randomStat2;
+    public float prosperityStat;
+    public float happinessStat;
+    public float environmentStat;
 
-public bool wasPlaced = false;
+    float randomFloat;
+    public float mainStat;
+    public float randomStat1;
+    public float randomStat2;
 
-[SerializeField] float minStatsPerTile = 3f;
-[SerializeField] float maxStatsPerTile = 6f;
+    [SerializeField] float minStatsPerTile = 3f;
+    [SerializeField] float maxStatsPerTile = 6f;
 
-[SerializeField] float minInfluencePerTile = -.0125f;
-[SerializeField] float maxInfluencePerTile = .0125f;
+    [SerializeField] float minInfluencePerTile = .125f;
+    [SerializeField] float maxInfluencePerTile = .325f;
 
-public bool isCow = false;
+    public bool isCow = false;
+    public bool wasPlaced = false;
 
-public void RandomizeStats(GameObject tile)
-{
-    GameObject SceneManager = GameObject.Find("SceneManager");
-
-    if (SceneManager.GetComponent<NeedsManager>().usingContinuousValues) // can be deleted if we chose a one-time-effect for good
+    public void RandomizeStats(GameObject tile)
     {
-        randomFloat = Random.Range(minInfluencePerTile, maxInfluencePerTile);
-        mainStat = randomFloat / 2 + Random.Range(0f, (randomFloat / 2f));
-        randomStat1 = randomFloat * Random.Range(-.5f, .5f);
-        randomStat2 = randomFloat * Random.Range(-.5f, .5f);
+        myPosition = transform;
 
-        // this prevents all stats from being positive or the same
-        if (randomStat1 >= 0f && randomStat2 >= 0f | randomStat1 == randomStat2)
-        {
+        GameObject SceneManager = GameObject.Find("SceneManager");
+
+        if (SceneManager.GetComponent<NeedsManager>().usingContinuousValues) // can be deleted if we chose a one-time-effect for good
+        { 
+            randomFloat = Random.Range(minInfluencePerTile, maxInfluencePerTile);
+
+            //mainStat = randomFloat / 2 + Random.Range(0f, (randomFloat / 2f));
+            mainStat = randomFloat;
+            randomStat1 = randomFloat * Random.Range(-.5f, .5f);
+            randomStat2 = randomFloat * Random.Range(-.5f, .5f);
+
+            // this prevents all stats from being positive or the same
+            if (randomStat1 >= 0f && randomStat2 >= 0f | randomStat1 == randomStat2)
+            {
             int randomStat = Random.Range(1, 2);
             if (randomStat == 1)
             {
@@ -49,8 +54,6 @@ public void RandomizeStats(GameObject tile)
                 randomStat2 = randomStat2 * -1;
             }
         }
-
-        Transform myPosition = transform;
 
         if (tag == "factory")
         {
@@ -100,8 +103,6 @@ public void RandomizeStats(GameObject tile)
                 randomStat2 = randomStat2 * -1;
             }
         }
-
-        Transform myPosition = transform;
 
         if (tag == "factory")
         {

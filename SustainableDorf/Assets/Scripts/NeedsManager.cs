@@ -18,9 +18,11 @@ public class NeedsManager : MonoBehaviour
     public float prosperityValue = 10f;
     public float happinessValue = 10f;
     public float environmentValue = 10f;
-    public float prosperityDegenerationRate = 0.001f;
-    public float happinessDegenerationRate = 0.001f;
-    public float environmentDegenerationRate = 0.001f;
+
+    public float prosperityDegenerationRate = 0.1f;
+    public float happinessDegenerationRate = 0.1f;
+    public float environmentDegenerationRate = 0.1f;
+
     public float accelleratedDegenerationRate = 1.5f;
     float degenerationThreshold;
 
@@ -37,17 +39,14 @@ public class NeedsManager : MonoBehaviour
 
     void Start()
     {
-        degenerationThreshold = environmentValue / 2; // is reached when environement is at 50% or lower
-        //prosperityBar.maxValue = prosperityValue;
-        //happinessBar.maxValue = happinessValue;
-        //environmentBar.maxValue = environmentValue;
+        degenerationThreshold = environmentValue / 2;
+
         proImgBaseColor = proImg.color;
         hapImgBaseColor = hapImg.color;
         envImgBaseColor = envImg.color;
-        Debug.Log("the degenerationThreshold is now: " + degenerationThreshold);
+        //Debug.Log("the degenerationThreshold is now: " + degenerationThreshold);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
             if (environmentValue >= degenerationThreshold | prosperityValue >= degenerationThreshold | happinessValue >= degenerationThreshold)
@@ -61,19 +60,18 @@ public class NeedsManager : MonoBehaviour
                 environmentBar.value = environmentValue;
                 //Debug.Log("the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
             }
-            else // faster decline of prosperity and happiness if environment-Rate is red
+            else // faster decline of other stats when any other stat is red
             {
-                // let prosperity PowerbarValue blink red
-                // let happiness PowerbarValue blink red
                 prosperityValue = prosperityValue - prosperityDegenerationRate * accelleratedDegenerationRate;
                 happinessValue = happinessValue - happinessDegenerationRate * accelleratedDegenerationRate;
-                environmentValue = environmentValue - environmentDegenerationRate * accelleratedDegenerationRate; // stays the same
+                environmentValue = environmentValue - environmentDegenerationRate * accelleratedDegenerationRate;
 
                 prosperityBar.value = prosperityValue;
                 happinessBar.value = happinessValue;
                 environmentBar.value = environmentValue;
                 //Debug.Log("Threshold breached = the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
             }
+
             // call LOOSER-function
             if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
             {

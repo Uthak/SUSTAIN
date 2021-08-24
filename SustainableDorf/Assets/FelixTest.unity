@@ -3140,13 +3140,13 @@ MonoBehaviour:
   environmentDegenerationRateField: {fileID: 13325096}
   usingContinuousValues: 1
   usingOneTimeValues: 0
-  statDisplayMultiplicator: 200
+  statDisplayMultiplicator: 15
   prosperityValue: 10
   happinessValue: 10
   environmentValue: 10
-  prosperityDegenerationRate: 0.001
-  happinessDegenerationRate: 0.001
-  environmentDegenerationRate: 0.001
+  prosperityDegenerationRate: 0.005
+  happinessDegenerationRate: 0.005
+  environmentDegenerationRate: 0.005
   accelleratedDegenerationRate: 1.5
   prosperityBar: {fileID: 149298043}
   happinessBar: {fileID: 1371168362}
