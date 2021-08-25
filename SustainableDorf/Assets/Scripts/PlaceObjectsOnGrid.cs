@@ -59,12 +59,13 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                     node.activeFix = true;
                 }
             }
+            //winning Condition
             else if (node.activeFix == true)
             {
                 if (node.isPlaceable == false)
                 {
                     allCells--;
-                    Debug.Log(allCells);
+                    //Debug.Log(allCells);
                     if (allCells == 0)
                     {
                         Debug.Log("Gewonnen OXOXOXOXOXOXOXOXOXOOXOXOXOXOXO");
@@ -116,7 +117,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                                 curObject.GetComponent<BoxCollider>().enabled = true;
                                 curObject.GetComponent<Stats>().UpdateStats();
                                 curObject.GetComponent<ClickTile>().setFix = true;
-                                //Debug.Log("DDDD");
+                                Debug.Log("DDDD");
                                 node.isPlaceable = false;
                                 isOnGrid = true;
                                 curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);

@@ -16,26 +16,25 @@ public class PutSelectedTileBack : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //Debug.Log("ggggggggggggggggggggg");
-        if (Input.GetMouseButtonUp(0))
+        //Debug.Log("mouse courser über Podest");
+        if (Input.GetMouseButtonDown(0))
         {
+            SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab = null;
+            //SceneManager.GetComponent<PlaceObjectsOnGrid>().isOnGrid = true;
             Debug.Log(SceneManager);
             GameObject curMaptile = SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject;
-            Transform myTrans = curMaptile.GetComponent<Stats>().myPosition;
+            Vector3 myTrans = curMaptile.GetComponent<Stats>().myPosition;
             SceneManager.GetComponent<PlaceObjectsOnGrid>().isOnGrid = true;
-            //GameObject myGo = SceneManager.GetComponent < PlaceObjectsOnGrid>().curObject;
-            Debug.Log(myTrans.position);
-            myGo.transform.position = myTrans.position;
-            //myGo.transform = trans.position;
-            //myGo.transform = trans.rotation;
-            //myGo.transform = trans.scale;
+            
+            Debug.Log(myTrans);
+            //myGo.transform.position = myTrans.position;
+            myGo.transform.position = gameObject.transform.position;
 
 
 
 
 
-            SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab = null;
-            SceneManager.GetComponent<PlaceObjectsOnGrid>().isOnGrid = true;
+
         }
     }
 }
