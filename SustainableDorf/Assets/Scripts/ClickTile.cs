@@ -24,7 +24,7 @@ public class ClickTile : MonoBehaviour
     // Liest Stats von MapTile beim Hovern aus 
     {
         GameObject SceneManager = GameObject.Find("SceneManager");
-        if (SceneManager.GetComponent<NeedsManager>().usingContinuousValues) // can be deleted if we chose continous-effects for good
+        if (SceneManager.GetComponent<GameManager>().usingContinuousValues) // can be deleted if we chose continous-effects for good
         {
             if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
             {
@@ -38,14 +38,14 @@ public class ClickTile : MonoBehaviour
                 Debug.Log(StatsDisplay);
                 //statsDisplay.transform.GetChild(0).gameObject.SetActive(true);
 
-                float a = Over.GetComponent<Stats>().prosperityStat * SceneManager.GetComponent<NeedsManager>().statDisplayMultiplicator; //makes miniscule values visible
-                float b = Over.GetComponent<Stats>().environmentStat * SceneManager.GetComponent<NeedsManager>().statDisplayMultiplicator; //makes miniscule values visible
-                float c = Over.GetComponent<Stats>().happinessStat * SceneManager.GetComponent<NeedsManager>().statDisplayMultiplicator; //makes miniscule values visible
+                float a = Over.GetComponent<Stats>().prosperityStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
+                float b = Over.GetComponent<Stats>().environmentStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
+                float c = Over.GetComponent<Stats>().happinessStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
 
                 StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, tag, a, b, c);
             }
         }
-        if (SceneManager.GetComponent<NeedsManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
+        if (SceneManager.GetComponent<GameManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
         {
             if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
             {

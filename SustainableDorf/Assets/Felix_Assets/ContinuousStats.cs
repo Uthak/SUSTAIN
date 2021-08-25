@@ -29,7 +29,7 @@ public class ContinuousStats : MonoBehaviour
     {
         GameObject SceneManager = GameObject.Find("SceneManager");
 
-        if (SceneManager.GetComponent<NeedsManager>().usingContinuousValues) // can be deleted if we chose a one-time-effect for good
+        if (SceneManager.GetComponent<GameManager>().usingContinuousValues) // can be deleted if we chose a one-time-effect for good
         {
             randomFloat = Random.Range(minInfluencePerTile, maxInfluencePerTile);
             mainStat = randomFloat / 2 + Random.Range(0f, (randomFloat / 2f));
@@ -79,7 +79,7 @@ public class ContinuousStats : MonoBehaviour
 
         //... old version:
 
-        if (SceneManager.GetComponent<NeedsManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
+        if (SceneManager.GetComponent<GameManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
         {
             randomFloat = Random.Range(minStatsPerTile, maxStatsPerTile);
             mainStat = randomFloat / 2 + Random.Range(0f, (randomFloat / 2f));
@@ -133,7 +133,7 @@ public class ContinuousStats : MonoBehaviour
         wasPlaced = true;
         GameObject SceneManager = GameObject.Find("SceneManager");
 
-        if (SceneManager.GetComponent<NeedsManager>().usingContinuousValues) // can be deleted if we chose a one-time-effect for good
+        if (SceneManager.GetComponent<GameManager>().usingContinuousValues) // can be deleted if we chose a one-time-effect for good
         {
             SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate += prosperityStat;
             if (SceneManager.GetComponent<NeedsManager>().prosperityValue > 10f)
@@ -159,7 +159,7 @@ public class ContinuousStats : MonoBehaviour
 
         //... old version: 
 
-        if (SceneManager.GetComponent<NeedsManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
+        if (SceneManager.GetComponent<GameManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
         {
             SceneManager.GetComponent<NeedsManager>().prosperityValue += prosperityStat;
             if (SceneManager.GetComponent<NeedsManager>().prosperityValue > 10f)

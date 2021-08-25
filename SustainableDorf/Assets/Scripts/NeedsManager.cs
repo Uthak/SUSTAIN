@@ -1,30 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class NeedsManager : MonoBehaviour
 {
-    [SerializeField] bool showDegenerationRates = true;
-    [SerializeField] TextMeshProUGUI prosperityDegenerationRateField;
-    [SerializeField] TextMeshProUGUI happinessDegenerationRateField;
-    [SerializeField] TextMeshProUGUI environmentDegenerationRateField;
+    public float prosperityValue;
+    public float happinessValue;
+    public float environmentValue;
 
-    public bool usingContinuousValues = true; // wird nur in "Stats"-Klasse benutzt, aber hier abgefragt, weil die Stats variable nur auf den Tiles anliegt
-    public bool usingOneTimeValues = false; // wird nur in "Stats"-Klasse benutzt, aber hier abgefragt, weil die Stats variable nur auf den Tiles anliegt
-    public float statDisplayMultiplicator = 200f; // wird nur in "Stats"-Klasse benutzt, aber hier abgefragt, weil die Stats variable nur auf den Tiles anliegt
+    public float prosperityDegenerationRate;
+    public float happinessDegenerationRate;
+    public float environmentDegenerationRate;
 
-    public float prosperityValue = 10f;
-    public float happinessValue = 10f;
-    public float environmentValue = 10f;
-
-    public float prosperityDegenerationRate = 0.1f;
-    public float happinessDegenerationRate = 0.1f;
-    public float environmentDegenerationRate = 0.1f;
-
-    public float accelleratedDegenerationRate = 1.5f;
+    float accelleratedDegenerationRate;
     float degenerationThreshold;
+    float baseStatValue;
 
     [SerializeField] Slider prosperityBar;
     [SerializeField] Slider happinessBar;
@@ -39,96 +28,110 @@ public class NeedsManager : MonoBehaviour
 
     void Start()
     {
-        degenerationThreshold = environmentValue / 2;
+        GameObject SceneManager = GameObject.Find("SceneManager");
 
+        // determines the degeneration Threshold as % of the maximum stat-value
+        degenerationThreshold = SceneManager.GetComponent<GameManager>().degenerationThreshold / 100f * SceneManager.GetComponent<GameManager>().baseStatValue;
+        
+        // gets the accellerated degeneration-rate value from "GameManager"-class
+        accelleratedDegenerationRate = SceneManager.GetComponent<GameManager>().accelleratedDegenerationRate;
+        
+        // determines basic degeneration rates
+        prosperityDegenerationRate = SceneManager.GetComponent<GameManager>().globalDegenerationRate;
+        happinessDegenerationRate = SceneManager.GetComponent<GameManager>().globalDegenerationRate;
+        environmentDegenerationRate = SceneManager.GetComponent<GameManager>().globalDegenerationRate;
+
+        // determines basic stat values
+        baseStatValue = SceneManager.GetComponent<GameManager>().baseStatValue;
+        prosperityValue = baseStatValue;
+        happinessValue = baseStatValue;
+        environmentValue = baseStatValue;
+
+        // determines basic stat-bar colors (green)
         proImgBaseColor = proImg.color;
         hapImgBaseColor = hapImg.color;
         envImgBaseColor = envImg.color;
-        //Debug.Log("the degenerationThreshold is now: " + degenerationThreshold);
     }
 
+    // this updates the game stats at a rate of 50/s
     void FixedUpdate()
     {
+            // as long as stat values are above the degeneration-threshold the normal degeneration-rate applies
             if (environmentValue >= degenerationThreshold | prosperityValue >= degenerationThreshold | happinessValue >= degenerationThreshold)
             {
-                prosperityValue = prosperityValue - prosperityDegenerationRate;
-                happinessValue = happinessValue - happinessDegenerationRate;
-                environmentValue = environmentValue - environmentDegenerationRate;
-
-                prosperityBar.value = prosperityValue;
-                happinessBar.value = happinessValue;
-                environmentBar.value = environmentValue;
-                //Debug.Log("the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
+                // updates stat values 50/s
+                prosperityValue -= prosperityDegenerationRate;
+                happinessValue -= happinessDegenerationRate;
+                environmentValue -= environmentDegenerationRate;
             }
-            else // faster decline of other stats when any other stat is red
+            // once below the degeneration-threshold the accellerated degeneration-rate applies to all other stats
+            else if(environmentValue < degenerationThreshold)
             {
-                prosperityValue = prosperityValue - prosperityDegenerationRate * accelleratedDegenerationRate;
-                happinessValue = happinessValue - happinessDegenerationRate * accelleratedDegenerationRate;
-                environmentValue = environmentValue - environmentDegenerationRate * accelleratedDegenerationRate;
-
-                prosperityBar.value = prosperityValue;
-                happinessBar.value = happinessValue;
-                environmentBar.value = environmentValue;
-                //Debug.Log("Threshold breached = the prosVal: " + prosperityValue + "the happVal: " + happinessValue + "the envVal: " + environmentValue);
-            }
-
-            // call LOOSER-function
-            if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
+                prosperityValue -= prosperityDegenerationRate * accelleratedDegenerationRate;
+                happinessValue -= happinessDegenerationRate * accelleratedDegenerationRate;
+            }else if(happinessValue < degenerationThreshold)
             {
-                GetComponent<Looser>().YouLose();
+                prosperityValue -= prosperityDegenerationRate * accelleratedDegenerationRate;
+                environmentValue -= environmentDegenerationRate * accelleratedDegenerationRate;
+            }else if (prosperityValue < degenerationThreshold)
+            {
+                happinessValue -= happinessDegenerationRate * accelleratedDegenerationRate;
+                environmentValue -= environmentDegenerationRate * accelleratedDegenerationRate;
             }
+
+        // displays updated stat values in UI
+        // was previously in the if/else statement above. if this works - DELETE this comment! (!!!!!!)
+        prosperityBar.value = prosperityValue;
+        happinessBar.value = happinessValue;
+        environmentBar.value = environmentValue;
+
+        // call "LOOSER"-script to end game if any stat value drops to 0 (or below)
+        if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
+        {
+            GetComponent<Looser>().YouLose();
+        }
 
             //color changes:
+            // 50.01%-100% green
+            // 25.01%-50% orange
+            // 0%-25% red
+
             //PROSPERITY
-            if (prosperityValue > degenerationThreshold)
+            if (prosperityValue > (baseStatValue / 2))
             {
                 proImg.color = proImgBaseColor; // green
-            }
-            else if (prosperityValue <= degenerationThreshold && prosperityValue > degenerationThreshold / 2)
+            }else if (prosperityValue <= (baseStatValue / 2) && prosperityValue > (baseStatValue / 4))
             {
                 proImg.color = new Color32(255, 116, 0, 150); // orange
-            }
-            else if (prosperityValue <= degenerationThreshold / 2)
+            }else if (prosperityValue <= (baseStatValue / 4))
             {
                 proImg.color = new Color32(188, 0, 0, 200); // red
             }
+
             //HAPPINESS
-            if (happinessValue > degenerationThreshold)
+            if (happinessValue > (baseStatValue / 2))
             {
                 hapImg.color = hapImgBaseColor;
-            }
-            else if (happinessValue <= degenerationThreshold && happinessValue > degenerationThreshold / 2)
+            }else if (happinessValue <= (baseStatValue / 2) && happinessValue > (baseStatValue / 4))
             {
                 hapImg.color = new Color32(255, 116, 0, 150);
-            }
-            else if (happinessValue <= degenerationThreshold / 2)
+            }else if (happinessValue <= (baseStatValue / 4))
             {
                 hapImg.color = new Color32(188, 0, 0, 200);
             }
+
             //ENVIRONMENT
-            if (environmentValue > degenerationThreshold)
+            if (environmentValue > (baseStatValue / 2))
             {
                 envImg.color = envImgBaseColor;
-            }
-            else if (environmentValue <= degenerationThreshold && environmentValue > degenerationThreshold / 2)
+            }else if (environmentValue <= (baseStatValue / 2) && environmentValue > (baseStatValue / 4))
             {
                 envImg.color = new Color32(255, 116, 0, 150);
-            }
-            else if (environmentValue <= degenerationThreshold / 2)
+            }else if (environmentValue <= (baseStatValue / 4))
             {
                 envImg.color = new Color32(188, 0, 0, 200);
             }
-
-            if (showDegenerationRates == true)
-            {
-                GameObject SceneManager = GameObject.Find("SceneManager");
-
-                prosperityDegenerationRateField.text = "prospRate " + SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate.ToString();
-                happinessDegenerationRateField.text = "hapRate " + SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate.ToString();
-                environmentDegenerationRateField.text = "envRate " + SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate.ToString();
-            }
     }
-
 }
     
 
