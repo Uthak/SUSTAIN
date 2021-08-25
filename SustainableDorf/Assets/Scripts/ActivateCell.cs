@@ -65,6 +65,7 @@ public class ActivateCell : MonoBehaviour
                     break;
             }
         }
+        
         SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().NeighborEffect(factory, social, nature, sustainable);
         Debug.Log("factory" + factory);
         Debug.Log("social" + social);

@@ -18,6 +18,10 @@ public class Stats : MonoBehaviour
     public bool isCow = false;
     public bool wasPlaced = false; // do we need this
 
+    public float prosperityBonus = 0f;
+    public float happinessBonus = 0f;
+    public float environmentBonus = 0f;
+
     public void RandomizeStats(GameObject tile, Vector3 position) // added ", Vector3 position" --> delete this comment if this works (!!!)
     {
         // checks position when spawning to allow placing the tile back if not wanted
@@ -175,10 +179,10 @@ public class Stats : MonoBehaviour
 
     public void NeighborEffect(int factoryNeighbors, int socialNeighbors, int natureNeighbors, int sustainableNeighbors)
     {
-        float prosperityBonus = 0f;
-        float happinessBonus = 0f;
-        float environmentBonus = 0f;
-        GameObject SceneManager = GameObject.Find("SceneManager");
+        //float prosperityBonus = 0f;
+        //float happinessBonus = 0f;
+        //float environmentBonus = 0f;
+        //GameObject SceneManager = GameObject.Find("SceneManager");
 
         float greatInfluence = -.002f;
         float positiveInfluence = -.001f;
@@ -256,11 +260,19 @@ public class Stats : MonoBehaviour
             }
         }*/
 
-        if (SceneManager.GetComponent<GameManager>().usingContinuousValues)
+        /*if (SceneManager.GetComponent<GameManager>().usingContinuousValues)
         {
             SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate += prosperityBonus;
             SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate += environmentBonus;
             SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate += happinessBonus;
-        }
+        }*/
+    }
+    public void AddNeighborBonus()
+    {
+        GameObject SceneManager = GameObject.Find("SceneManager");
+
+        SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate += prosperityBonus;
+        SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate += environmentBonus;
+        SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate += happinessBonus;
     }
 }

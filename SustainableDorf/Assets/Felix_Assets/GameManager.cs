@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI happinessValueField;
     [SerializeField] TextMeshProUGUI environmentValueField;
 
+    // live update of degeneration Bonuses
+    [SerializeField] TextMeshProUGUI prosperityDegBonus;
+    [SerializeField] TextMeshProUGUI happinessDegBonus;
+    [SerializeField] TextMeshProUGUI environmentDegBonus;
+
     // to adjust camera-zoom ("CameraZoom"-script)
     public float cameraZoomSpeed = 10f;
     public float cameraMaxZoom = 15f;
@@ -72,11 +77,11 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        GameObject SceneManager = GameObject.Find("SceneManager");
+
         // if activated this displays DEGENERATION-RATES in the UI (optional)
         if (showDegenerationRates == true)
         {
-            GameObject SceneManager = GameObject.Find("SceneManager");
-
             prosperityDegenerationRateField.text = "prospRate " + SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate.ToString();
             happinessDegenerationRateField.text = "hapRate " + SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate.ToString();
             environmentDegenerationRateField.text = "envRate " + SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate.ToString();
@@ -85,14 +90,18 @@ public class GameManager : MonoBehaviour
         // if activated this displays STATS numerically in the UI (optional)
         if (numericalValueDisplay == true)
         {
-            GameObject SceneManager = GameObject.Find("SceneManager");
-
             prosperityValueField.text = "prosperity " + SceneManager.GetComponent<NeedsManager>().prosperityValue.ToString();
             happinessValueField.text = "happiness " + SceneManager.GetComponent<NeedsManager>().happinessValue.ToString();
             environmentValueField.text = "environment " + SceneManager.GetComponent<NeedsManager>().environmentValue.ToString();
         }
 
+        // live update of camera settings
         cameraTransformMetrics1.text = "camera field Of View: " + Camera.main.fieldOfView.ToString();
         cameraTransformMetrics2.text = "camera orthographicSize: " + Camera.main.orthographicSize.ToString();
+
+        // live update of "degenerationBonus" from "Stats"-script
+        prosperityDegBonus.text = "current prospBonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityBonus.ToString();
+        happinessDegBonus.text = "current hapBonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessBonus.ToString();
+        environmentDegBonus.text = "current envBonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentBonus.ToString();
     }
 }

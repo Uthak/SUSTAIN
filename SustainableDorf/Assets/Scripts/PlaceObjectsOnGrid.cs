@@ -116,8 +116,9 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                                 // wird gesetzt
                                 curObject.GetComponent<BoxCollider>().enabled = true;
                                 curObject.GetComponent<Stats>().UpdateStats();
+                                curObject.GetComponent<Stats>().AddNeighborBonus(); // this is new
                                 curObject.GetComponent<ClickTile>().setFix = true;
-                                Debug.Log("DDDD");
+                                //Debug.Log("DDDD");
                                 node.isPlaceable = false;
                                 isOnGrid = true;
                                 curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
