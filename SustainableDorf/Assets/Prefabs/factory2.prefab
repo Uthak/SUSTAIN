@@ -305,6 +305,9 @@ MonoBehaviour:
   randomStat2: 0
   isCow: 1
   wasPlaced: 0
+  prosperityBonus: 0
+  happinessBonus: 0
+  environmentBonus: 0
 --- !u!114 &7410871791592228675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +333,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.51, y: 1, z: 1.51}
+  m_Size: {x: 1.51, y: 0.4, z: 1.51}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3561558802030479265
 GameObject:

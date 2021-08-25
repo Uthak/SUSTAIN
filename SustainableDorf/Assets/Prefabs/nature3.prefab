@@ -573,18 +573,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd14bf52514a434479c562832764d949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myPosition: {x: 0, y: 0, z: 0}
   prosperityStat: 0
   happinessStat: 0
   environmentStat: 0
+  mainStat: 0
+  randomStat1: 0
+  randomStat2: 0
+  isCow: 0
   wasPlaced: 0
-  minStatsPerTile: 3
-  maxStatsPerTile: 6
-  prosperityBar: {fileID: 0}
-  happinessBar: {fileID: 0}
-  environmentBar: {fileID: 0}
-  NEGprosperityBar: {fileID: 0}
-  NEGhappinessBar: {fileID: 0}
-  NEGenvironmentBar: {fileID: 0}
+  prosperityBonus: 0
+  happinessBonus: 0
+  environmentBonus: 0
 --- !u!114 &7113912333713825946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setFix: 0
+  Over: {fileID: 0}
 --- !u!65 &3988996978505494971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -609,5 +610,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.51, y: 1, z: 1.51}
+  m_Size: {x: 1.51, y: 0.4, z: 1.51}
   m_Center: {x: 0, y: 0, z: 0}

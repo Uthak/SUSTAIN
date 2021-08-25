@@ -38,6 +38,7 @@ public class ActivateCell : MonoBehaviour
 
     private void OnMouseOver()
     {
+        
         //Debug.Log(neighbors.Count);
         foreach (var tile in neighbors)
         {

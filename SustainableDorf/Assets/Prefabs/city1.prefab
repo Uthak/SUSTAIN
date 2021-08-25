@@ -1467,7 +1467,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.51, y: 1, z: 1.51}
+  m_Size: {x: 1.51, y: 0.4, z: 1.51}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4452195919522563056
 MonoBehaviour:
@@ -1494,7 +1494,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.51, y: 1, z: 1.51}
+  m_Size: {x: 1.51, y: 0.4, z: 1.51}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6301859393729582950
 MonoBehaviour:
@@ -1508,16 +1508,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd14bf52514a434479c562832764d949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myPosition: {x: 0, y: 0, z: 0}
   prosperityStat: 0
   happinessStat: 0
   environmentStat: 0
   mainStat: 0
   randomStat1: 0
   randomStat2: 0
-  wasPlaced: 0
-  minStatsPerTile: 0
-  maxStatsPerTile: 0
   isCow: 0
+  wasPlaced: 0
+  prosperityBonus: 0
+  happinessBonus: 0
+  environmentBonus: 0
 --- !u!1 &5724523735169331730
 GameObject:
   m_ObjectHideFlags: 0

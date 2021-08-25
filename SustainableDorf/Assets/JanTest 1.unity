@@ -1157,7 +1157,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &548347952
 MeshRenderer:
@@ -1182,7 +1182,7 @@ MeshRenderer:
   - {fileID: -6478536213147159724, guid: e41aa661fae55b14888fb8a578c8e27b, type: 3}
   - {fileID: -3846018093981099296, guid: e41aa661fae55b14888fb8a578c8e27b, type: 3}
   - {fileID: -6629797300637803691, guid: e41aa661fae55b14888fb8a578c8e27b, type: 3}
-  - {fileID: -6922793697723135513, guid: e41aa661fae55b14888fb8a578c8e27b, type: 3}
+  - {fileID: -876546973899608171, guid: fdf7509cdb2da4673b7e445174d1ca03, type: 3}
   - {fileID: 4874126678125670354, guid: e41aa661fae55b14888fb8a578c8e27b, type: 3}
   - {fileID: -2813467912831258332, guid: e41aa661fae55b14888fb8a578c8e27b, type: 3}
   m_StaticBatchInfo:
@@ -3897,6 +3897,15 @@ MonoBehaviour:
   prosperityValueField: {fileID: 1739707751}
   happinessValueField: {fileID: 1306487834}
   environmentValueField: {fileID: 13083852}
+  prosperityDegBonus: {fileID: 0}
+  happinessDegBonus: {fileID: 0}
+  environmentDegBonus: {fileID: 0}
+  cameraZoomSpeed: 10
+  cameraMaxZoom: 15
+  cameraMinZoom: 70
+  cameraTransformMetrics1: {fileID: 0}
+  cameraTransformMetrics2: {fileID: 0}
+  developmentStatUI: {fileID: 0}
 --- !u!1 &1943823794
 GameObject:
   m_ObjectHideFlags: 0
