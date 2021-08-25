@@ -10,6 +10,7 @@ TagManager:
   - sustainable
   - city
   - cow
+  - podest
   layers:
   - Default
   - TransparentFX

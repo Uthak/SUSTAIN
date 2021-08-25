@@ -26,8 +26,8 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     //bool setFix = false;
     public bool isOnGrid;
     //bool activeFix = false;
-    GameObject curObject;
-
+    public GameObject curObject;
+    int allCells;
 
 
     void Start()
@@ -59,7 +59,20 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                     node.activeFix = true;
                 }
             }
+            else if (node.activeFix == true)
+            {
+                if (node.isPlaceable == false)
+                {
+                    allCells--;
+                    Debug.Log(allCells);
+                    if (allCells == 0)
+                    {
+                        Debug.Log("Gewonnen OXOXOXOXOXOXOXOXOXOOXOXOXOXOXO");
+                    }
+                }
+            }
         }
+        allCells = width * height;
     }
 
     RaycastHit hit;
@@ -70,7 +83,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         
         if (plane.Raycast(ray,out var enter) )        
         {
-            Debug.Log("AAAA");
+            //Debug.Log("AAAA");
             mousePosition = ray.GetPoint(enter);
             smoothMousePosition = mousePosition;
             mousePosition.y = 0;
@@ -150,6 +163,9 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                 obj.name = "Cell" + name;
                 nodes[i, j] = new Node(isPlaceable: false, worldPosition, obj, activeFix: false);
                 name++;
+
+                //Anzahl an Zellen wird belegt, damit es für die WinningCondition überprüft werden kann
+                allCells = width * height;
             }
         }
 
