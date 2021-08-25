@@ -85,6 +85,20 @@ public class NeedsManager : MonoBehaviour
         happinessBar.value = happinessValue;
         environmentBar.value = environmentValue;
 
+        // ensures that the stat caps cannot be surpassed
+        if (prosperityValue > baseStatValue)
+        {
+            prosperityValue = baseStatValue;
+        }
+        if (happinessValue > baseStatValue)
+        {
+            happinessValue = baseStatValue;
+        }
+        if (environmentValue > baseStatValue)
+        {
+            environmentValue = baseStatValue;
+        }
+
         // call "LOOSER"-script to end game if any stat value drops to 0 (or below)
         if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
         {

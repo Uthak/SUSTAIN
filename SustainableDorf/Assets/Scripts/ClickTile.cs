@@ -56,7 +56,7 @@ public class ClickTile : MonoBehaviour
                 //Debug.Log(Over);
                 //Debug.Log("OnMouseOver");
                 StatsDisplay = GameObject.Find("Stats_UI");
-                Debug.Log(StatsDisplay);
+                //Debug.Log(StatsDisplay);
                 //statsDisplay.transform.GetChild(0).gameObject.SetActive(true);
 
                 float a = Over.GetComponent<Stats>().prosperityStat;

@@ -38,6 +38,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI happinessValueField;
     [SerializeField] TextMeshProUGUI environmentValueField;
 
+    // to adjust camera-zoom ("CameraZoom"-script)
+    public float cameraZoomSpeed = 10f;
+    public float cameraMaxZoom = 15f;
+    public float cameraMinZoom = 70f;
+    [SerializeField] TextMeshProUGUI cameraTransformMetrics1;
+    [SerializeField] TextMeshProUGUI cameraTransformMetrics2;
+
+    // becomes activated if using numerical degeneration-rates or stat-values (see above)
+    [Tooltip("becomes activated if using numerical degeneration-rates or stat-values (see above)")]
+    [SerializeField] GameObject developmentStatUI;
+
     // used to reset the UI-display at the start of the game
     private GameObject StatsDisplay;
 
@@ -51,6 +62,12 @@ public class GameManager : MonoBehaviour
         // resets all stat-bars in bottom-center UI (otherwise they would be maxed out)
         StatsDisplay = GameObject.Find("Stats_UI");
         StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
+        
+        // activates numerical stat UI's if activated
+        if (showDegenerationRates == true | numericalValueDisplay == true)
+        {
+            developmentStatUI.SetActive(true);
+        }
     }
 
     void FixedUpdate()
@@ -74,5 +91,8 @@ public class GameManager : MonoBehaviour
             happinessValueField.text = "happiness " + SceneManager.GetComponent<NeedsManager>().happinessValue.ToString();
             environmentValueField.text = "environment " + SceneManager.GetComponent<NeedsManager>().environmentValue.ToString();
         }
+
+        cameraTransformMetrics1.text = "camera field Of View: " + Camera.main.fieldOfView.ToString();
+        cameraTransformMetrics2.text = "camera orthographicSize: " + Camera.main.orthographicSize.ToString();
     }
 }
