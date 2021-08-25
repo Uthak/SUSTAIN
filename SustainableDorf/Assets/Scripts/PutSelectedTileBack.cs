@@ -20,15 +20,17 @@ public class PutSelectedTileBack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab = null;
-            //SceneManager.GetComponent<PlaceObjectsOnGrid>().isOnGrid = true;
-            Debug.Log(SceneManager);
-            GameObject curMaptile = SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject;
-            Vector3 myTrans = curMaptile.GetComponent<Stats>().myPosition;
             SceneManager.GetComponent<PlaceObjectsOnGrid>().isOnGrid = true;
+
+            //Debug.Log(SceneManager);
+            GameObject curMaptile = SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject;
+            curMaptile.GetComponent<BoxCollider>().enabled = true;
+            Vector3 myTrans = curMaptile.GetComponent<Stats>().myPosition;
+            
             
             Debug.Log(myTrans);
-            //myGo.transform.position = myTrans.position;
-            myGo.transform.position = gameObject.transform.position;
+            curMaptile.transform.position = myTrans;
+            //myGo.transform.position = gameObject.transform.position;
 
 
 
