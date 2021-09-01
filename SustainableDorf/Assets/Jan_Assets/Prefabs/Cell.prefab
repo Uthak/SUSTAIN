@@ -127,6 +127,8 @@ MonoBehaviour:
   placeable: {fileID: 2100000, guid: ea888df225f880e4da0fce5feeca7acb, type: 2}
   Active: 0
   neighbors: []
+  Material1: {fileID: 2100000, guid: d819509173f5bcc42b616e1033f6418e, type: 2}
+  Material2: {fileID: -3846018093981099296, guid: 8e1060f4281e99943ac1843b1fc63904, type: 3}
 --- !u!54 &8659909799071928631
 Rigidbody:
   m_ObjectHideFlags: 0
