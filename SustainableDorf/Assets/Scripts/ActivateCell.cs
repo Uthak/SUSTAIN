@@ -53,7 +53,7 @@ public class ActivateCell : MonoBehaviour
         
 
             //zählt die jeweiligen Tags der Nachbarn
-            Debug.Log(neighbors.Count);
+            //Debug.Log(neighbors.Count);
             foreach (var tile in neighbors)
             {
                 children = tile.GetComponentsInChildren<Renderer>();

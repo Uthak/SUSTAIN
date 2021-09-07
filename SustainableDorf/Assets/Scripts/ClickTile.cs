@@ -35,7 +35,7 @@ public class ClickTile : MonoBehaviour
                 //Debug.Log(Over);
                 //Debug.Log("OnMouseOver");
                 StatsDisplay = GameObject.Find("Stats_UI");
-                Debug.Log(StatsDisplay);
+                //Debug.Log(StatsDisplay);
                 //statsDisplay.transform.GetChild(0).gameObject.SetActive(true);
 
                 float a = Over.GetComponent<Stats>().prosperityStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
@@ -83,7 +83,7 @@ public class ClickTile : MonoBehaviour
     {
         if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
         {
-            Debug.Log("nachbar");
+            //Debug.Log("nachbar");
         }
     }
 }

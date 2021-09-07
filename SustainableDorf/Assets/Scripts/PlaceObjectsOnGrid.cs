@@ -60,6 +60,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                 }
             }
             //winning Condition
+            /*
             else if (node.activeFix == true)
             {
                 if (node.isPlaceable == false)
@@ -72,8 +73,10 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                     }
                 }
             }
+            */
         }
-        allCells = width * height;
+        //allCells = width * height;    //allCells wieder voll machen für nächsten Loop
+        
     }
 
     RaycastHit hit;

@@ -14,7 +14,7 @@ public class TakeScreenshot : MonoBehaviour
         texture.Apply();
 
         byte[] bytes = texture.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + "/Screenshot.png", bytes);
+        File.WriteAllBytes(Application.dataPath + "/../Screenshots/Screenshot.png", bytes);
         
         
     }
