@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TakeScreenshot : MonoBehaviour
 {
+    GameObject UI;
+
     private IEnumerator Screenshot()
     {
         yield return new WaitForEndOfFrame();
@@ -15,12 +17,17 @@ public class TakeScreenshot : MonoBehaviour
 
         byte[] bytes = texture.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/../Screenshots/Screenshot.png", bytes);
-        
-        
+
+        //UI wieder sichbar machen
+        UI.SetActive(true);
     }
 
     public void MakeScreenshot()
     {
+        //UI ausschalten für Screenshot
+        UI = GameObject.Find("SceneObjects");
+        UI.SetActive(false);
+
         StartCoroutine("Screenshot");
     }
 }

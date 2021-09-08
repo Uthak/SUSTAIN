@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WinningCondition : MonoBehaviour
 {
-    public NeedsManager NeedsManager;
+    NeedsManager NeedsManager;
     GameObject Button;
     float enviromentLimit;
     float happinessLimit;
