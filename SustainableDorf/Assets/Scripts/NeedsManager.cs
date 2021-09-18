@@ -1,8 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NeedsManager : MonoBehaviour
 {
+    public int tileCounter = 0;
+    float speedUpDegenerationTime;
+    float degenerationIncreaseOverTime;
+    bool degenerationWasIncreased = false;
+
     public float prosperityValue;
     public float happinessValue;
     public float environmentValue;
@@ -30,6 +36,10 @@ public class NeedsManager : MonoBehaviour
     {
         GameObject SceneManager = GameObject.Find("SceneManager");
 
+        // pick up the timer-setting from GameManager to accellerate degeneration rates over time
+        speedUpDegenerationTime = SceneManager.GetComponent<GameManager>().speedUpDegenerationTime;
+        degenerationIncreaseOverTime = SceneManager.GetComponent<GameManager>().degenerationIncreaseOverTime;
+
         // determines the degeneration Threshold as % of the maximum stat-value
         degenerationThreshold = SceneManager.GetComponent<GameManager>().degenerationThreshold / 100f * SceneManager.GetComponent<GameManager>().baseStatValue;
         
@@ -51,33 +61,43 @@ public class NeedsManager : MonoBehaviour
         proImgBaseColor = proImg.color;
         hapImgBaseColor = hapImg.color;
         envImgBaseColor = envImg.color;
+
+        // accellerating degeneration over time
+        if (SceneManager.GetComponent<GameManager>().useGraduallyIncresedDegeneration)
+        {
+            StartCoroutine("SpeedUpDegeneration");
+        }
     }
 
     // this updates the game stats at a rate of 50/s
     void FixedUpdate()
     {
             // as long as stat values are above the degeneration-threshold the normal degeneration-rate applies
-            if (environmentValue >= degenerationThreshold | prosperityValue >= degenerationThreshold | happinessValue >= degenerationThreshold)
-            {
-                // updates stat values 50/s
-                prosperityValue -= prosperityDegenerationRate;
-                happinessValue -= happinessDegenerationRate;
-                environmentValue -= environmentDegenerationRate;
-            }
-            // once below the degeneration-threshold the accellerated degeneration-rate applies to all other stats
-            else if(environmentValue < degenerationThreshold)
+        if (prosperityValue > degenerationThreshold && happinessValue > degenerationThreshold && environmentValue > degenerationThreshold)
+        {
+            // updates prosperity values 50/s
+            prosperityValue -= prosperityDegenerationRate;
+            happinessValue -= happinessDegenerationRate;
+            environmentValue -= environmentDegenerationRate;
+        }
+
+        // once below the degeneration-threshold the accellerated degeneration-rate applies to all other stats
+        if(environmentValue < degenerationThreshold)
             {
                 prosperityValue -= prosperityDegenerationRate * accelleratedDegenerationRate;
                 happinessValue -= happinessDegenerationRate * accelleratedDegenerationRate;
-            }else if(happinessValue < degenerationThreshold)
+            }
+        if(happinessValue < degenerationThreshold)
             {
                 prosperityValue -= prosperityDegenerationRate * accelleratedDegenerationRate;
                 environmentValue -= environmentDegenerationRate * accelleratedDegenerationRate;
-            }else if (prosperityValue < degenerationThreshold)
+            }
+        if (prosperityValue < degenerationThreshold)
             {
                 happinessValue -= happinessDegenerationRate * accelleratedDegenerationRate;
                 environmentValue -= environmentDegenerationRate * accelleratedDegenerationRate;
             }
+
 
         // displays updated stat values in UI
         // was previously in the if/else statement above. if this works - DELETE this comment! (!!!!!!)
@@ -145,6 +165,45 @@ public class NeedsManager : MonoBehaviour
             {
                 envImg.color = new Color32(188, 0, 0, 200);
             }
+
+        if (tileCounter == 5 | tileCounter == 10 | tileCounter == 15 | tileCounter == 20 | tileCounter == 25 | tileCounter == 30 | tileCounter == 35 | tileCounter == 40 | tileCounter == 45)
+        {
+            if (degenerationWasIncreased == false)
+            {
+                IncreaseDegenerationRates();
+                Debug.Log("tileCounter worked " + tileCounter);
+            }
+        }
+    }
+    // this is supposed to update the degen. rates every 60 seconds - unless they already increased by placing tiles
+    IEnumerator SpeedUpDegeneration()
+    {
+        // this should only work until all tiles are full (at 49)... not sure how to test
+        for (tileCounter = 0; tileCounter <= 49;) 
+        {
+            yield return new WaitForSeconds(speedUpDegenerationTime); // currently 60 seconds
+
+            if (degenerationWasIncreased == false)
+            {
+                IncreaseDegenerationRates();
+                Debug.Log("COROUTINE Worked!");
+            }
+        }
+    }
+
+    void IncreaseDegenerationRates()
+    {
+        prosperityDegenerationRate += degenerationIncreaseOverTime; // should add .001 to all degenerationrates
+        happinessDegenerationRate += degenerationIncreaseOverTime;
+        environmentDegenerationRate += degenerationIncreaseOverTime;
+        degenerationWasIncreased = true;
+        Invoke("ResetDegenerationIncreaser", speedUpDegenerationTime);
+        Debug.Log("degeneration rates were increased");
+    }
+    void ResetDegenerationIncreaser()
+    {
+        degenerationWasIncreased = false;
+        Debug.Log("increaser cooldown was reset");
     }
 }
     

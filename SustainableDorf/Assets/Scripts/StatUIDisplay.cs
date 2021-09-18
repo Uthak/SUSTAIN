@@ -63,8 +63,7 @@ public class StatUIDisplay : MonoBehaviour
         {
             prosperityBar.value = pS;
             NEGprosperityBar.value = 0f;
-        }
-        else
+        }else
         {
             prosperityBar.value = 0f;
             NEGprosperityBar.value = pS * -1;

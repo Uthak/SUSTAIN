@@ -43,6 +43,12 @@ public class ClickTile : MonoBehaviour
                 float c = Over.GetComponent<Stats>().happinessStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
 
                 StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, tag, a, b, c);
+
+                // added by Felix to see numerical stats in dev mode while hovering
+                if (SceneManager.GetComponent<GameManager>().developerMode)
+                {
+                    SceneManager.GetComponent<GameManager>().ShowDevStats(a, b, c);
+                }
             }
         }
         if (SceneManager.GetComponent<GameManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
@@ -64,6 +70,12 @@ public class ClickTile : MonoBehaviour
                 float c = Over.GetComponent<Stats>().happinessStat;
 
                 StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, tag, a, b, c);
+
+                // added by Felix to see numerical stats in dev mode while hovering
+                if (SceneManager.GetComponent<GameManager>().developerMode)
+                {
+                    SceneManager.GetComponent<GameManager>().ShowDevStats(a, b, c);
+                }
             }
         }
     }
@@ -76,6 +88,13 @@ public class ClickTile : MonoBehaviour
         //statsDisplay = null;
 
         StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
+
+        // added by Felix to see numerical stats in dev mode while hovering
+        /*GameObject SceneManager = GameObject.Find("SceneManager");
+        if (SceneManager.GetComponent<GameManager>().developerMode)
+        {
+            SceneManager.GetComponent<GameManager>().ResetDevStats();
+        }*/
     }
 
 
