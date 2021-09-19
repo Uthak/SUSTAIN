@@ -29,5 +29,6 @@ public class TakeScreenshot : MonoBehaviour
         UI.SetActive(false);
 
         StartCoroutine("Screenshot");
+        Debug.Log("takedScreenshot");
     }
 }

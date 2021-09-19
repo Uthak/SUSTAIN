@@ -63,7 +63,7 @@ public class ActivateCell : MonoBehaviour
                 {
                     case "factory":
                         factory ++;
-                        children[1].GetComponent<Renderer>().material.color = Color.gray;//Boden von Nachbarn wird gefärbt
+                        children[1].GetComponent<Renderer>().material.color = Color.gray;//new Color(1f, 0.85f, 0.35f);//Boden von Nachbarn wird gefärbt
 
                         break;
                     case "social":

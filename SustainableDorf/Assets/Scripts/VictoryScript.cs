@@ -12,7 +12,7 @@ public class VictoryScript : MonoBehaviour
     float happinessLimit;
     float prosperityLimit;
 
-    //[SerializeField] endGameScreen_UI;
+    [SerializeField] GameObject endGameScreen_UI;
     //Highscore = highscoreScript;
 
     bool gameEnded = false;
@@ -51,7 +51,7 @@ public class VictoryScript : MonoBehaviour
                 NeedsManager.environmentDegenerationRate *= 10;
 
                 //highscoreScript.CalculateHighscore();
-                //endGameScreen_UI.SetActive(true);
+                endGameScreen_UI.SetActive(true);
 
                 // execute winner screen HERE
 
@@ -66,7 +66,7 @@ public class VictoryScript : MonoBehaviour
                 NeedsManager.environmentDegenerationRate *= 10;
 
                 //highscoreScript.CalculateHighscore();
-                //endGameScreen_UI.SetActive(true);
+                endGameScreen_UI.SetActive(true);
 
                 // execute loser screen HERE
 

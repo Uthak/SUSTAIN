@@ -5,7 +5,7 @@ using UnityEngine;
 public class WinningCondition : MonoBehaviour
 {
     NeedsManager NeedsManager;
-    GameObject Button;
+    GameObject endScreen;
     float enviromentLimit;
     float happinessLimit;
     float prosperityLimit;
@@ -21,8 +21,8 @@ public class WinningCondition : MonoBehaviour
         prosperityLimit = NeedsManager.prosperityValue * 0.8f;
 
         //Button für Screenshot suchen
-        Button = GameObject.Find("Button");
-        Button.SetActive(false);
+        endScreen = GameObject.Find("endGameScreen_UI");
+        endScreen.SetActive(false);
 
     }
 
@@ -33,9 +33,9 @@ public class WinningCondition : MonoBehaviour
         {
             if (NeedsManager.environmentDegenerationRate < 0 && NeedsManager.happinessDegenerationRate < 0 && NeedsManager.prosperityDegenerationRate < 0)
             {
-                Debug.Log("winning condition erreicht");
+                //Debug.Log("winning condition erreicht");
 
-                Button.SetActive(true);
+                endScreen.SetActive(true);
             }
         }
     }
