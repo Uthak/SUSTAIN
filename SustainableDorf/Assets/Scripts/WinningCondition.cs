@@ -22,7 +22,7 @@ public class WinningCondition : MonoBehaviour
 
         //Button für Screenshot suchen
         endScreen = GameObject.Find("endGameScreen_UI");
-        endScreen.SetActive(false);
+        //endScreen.SetActive(false);
 
     }
 
