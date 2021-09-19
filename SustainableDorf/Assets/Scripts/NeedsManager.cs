@@ -122,7 +122,12 @@ public class NeedsManager : MonoBehaviour
         // call "LOOSER"-script to end game if any stat value drops to 0 (or below)
         if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
         {
-            GetComponent<Looser>().YouLose();
+            GameObject SceneManager = GameObject.Find("SceneManager");
+
+            if (SceneManager.GetComponent<GameManager>().quickWin != true && tileCounter !=  48)
+            {
+                GetComponent<Looser>().YouLose();
+            }
         }
 
             //color changes:

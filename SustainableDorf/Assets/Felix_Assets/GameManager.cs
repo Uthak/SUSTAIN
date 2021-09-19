@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     // have metric displays of all variables
     public bool developerMode = true;
+    public bool quickWin = false;
 
     // controls global maximum of stats (and starting condition)
     public float baseStatValue = 10f;

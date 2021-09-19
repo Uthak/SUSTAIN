@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonBehavior : MonoBehaviour
 {
-    //float buttonFeedbackTimer = .3f;
+    /*//float buttonFeedbackTimer = .3f;
     //Transform defaultTransform;
     RectTransform defaultTransform;
     float scaleFactor = 1.1f;
@@ -36,7 +36,7 @@ public class ButtonBehavior : MonoBehaviour
         // if we wanted to use various sounds
         /*AudioSource[] paperSoundList = //GameManager.GetComponent<Sounds>().arrayOfPaperSounds;
         AudioSource randomPaperSound = paperSoundList[Random.Range(0, paperSOundList.Length)];
-        randomPaperSound.Play();*/
+        randomPaperSound.Play();
     }
 
     private void OnMouseExit()
