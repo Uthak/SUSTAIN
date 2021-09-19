@@ -7,10 +7,13 @@ public class VictoryScript : MonoBehaviour
     GameObject SceneManager;
     NeedsManager NeedsManager;
     GameManager GameManager;
-    GameObject Button;
+    GameObject ScreenshotButton;
     float enviromentLimit;
     float happinessLimit;
     float prosperityLimit;
+
+    //[SerializeField] endGameScreen_UI;
+    //Highscore = highscoreScript;
 
     bool gameEnded = false;
 
@@ -20,19 +23,23 @@ public class VictoryScript : MonoBehaviour
         GameManager = SceneManager.GetComponent<GameManager>();
         NeedsManager = SceneManager.GetComponent<NeedsManager>();
         
+        //highscoreScript = SceneManager.GetComponent<Highscore>();
+        //endGameScreen_UI.SetActive(false);
+
+
         //enviromentLimit = NeedsManager.environmentValue * 0.8f;
         //happinessLimit = NeedsManager.happinessValue * 0.8f;
         //prosperityLimit = NeedsManager.prosperityValue * 0.8f;
 
         //Button für Screenshot suchen
-        Button = GameObject.Find("Button");
-        Button.SetActive(false);
+        ScreenshotButton = GameObject.Find("Button");
+        ScreenshotButton.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (NeedsManager.tileCounter == 49)
+        if (NeedsManager.tileCounter == 48)
         {
             if (NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
             {
@@ -43,9 +50,12 @@ public class VictoryScript : MonoBehaviour
                 NeedsManager.happinessDegenerationRate *= 10;
                 NeedsManager.environmentDegenerationRate *= 10;
 
+                //highscoreScript.CalculateHighscore();
+                //endGameScreen_UI.SetActive(true);
+
                 // execute winner screen HERE
 
-                Button.SetActive(true);
+                ScreenshotButton.SetActive(true);
             }else // = if any degeneration rate is still going downwards
             {
                 Debug.Log("You Lost");
@@ -55,9 +65,12 @@ public class VictoryScript : MonoBehaviour
                 NeedsManager.happinessDegenerationRate *= 10;
                 NeedsManager.environmentDegenerationRate *= 10;
 
+                //highscoreScript.CalculateHighscore();
+                //endGameScreen_UI.SetActive(true);
+
                 // execute loser screen HERE
 
-                Button.SetActive(true);
+                ScreenshotButton.SetActive(true);
             }
         }
     }

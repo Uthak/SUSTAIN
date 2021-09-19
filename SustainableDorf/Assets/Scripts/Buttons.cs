@@ -44,7 +44,7 @@ public class Buttons : MonoBehaviour
     }
     public void ResumeGame()
     {
-        //standardClick.Play();
+        standardClick.Play();
         gameIsPaused = false;
         pauseScreen_UI.SetActive(false);
         Time.timeScale = 1;
@@ -52,20 +52,21 @@ public class Buttons : MonoBehaviour
 
     public void StartTutorial()
     {
-        //standardClick.Play();
+        standardClick.Play();
         SceneManager.LoadScene("Tutorial_1");
     }
 
     public void StartGame()
     {
-        //standardClick.Play();
+        standardClick.Play();
         SceneManager.LoadScene("Level_1");
         Debug.Log("Start Button has been pressed");
+        ResumeGame();
     }
 
     public void Restart()
     {
-        //standardClick.Play();
+        standardClick.Play();
         ResumeGame();
         // this restarts current Level
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -74,14 +75,14 @@ public class Buttons : MonoBehaviour
     // Opens Credit Screen
     public void Credits()
     {
-        //standardClick.Play();
+        standardClick.Play();
         SceneManager.LoadScene("Credits_UI");
     }
 
     // Goes back to main menu
     public void BackToMain()
     {
-        //standardClick.Play();
+        standardClick.Play();
         SceneManager.LoadScene("Start_UI");
         /*if (SceneManager.GetActiveScene().name != "Start_UI")
         {

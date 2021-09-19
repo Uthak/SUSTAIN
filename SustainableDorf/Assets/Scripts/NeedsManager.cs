@@ -178,8 +178,8 @@ public class NeedsManager : MonoBehaviour
     // this is supposed to update the degen. rates every 60 seconds - unless they already increased by placing tiles
     IEnumerator SpeedUpDegeneration()
     {
-        // this should only work until all tiles are full (at 49)... not sure how to test
-        for (tileCounter = 0; tileCounter <= 49;) 
+        // this should only work until all tiles are full (at 48+1pagotopia-tile)... not sure how to test
+        for (tileCounter = 0; tileCounter <= 48;) 
         {
             yield return new WaitForSeconds(speedUpDegenerationTime); // currently 60 seconds
 

@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.41960785, g: 0.47843137, b: 0.627451, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 04b560e18c68f4f29a8a594060f51b03, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: d2b84e5332b5efb4fbecfd8db1593cc3, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 9169eab311f10cb429de5fb37ec31714, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2488,6 +2488,7 @@ GameObject:
   - component: {fileID: 672815501}
   - component: {fileID: 672815500}
   - component: {fileID: 672815499}
+  - component: {fileID: 672815502}
   m_Layer: 0
   m_Name: tile3
   m_TagString: Untagged
@@ -2572,6 +2573,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672815497}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &672815502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672815497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55626a5b72b52d4b9f8cbc527c1ffc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &680129032
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,6 +3849,7 @@ GameObject:
   - component: {fileID: 1080299006}
   - component: {fileID: 1080299005}
   - component: {fileID: 1080299004}
+  - component: {fileID: 1080299007}
   m_Layer: 0
   m_Name: tile1
   m_TagString: Untagged
@@ -3920,6 +3934,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080299002}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1080299007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080299002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55626a5b72b52d4b9f8cbc527c1ffc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1087550809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6439,7 +6465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1d7ba33f4f81e42a8f40cc0c11fd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardClick: {fileID: 0}
+  standardClick: {fileID: 1865021648}
   exitClick: {fileID: 0}
   doorClose: {fileID: 0}
   pauseScreen_UI: {fileID: 504954141}
@@ -6530,6 +6556,7 @@ GameObject:
   - component: {fileID: 2054591626}
   - component: {fileID: 2054591625}
   - component: {fileID: 2054591624}
+  - component: {fileID: 2054591627}
   m_Layer: 0
   m_Name: tile2
   m_TagString: Untagged
@@ -6614,6 +6641,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054591622}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2054591627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054591622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55626a5b72b52d4b9f8cbc527c1ffc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2078782707
 GameObject:
   m_ObjectHideFlags: 0
