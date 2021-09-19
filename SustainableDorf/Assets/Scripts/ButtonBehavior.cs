@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class ButtonBehavior : MonoBehaviour
 {
+    AudioSource soundOfPaper; 
     /*//float buttonFeedbackTimer = .3f;
     //Transform defaultTransform;
     RectTransform defaultTransform;
     float scaleFactor = 1.1f;
     [SerializeField] AudioSource paperSound;
-    
+    */
     private void Start()
     {
-        defaultTransform = RectTransform.localScale;
-        rt = transform;
+        soundOfPaper = GameObject.Find("SceneManager").GetComponent<Buttons>().soundOfPaper;
+
+        //defaultTransform = RectTransform.localScale;
+        //rt = transform;
     }
     private void OnMouseOver()
     {
-        rt.localScale = other.localScale;
+        //soundOfPaper.Play();
+        Debug.Log("hovering over button");
+        /*rt.localScale = other.localScale;
         this.rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3f);// * scaleFactor);
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, other.rect.height);
         //rectTransf.ForceUpdateRectTransforms(); - needed before we adjust pivot a second time?
         //rt.pivot = myPrevPivot;
 
-        //paperSound.Play();
+        paperSound.Play();
         RectTransform.sizeDelta = new Vector2(width, height);
         transform.localScale = transform.localScale * scaleFactor;
         RectTransform.localScale = RectTransform.localScale * scaleFactor;
@@ -36,14 +41,16 @@ public class ButtonBehavior : MonoBehaviour
         // if we wanted to use various sounds
         /*AudioSource[] paperSoundList = //GameManager.GetComponent<Sounds>().arrayOfPaperSounds;
         AudioSource randomPaperSound = paperSoundList[Random.Range(0, paperSOundList.Length)];
-        randomPaperSound.Play();
+        randomPaperSound.Play();*/
     }
 
     private void OnMouseExit()
     {
-        transform.localScale = defaultTransform.localScale;
+        //soundOfPaper.Stop();
+        Debug.Log("no longer hovering over button");
+        //transform.localScale = defaultTransform.localScale;
         //transform.SetParent(defaultTransform);// this shouldnt work?!
-        
+
         //transform.localScale = transform.localScale / scaleFactor;
     }
 

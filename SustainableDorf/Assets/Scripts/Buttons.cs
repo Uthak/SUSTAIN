@@ -9,8 +9,10 @@ public class Buttons : MonoBehaviour
     [SerializeField] AudioSource standardClick;
     [SerializeField] AudioSource exitClick;
     [SerializeField] AudioSource doorClose;
+    public AudioSource soundOfPaper;
 
     [SerializeField] GameObject pauseScreen_UI;
+    [SerializeField] GameObject areYouSure_UI;
 
     bool gameIsPaused = false;
 
@@ -21,7 +23,7 @@ public class Buttons : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape) | Input.GetKeyDown(KeyCode.Space))
             {
-                //standardClick.Play();
+                standardClick.Play();
                 PauseGame();
             }
         }
@@ -96,13 +98,40 @@ public class Buttons : MonoBehaviour
         //Debug.Log("trying to go back to Main");
     }
 
-    // Exits the game
+    // Exits the game when asked to confirm
+    public void YesIAmSure()
+    {
+        standardClick.Play();
+        Debug.Log("The game would now end in built game!"); // this is to check operation while in Editor
+        Application.Quit(); // only works when built
+    }
+    public void NoIAmNot()
+    {
+        standardClick.Play();
+        areYouSure_UI.SetActive(false);
+    }
+
+    // launches UI asking to confirm if you REALLY wanna leave the game
     public void QuitGame()
     {
         //exitClick.Play(); // should play door closing & clicking sound
         //doorClose.Play();
-        Debug.Log("The game would now end in built game!"); // this is to check operation while in Editor
-        Application.Quit(); // only works when built
+        standardClick.Play();
+        areYouSure_UI.SetActive(true);
+    }
+
+    public void Options_UI()
+    {
+        standardClick.Play();
+        SceneManager.LoadScene("Options_UI");
+        Debug.Log("Options-Button was pressed");
+    }
+    public void Highscore_UI()
+    {
+        standardClick.Play();
+        SceneManager.LoadScene("Highscore_UI");
+        Debug.Log("Highscore-Button was pressed");
+
     }
 }
 
