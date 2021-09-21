@@ -37,10 +37,15 @@ public class Highscore : MonoBehaviour
             }
         }
 
+        int Index = 0;
         highscoreEntryTransformList = new List<Transform>();
         foreach (HighscoreEntry highscoreEntry in highscores.highscoreEntriesList)
         {
-            CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
+            Index++;
+            if (Index < 9)
+            {
+                CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
+            }
         }
 
         
