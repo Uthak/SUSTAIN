@@ -13,13 +13,40 @@ public class Buttons : MonoBehaviour
 
     [SerializeField] GameObject pauseScreen_UI;
     [SerializeField] GameObject areYouSure_UI;
+    //[SerializeField] GameObject areYouSure_BackToMain_UI;
+    //[SerializeField] GameObject areYouSure_Quit_UI;
+
+
+    [SerializeField] GameObject pop_up_screen_1;
+    [SerializeField] GameObject pop_up_screen_2;
 
     bool gameIsPaused = false;
+    // used to check if the player can pause the scene he/she is in
+    bool canBePaused = false;
 
+    // this Start function is only to turn off your pop_ups in case you forgot
+    private void Start()
+    {
+        if (pop_up_screen_1 != null)
+        {
+            pop_up_screen_1.SetActive(false);
+        }
+        if (pop_up_screen_2 != null)
+        {
+            pop_up_screen_2.SetActive(false);
+        }
+
+        // checks if player is currently in the actual game in order to unlock "pause"-ability
+        if (SceneManager.GetActiveScene().name == "Level_1")
+        {
+            canBePaused = true;
+        }
+
+    }
     // Pause and open a screen while playing, enabling leaving the game midgame
     void Update()
     {
-        if(gameIsPaused == false)
+        if(gameIsPaused == false && canBePaused)
         {
             if (Input.GetKeyDown(KeyCode.Escape) | Input.GetKeyDown(KeyCode.Space))
             {
@@ -48,7 +75,10 @@ public class Buttons : MonoBehaviour
     {
         standardClick.Play();
         gameIsPaused = false;
-        pauseScreen_UI.SetActive(false);
+        if (pauseScreen_UI != null)
+        {
+            pauseScreen_UI.SetActive(false);
+        }
         Time.timeScale = 1;
     }
 
@@ -72,6 +102,7 @@ public class Buttons : MonoBehaviour
         ResumeGame();
         // this restarts current Level
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("this scene was just restarted");
     }
 
     // Opens Credit Screen
@@ -85,6 +116,7 @@ public class Buttons : MonoBehaviour
     public void BackToMain()
     {
         standardClick.Play();
+        ResumeGame();
         SceneManager.LoadScene("Start_UI");
         /*if (SceneManager.GetActiveScene().name != "Start_UI")
         {
@@ -133,6 +165,59 @@ public class Buttons : MonoBehaviour
         Debug.Log("Highscore-Button was pressed");
 
     }
+
+
+    // ----------------------------------------------
+
+    // these are completly optional UI_Screens you can assign via [SerializeFields]
+    public void Open_PoP_Up_Screen_1()
+    {
+        if (pop_up_screen_1 != null)
+        {
+            standardClick.Play();
+            Time.timeScale = 0;
+            pop_up_screen_1.SetActive(true);
+        }else
+        {
+            Debug.Log("You want to open pop_up_screen_1");
+            Debug.Log("Make sure that you put the desired pop-up in the corresponding slot of the \"Buttons\"-Script in the \"SceneManager\"-GameObject in the Editor");
+            Debug.Log("Be aware that there is pop_up_screen_1 & pop_up_screen_2! --> this is targeting Nr.: 1");
+        }
+    }
+    public void Close_PoP_Up_Screen_1()
+    {
+        if (pop_up_screen_1 != null)
+        {
+            standardClick.Play();
+            Time.timeScale = 1;
+            pop_up_screen_1.SetActive(false);
+        }
+    }
+    public void Open_PoP_Up_Screen_2()
+    {
+        if (pop_up_screen_2 != null)
+        {
+            standardClick.Play();
+            Time.timeScale = 0;
+            pop_up_screen_2.SetActive(true);
+        }else
+        {
+            Debug.Log("You want to open pop_up_screen_2");
+            Debug.Log("Make sure that you put the desired pop-up in the corresponding slot of the \"Buttons\"-Script in the \"SceneManager\"-GameObject in the Editor");
+            Debug.Log("Be aware that there is pop_up_screen_1 & pop_up_screen_2! --> this is targeting Nr.: 2");
+        }
+    }
+    public void Close_PoP_Up_Screen_2()
+    {
+        if (pop_up_screen_2 != null)
+        {
+            standardClick.Play();
+            Time.timeScale = 1;
+            pop_up_screen_2.SetActive(false);
+        }
+    }
+
+
 }
 
 

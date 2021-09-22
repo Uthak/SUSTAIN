@@ -9,20 +9,20 @@ public class CameraRotator : MonoBehaviour
     
     Vector3 rotationVector;
     float randomFloat;
-    private void Start()
+    /*private void Start()
     {
         rotationVector = new Vector3(0f, Y, 0f);
-    }
+    }*/
     void FixedUpdate()
     {
         if (isCow == false)
         {
-            transform.Rotate(rotationVector, speed * Time.deltaTime, Space.World);
+            transform.Rotate(new Vector3(0f, Y, 0f), speed * Time.deltaTime, Space.World);
         }
         else
         {
             randomFloat = Random.Range(0f, 60f);
-            transform.Rotate(rotationVector, randomFloat * Time.deltaTime, Space.Self);
+            transform.Rotate(new Vector3(0f, Y, 0f), randomFloat * Time.deltaTime, Space.Self);
 
         }
     }
