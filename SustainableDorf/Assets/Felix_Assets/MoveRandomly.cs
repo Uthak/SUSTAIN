@@ -31,6 +31,23 @@ public class MoveRandomly : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         path = new NavMeshPath();
+
+        //testing to start cows on spawn
+        inCoRoutine = true;
+        //yield return new WaitForSeconds(timerForNewPath);
+        //yield return new WaitForSeconds(Random.Range(minTimerForNewPath, maxTimerForNewPath));
+        GetNewPath();
+        validPath = navMeshAgent.CalculatePath(target, path);
+
+        //if (!validPath) Debug.Log("Found an invalid path");
+
+        /*while (!validPath)
+        {
+            //yield return new WaitForSeconds(0.01f);
+            GetNewPath();
+            validPath = navMeshAgent.CalculatePath(target, path);
+        }*/
+        inCoRoutine = false;
     }
 
     Vector3 getNewRandomPosition()
@@ -69,7 +86,7 @@ public class MoveRandomly : MonoBehaviour
         inCoRoutine = false;
     }
 
-    void GetNewPath()
+    public void GetNewPath()
     {
         target = getNewRandomPosition();
         navMeshAgent.SetDestination(target);

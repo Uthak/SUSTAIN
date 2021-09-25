@@ -11,6 +11,8 @@ TagManager:
   - city
   - cow
   - podest
+  - DropZone
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - cow
   - 
   - 
   - 

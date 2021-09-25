@@ -9,6 +9,10 @@ public class Buttons : MonoBehaviour
     [SerializeField] AudioSource standardClick;
     [SerializeField] AudioSource exitClick;
     [SerializeField] AudioSource doorClose;
+    public AudioSource kickingSound;
+    public AudioSource mooh;
+
+
     public AudioSource soundOfPaper;
 
     [SerializeField] GameObject pauseScreen_UI;
@@ -20,9 +24,19 @@ public class Buttons : MonoBehaviour
     [SerializeField] GameObject pop_up_screen_1;
     [SerializeField] GameObject pop_up_screen_2;
 
+    [SerializeField] GameObject jan;
+    [SerializeField] GameObject sophie;
+    [SerializeField] GameObject paula;
+    [SerializeField] GameObject felix;
+    [SerializeField] GameObject credits_PopUp;
+    [SerializeField] TextMeshProUGUI creditsTextField;
+
     bool gameIsPaused = false;
     // used to check if the player can pause the scene he/she is in
     bool canBePaused = false;
+
+    // respawn-blink-timer; used by KickOnClick-script
+    public float blinkIntervall = .3f;
 
     // this Start function is only to turn off your pop_ups in case you forgot
     private void Start()
@@ -218,6 +232,81 @@ public class Buttons : MonoBehaviour
     }
 
 
+
+    // these are the credits buttons only. they are kind of pointless all together
+    // untill I add descriptions of contributions
+    public void JanKuh()
+    {
+        if (jan.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        {
+            jan.GetComponent<KickOnClick>().wobbleEnabled = false;
+            jan.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
+            jan.GetComponent<Rigidbody>().mass = 1f;
+        }
+        else
+        {
+            jan.GetComponent<KickOnClick>().wobbleEnabled = true;
+            jan.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
+            jan.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
+        }
+    }
+    public void SophieKuh()
+    {
+        if (sophie.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        {
+            sophie.GetComponent<KickOnClick>().wobbleEnabled = false;
+            sophie.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
+            sophie.GetComponent<Rigidbody>().mass = 1f;
+        }
+        else
+        {
+            sophie.GetComponent<KickOnClick>().wobbleEnabled = true;
+            sophie.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
+            sophie.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
+        }
+    }
+    public void PaulaKuh()
+    {
+        if (paula.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        {
+            paula.GetComponent<KickOnClick>().wobbleEnabled = false;
+            paula.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
+            paula.GetComponent<Rigidbody>().mass = 1f;
+        }
+        else
+        {
+            paula.GetComponent<KickOnClick>().wobbleEnabled = true;
+            paula.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
+            paula.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
+        }
+    }
+    public void FelixKuh()
+    {
+        if (felix.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        {
+            felix.GetComponent<KickOnClick>().wobbleEnabled = false;
+            //felix.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
+            felix.GetComponent<Rigidbody>().mass = 1f;
+        }
+        else
+        {
+            felix.GetComponent<KickOnClick>().wobbleEnabled = true;
+            //felix.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
+            felix.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
+        }
+        credits_PopUp.SetActive(true);
+        creditsTextField.text = "Felix Mundschenk\nGame Design, UI's and Code";
+        /*if (credits_PopUp != enabled)
+        {
+            credits_PopUp.SetActive(true);
+            creditsTextField.text = "Felix Mundschenk\nGame Design, UI's and Code";
+        }
+        else
+        {
+            credits_PopUp.SetActive(false);
+        }*/
+            
+    }
 }
 
 
