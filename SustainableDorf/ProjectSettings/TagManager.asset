@@ -13,6 +13,12 @@ TagManager:
   - podest
   - DropZone
   - Ball
+  - Ground
+  - Fence
+  - Button
+  - BackGround_UI
+  - Skill_UI
+  - Title
   layers:
   - Default
   - TransparentFX

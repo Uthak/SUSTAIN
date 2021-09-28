@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -28,8 +29,13 @@ public class Buttons : MonoBehaviour
     [SerializeField] GameObject sophie;
     [SerializeField] GameObject paula;
     [SerializeField] GameObject felix;
+
+    GameObject lastClickedNameButton;
+
     [SerializeField] GameObject credits_PopUp;
-    [SerializeField] TextMeshProUGUI creditsTextField;
+    public TextMeshProUGUI developerName_TextField;
+    public TextMeshProUGUI developerSkills_TextField;
+    bool aCreditsButtonHasBeenPressed = false;
 
     bool gameIsPaused = false;
     // used to check if the player can pause the scene he/she is in
@@ -231,81 +237,94 @@ public class Buttons : MonoBehaviour
         }
     }
 
-
+    public void StopWobble()
+    {
+        lastClickedNameButton.GetComponent<KickOnClick>().wobbleEnabled = false;
+    }
 
     // these are the credits buttons only. they are kind of pointless all together
     // untill I add descriptions of contributions
     public void JanKuh()
     {
-        if (jan.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        jan.GetComponent<KickOnClick>().wobbleEnabled = true;
+        lastClickedNameButton = jan;
+        Invoke("StopWobble", 3f);
+
+        developerName_TextField.text = "Jan";
+        developerSkills_TextField.text = "Game Design and Code";
+        /*if (aCreditsButtonHasBeenPressed == false)
         {
-            jan.GetComponent<KickOnClick>().wobbleEnabled = false;
-            jan.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
-            jan.GetComponent<Rigidbody>().mass = 1f;
-        }
-        else
+            aCreditsButtonHasBeenPressed = true;
+            developerName_TextField.text = "Jan";
+            developerSkills_TextField.text = "Game Design and Code";
+        }else
         {
-            jan.GetComponent<KickOnClick>().wobbleEnabled = true;
-            jan.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
-            jan.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
-        }
+            aCreditsButtonHasBeenPressed = false;
+            developerName_TextField.text = "";
+            developerSkills_TextField.text = "";
+        }*/
     }
     public void SophieKuh()
     {
-        if (sophie.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        sophie.GetComponent<KickOnClick>().wobbleEnabled = true;
+        lastClickedNameButton = sophie;
+        Invoke("StopWobble", 3f);
+
+        developerName_TextField.text = "Sophie";
+        developerSkills_TextField.text = "Art, 3D and Music";
+        /*if (aCreditsButtonHasBeenPressed == false)
         {
-            sophie.GetComponent<KickOnClick>().wobbleEnabled = false;
-            sophie.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
-            sophie.GetComponent<Rigidbody>().mass = 1f;
-        }
-        else
+            aCreditsButtonHasBeenPressed = true;
+            developerName_TextField.text = "Sophie";
+            developerSkills_TextField.text = "Art, 3D and Music";
+        }else
         {
-            sophie.GetComponent<KickOnClick>().wobbleEnabled = true;
-            sophie.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
-            sophie.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
-        }
+            aCreditsButtonHasBeenPressed = false;
+            developerName_TextField.text = "";
+            developerSkills_TextField.text = "";
+        }*/
     }
     public void PaulaKuh()
     {
-        if (paula.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        paula.GetComponent<KickOnClick>().wobbleEnabled = true;
+        lastClickedNameButton = paula;
+        Invoke("StopWobble", 3f);
+        
+        developerName_TextField.text = "Paula";
+        developerSkills_TextField.text = "Art, 3D and VFX";
+        /*if (aCreditsButtonHasBeenPressed == false)
         {
-            paula.GetComponent<KickOnClick>().wobbleEnabled = false;
-            paula.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
-            paula.GetComponent<Rigidbody>().mass = 1f;
-        }
-        else
+            aCreditsButtonHasBeenPressed = true;
+            developerName_TextField.text = "Paula";
+            developerSkills_TextField.text = "Art, 3D and VFX";
+        }else
         {
-            paula.GetComponent<KickOnClick>().wobbleEnabled = true;
-            paula.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
-            paula.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
-        }
+            aCreditsButtonHasBeenPressed = false;
+            developerName_TextField.text = "";
+            developerSkills_TextField.text = "";
+        }*/
     }
     public void FelixKuh()
     {
-        if (felix.GetComponent<KickOnClick>().wobbleEnabled == true) // press button again and go back to normal
+        //aCreditsButtonHasBeenPressed = false;
+        //aCreditsButtonHasBeenPressed = true;
+        felix.GetComponent<KickOnClick>().wobbleEnabled = true;
+        lastClickedNameButton = felix;
+        Invoke("StopWobble", 3f);
+
+        developerName_TextField.text = "Felix";
+        developerSkills_TextField.text = "Game Design, UI's and Code";
+        /*if (aCreditsButtonHasBeenPressed == false)
         {
-            felix.GetComponent<KickOnClick>().wobbleEnabled = false;
-            //felix.GetComponent<KickOnClick>().navMeshAgent.enabled = true;
-            felix.GetComponent<Rigidbody>().mass = 1f;
-        }
-        else
+            aCreditsButtonHasBeenPressed = true;
+            developerName_TextField.text = "Felix";
+            developerSkills_TextField.text = "Game Design, UI's and Code";
+        }else
         {
-            felix.GetComponent<KickOnClick>().wobbleEnabled = true;
-            //felix.GetComponent<KickOnClick>().navMeshAgent.enabled = false;
-            felix.GetComponent<Rigidbody>().mass = .001f; // you can kick him much harder now! yeah!
-        }
-        credits_PopUp.SetActive(true);
-        creditsTextField.text = "Felix Mundschenk\nGame Design, UI's and Code";
-        /*if (credits_PopUp != enabled)
-        {
-            credits_PopUp.SetActive(true);
-            creditsTextField.text = "Felix Mundschenk\nGame Design, UI's and Code";
-        }
-        else
-        {
-            credits_PopUp.SetActive(false);
-        }*/
-            
+            aCreditsButtonHasBeenPressed = false;
+            developerName_TextField.text = "";
+            developerSkills_TextField.text = "";
+        }   */
     }
 }
 
