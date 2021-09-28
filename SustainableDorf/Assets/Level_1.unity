@@ -9190,6 +9190,9 @@ MonoBehaviour:
   cameraTransformMetrics1: {fileID: 55970413}
   cameraTransformMetrics2: {fileID: 586254481}
   developmentStatUI: {fileID: 1333699758}
+  positiveInfluence: 0.1
+  neutralInfluence: 0
+  negativeInfluence: -0.1
 --- !u!114 &1865021651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9217,11 +9220,35 @@ MonoBehaviour:
   standardClick: {fileID: 1865021648}
   exitClick: {fileID: 0}
   doorClose: {fileID: 0}
+  kickingSound: {fileID: 0}
+  mooh: {fileID: 0}
   soundOfPaper: {fileID: 0}
   pauseScreen_UI: {fileID: 504954141}
   areYouSure_UI: {fileID: 1457256469}
   pop_up_screen_1: {fileID: 99552432}
   pop_up_screen_2: {fileID: 24163114}
+  jan: {fileID: 0}
+  sophie: {fileID: 0}
+  paula: {fileID: 0}
+  felix: {fileID: 0}
+  credits_PopUp: {fileID: 0}
+  developerName_TextField: {fileID: 0}
+  developerSkills_TextField: {fileID: 0}
+  blinkIntervall: 0.3
+  numberOfPages: 9
+  tutorial_page_0: {fileID: 0}
+  tutorial_page_1: {fileID: 0}
+  tutorial_page_2: {fileID: 0}
+  tutorial_page_3: {fileID: 0}
+  tutorial_page_4: {fileID: 0}
+  tutorial_page_5: {fileID: 0}
+  tutorial_page_6: {fileID: 0}
+  tutorial_page_7: {fileID: 0}
+  tutorial_page_8: {fileID: 0}
+  forwardButton: {fileID: 0}
+  backwardButton: {fileID: 0}
+  errorSound: {fileID: 0}
+  tutorial_page_counter: {fileID: 0}
 --- !u!114 &1865021653
 MonoBehaviour:
   m_ObjectHideFlags: 0

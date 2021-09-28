@@ -29,9 +29,9 @@ public class MoveRandomly : MonoBehaviour
         path = new NavMeshPath();
         
         // this part is to get cows Moving right on spawn
-        minTimerForNewPath = .001f;
-        maxTimerForNewPath = .001f;
-        Invoke("StartMoving", 1f);
+        minTimerForNewPath = .1f;
+        maxTimerForNewPath = .1f;
+        Invoke("StartMoving", .5f);
     }
 
     // here the MeshNav receives its real time-variables

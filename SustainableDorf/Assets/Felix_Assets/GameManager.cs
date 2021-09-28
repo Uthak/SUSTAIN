@@ -73,6 +73,13 @@ public class GameManager : MonoBehaviour
     // used to reset the UI-display at the start of the game
     private GameObject StatsDisplay;
 
+    // these are used by the "STATS" script on terrain tiles to determine the amount of impact neighbors have
+    //float greatInfluence = -.002f; // currently not used
+    public float positiveInfluence = -.001f;
+    public float neutralInfluence = 0f;
+    public float negativeInfluence = .001f;
+    //float terribleInfluence = .002f; // currently not used
+
     void Start()
     {
         // determines the degeneration Threshold as % of the maximum stat-value
