@@ -17,7 +17,8 @@ public class Highscore : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
-        //AddHighscoreEntry(1000000, "CMK");
+        AddHighscoreEntry(1000000, "CMK");        //einzutragender Highscore
+        //PlayerPrefs.DeleteAll();                  //liste löschen
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
@@ -100,6 +101,15 @@ public class Highscore : MonoBehaviour
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+
+        if (highscores == null)
+        {
+            // There's no stored table, initialize
+            highscores = new Highscores()
+            {
+                highscoreEntriesList = new List<HighscoreEntry>()
+            };
+        }
 
         highscores.highscoreEntriesList.Add(highscoreEntry);
 
