@@ -119,14 +119,15 @@ public class NeedsManager : MonoBehaviour
             environmentValue = baseStatValue;
         }
 
-        // call "LOOSER"-script to end game if any stat value drops to 0 (or below)
+        // call "VictoryScript"-script to end game if any stat value drops to 0 (or below)
         if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
         {
             GameObject SceneManager = GameObject.Find("SceneManager");
 
-            if (SceneManager.GetComponent<GameManager>().quickWin != true && tileCounter !=  48)
+            //if (SceneManager.GetComponent<GameManager>().quickWin != true && tileCounter !=  48)
+            if (GetComponent<VictoryScript>().gameHasEnded == false)
             {
-                GetComponent<Looser>().YouLose();
+                GetComponent<VictoryScript>().Loser();
             }
         }
 

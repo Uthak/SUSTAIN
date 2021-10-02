@@ -11,6 +11,7 @@ public class Buttons : MonoBehaviour
     [SerializeField] AudioSource standardClick;
     [SerializeField] AudioSource exitClick;
     [SerializeField] AudioSource doorClose;
+    [SerializeField] AudioSource ambientSound;
     public AudioSource kickingSound;
     public AudioSource mooh;
     public AudioSource soundOfPaper;
@@ -37,8 +38,27 @@ public class Buttons : MonoBehaviour
     // used to check if the player can pause the scene he/she is in
     bool canBePaused = false;
 
+    [SerializeField] GameObject getNewSetOfTiles_Button;
+
     // respawn-blink-timer; used by KickOnClick-script
     public float blinkIntervall = .3f;
+
+    // all of this is for the Tutorial:
+    int tutorialPage;
+    [SerializeField] int numberOfPages = 9;
+    [SerializeField] GameObject tutorial_page_0;
+    [SerializeField] GameObject tutorial_page_1;
+    [SerializeField] GameObject tutorial_page_2;
+    [SerializeField] GameObject tutorial_page_3;
+    [SerializeField] GameObject tutorial_page_4;
+    [SerializeField] GameObject tutorial_page_5;
+    [SerializeField] GameObject tutorial_page_6;
+    [SerializeField] GameObject tutorial_page_7;
+    [SerializeField] GameObject tutorial_page_8;
+    [SerializeField] GameObject forwardButton;
+    [SerializeField] GameObject backwardButton;
+    public AudioSource errorSound; // also used by the tileGenerator script when pressing the NewSet button in Error
+    [SerializeField] TextMeshProUGUI tutorial_page_counter;
 
     // this Start function is only to turn off your pop_ups in case you forgot
     private void Start()
@@ -71,32 +91,13 @@ public class Buttons : MonoBehaviour
     {
         if(gameIsPaused == false && canBePaused)
         {
-            if (Input.GetKeyDown(KeyCode.Escape) | Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Escape)/* | Input.GetKeyDown(KeyCode.Space)*/)
             {
                 standardClick.Play();
+                ambientSound.Pause();
                 PauseGame();
             }
         }
-        
-        // sets the BackwardButton in the tutorial scene to transluscent on spawn
-        /*if (SceneManager.GetActiveScene().name == "Tutorial_1")
-        //if (backwardButton && forwardButton)
-        {
-            if(tutorialPage == 0)
-            {
-                backwardButton.GetComponent<Image>().color = new Color(100, 100, 100, 100);
-            }else
-            {
-                backwardButton.GetComponent<Image>().color = new Color(181, 155, 155, 255);
-            }
-            if (tutorialPage == (numberOfPages - 1))
-            {
-                forwardButton.GetComponent<Image>().color = new Color(100, 100, 100, 100);
-            }else
-            {
-                forwardButton.GetComponent<Image>().color = new Color(181, 155, 155, 255);
-            }
-        }*/
     }
     void PauseGame()
     {
@@ -108,6 +109,7 @@ public class Buttons : MonoBehaviour
     public void ResumeGame()
     {
         standardClick.Play();
+        ambientSound.UnPause();
         gameIsPaused = false;
         if (pauseScreen_UI != null)
         {
@@ -188,26 +190,34 @@ public class Buttons : MonoBehaviour
         standardClick.Play();
         SceneManager.LoadScene("Highscore_UI");
         Debug.Log("Highscore-Button was pressed");
-
     }
 
-    int tutorialPage;
-    [SerializeField] int numberOfPages = 9;
-    [SerializeField] GameObject tutorial_page_0;
-    [SerializeField] GameObject tutorial_page_1;
-    [SerializeField] GameObject tutorial_page_2;
-    [SerializeField] GameObject tutorial_page_3;
-    [SerializeField] GameObject tutorial_page_4;
-    [SerializeField] GameObject tutorial_page_5;
-    [SerializeField] GameObject tutorial_page_6;
-    [SerializeField] GameObject tutorial_page_7;
-    [SerializeField] GameObject tutorial_page_8;
-    [SerializeField] GameObject forwardButton;
-    [SerializeField] GameObject backwardButton;
-    [SerializeField] AudioSource errorSound;
-    [SerializeField] TextMeshProUGUI tutorial_page_counter;
+    // this gets the player a new set of tiles (referencing the TileGenerator-script)
+    bool nextSetButtonCooldown = false;
+    public void GetNewSetOfTiles()
+    {
+        GameObject SceneManager = GameObject.Find("SceneManager");
 
+        if (nextSetButtonCooldown == false)
+        {
+            nextSetButtonCooldown = true;
+            standardClick.Play();
+            SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
+            SceneManager.GetComponent<TileGenerator>().NextSet();
+            getNewSetOfTiles_Button.GetComponent<Image>().color = new Color32(100, 100, 100, 100);
+            Invoke("ResetNextSetButtonCooldown", 5f);
+        }else
+        {
+            errorSound.Play();
+        }
+    }
+    void ResetNextSetButtonCooldown()
+    {
+        nextSetButtonCooldown = false;
+        getNewSetOfTiles_Button.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+    }
 
+    // all of this is for the Tutorial:
     public void Forward()
     {
         if(tutorialPage !< (numberOfPages - 1))
@@ -311,6 +321,27 @@ public class Buttons : MonoBehaviour
             forwardButton.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
     }
+
+    // buttons at the end of the game:
+    // when ending a game by winning/loosing (not exiting) you will have to continue by clicking this
+    [SerializeField] GameObject highscore_UI;
+    public void OpenHighscore_UI()
+    {
+        // could close the "WIN" and "LOSE" Logos here, but may be cool to keep them as overlay for the rest of the round
+        standardClick.Play();
+        GameObject SceneManager = GameObject.Find("SceneManager");
+        SceneManager.GetComponent<VictoryScript>().endGame_UI.SetActive(false);
+        highscore_UI.SetActive(true);
+        // --> display all current highscores (maybe 10?) 
+        // -------> here an option for "moreInfo" would be awesome, to see relevant stats of your round.
+        // --> "TakeScreenshot" button to allow a pic (now after being able to see how well you did)
+        // --> "BackToMain" button (back to main menu)
+        // --> "PlayAgain" button (starts another round)
+    }
+
+
+
+
 
     // these are the buttons in the credits_Scene
     public void JanKuh()

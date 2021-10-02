@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
     public float maxStatsPerTile = 6f;
 
     // Separate, optional display that lets you read out the actual degeneration rates of all stats
+    // becomes activated if using numerical degeneration-rates or stat-values (see above)
+    [Tooltip("becomes activated if using numerical degeneration-rates or stat-values (see above)")]
+    [SerializeField] GameObject developmentStatUI;
+
     //[SerializeField] bool showDegenerationRates = true;
     [SerializeField] TextMeshProUGUI prosperityDegenerationRateField;
     [SerializeField] TextMeshProUGUI happinessDegenerationRateField;
@@ -66,10 +70,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI cameraTransformMetrics1;
     [SerializeField] TextMeshProUGUI cameraTransformMetrics2;
 
-    // becomes activated if using numerical degeneration-rates or stat-values (see above)
-    [Tooltip("becomes activated if using numerical degeneration-rates or stat-values (see above)")]
-    [SerializeField] GameObject developmentStatUI;
-
     // used to reset the UI-display at the start of the game
     private GameObject StatsDisplay;
 
@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
         StatsDisplay = GameObject.Find("Stats_UI");
         StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
 
+        // turn off Dev mode in case you simply forgot
+        developmentStatUI.SetActive(false);
         // activates numerical stat UI's if activated
         if (developerMode == true)
         {
@@ -103,46 +105,54 @@ public class GameManager : MonoBehaviour
         GameObject SceneManager = GameObject.Find("SceneManager");
 
         // if activated this displays DEGENERATION-RATES in the UI (optional)
-        //if (showDegenerationRates == true)
-        //{
-        prosperityDegenerationRateField.text = "prosperity degeneration-rate " + SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate.ToString();
-        happinessDegenerationRateField.text = "happiness degeneration-rate " + SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate.ToString();
-        environmentDegenerationRateField.text = "environment degeneration-rate " + SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate.ToString();
-        //}
+        if (developerMode)
+        {
+            //if (showDegenerationRates == true)
+            //{
+            prosperityDegenerationRateField.text = "prosperity degeneration-rate " + SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate.ToString();
+            happinessDegenerationRateField.text = "happiness degeneration-rate " + SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate.ToString();
+            environmentDegenerationRateField.text = "environment degeneration-rate " + SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate.ToString();
+            //}
 
-        // if activated this displays STATS numerically in the UI (optional)
-        //if (numericalValueDisplay == true)
-        //{
-        prosperityValueField.text = "prosperity " + SceneManager.GetComponent<NeedsManager>().prosperityValue.ToString();
-        happinessValueField.text = "happiness " + SceneManager.GetComponent<NeedsManager>().happinessValue.ToString();
-        environmentValueField.text = "environment " + SceneManager.GetComponent<NeedsManager>().environmentValue.ToString();
-        //}
+            // if activated this displays STATS numerically in the UI (optional)
+            //if (numericalValueDisplay == true)
+            //{
+            prosperityValueField.text = "prosperity " + SceneManager.GetComponent<NeedsManager>().prosperityValue.ToString();
+            happinessValueField.text = "happiness " + SceneManager.GetComponent<NeedsManager>().happinessValue.ToString();
+            environmentValueField.text = "environment " + SceneManager.GetComponent<NeedsManager>().environmentValue.ToString();
+            //}
 
-        // live update of camera settings
-        cameraTransformMetrics1.text = "camera field Of View: " + Camera.main.fieldOfView.ToString();
-        cameraTransformMetrics2.text = "camera orthographic size: " + Camera.main.orthographicSize.ToString();
+            // live update of camera settings
+            cameraTransformMetrics1.text = "camera field Of View: " + Camera.main.fieldOfView.ToString();
+            cameraTransformMetrics2.text = "camera orthographic size: " + Camera.main.orthographicSize.ToString();
 
-        // live update of "degenerationBonus" from "Stats"-script
-        prosperityDegBonus.text = "local prosperity bonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityBonus.ToString();
-        happinessDegBonus.text = "local happiness bonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessBonus.ToString();
-        environmentDegBonus.text = "local environment bonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentBonus.ToString();
+            // live update of "degenerationBonus" from "Stats"-script
+            prosperityDegBonus.text = "local prosperity bonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityBonus.ToString();
+            happinessDegBonus.text = "local happiness bonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessBonus.ToString();
+            environmentDegBonus.text = "local environment bonus " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentBonus.ToString();
 
-        // numerical display of current tiles static and contineous stats
-        //currentTileProsperity.text = "this tiles prosperity: static " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityStat.ToString() + "contineous: " + (SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityStat * degenerationFactor).ToString("0.00000");
-        //currentTileHappiness.text = "this tiles happiness: static " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessStat.ToString() + "contineous: " + (SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessStat * degenerationFactor).ToString("0.00000");
-        //currentTileEnvironment.text = "this tiles environment: static " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentStat.ToString() + "contineous: " + (SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentStat * degenerationFactor).ToString("0.00000");
-
+            // numerical display of current tiles static and contineous stats
+            //currentTileProsperity.text = "this tiles prosperity: static " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityStat.ToString() + "contineous: " + (SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().prosperityStat * degenerationFactor).ToString("0.00000");
+            //currentTileHappiness.text = "this tiles happiness: static " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessStat.ToString() + "contineous: " + (SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().happinessStat * degenerationFactor).ToString("0.00000");
+            //currentTileEnvironment.text = "this tiles environment: static " + SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentStat.ToString() + "contineous: " + (SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().environmentStat * degenerationFactor).ToString("0.00000");
+        }
     }
     public void ShowDevStats(float a, float b, float c)
     {
-        currentTileProsperity.text = "this tiles prosperity: static " + a + "contineous: " + (a * degenerationFactor).ToString("0.00000");
-        currentTileHappiness.text = "this tiles happiness: static " + b + "contineous: " + (b * degenerationFactor).ToString("0.00000");
-        currentTileEnvironment.text = "this tiles environment: static " + c + "contineous: " + (c * degenerationFactor).ToString("0.00000");
+        if (developerMode)
+        {
+            currentTileProsperity.text = "this tiles prosperity: static " + a + "contineous: " + (a * degenerationFactor).ToString("0.00000");
+            currentTileHappiness.text = "this tiles happiness: static " + b + "contineous: " + (b * degenerationFactor).ToString("0.00000");
+            currentTileEnvironment.text = "this tiles environment: static " + c + "contineous: " + (c * degenerationFactor).ToString("0.00000");
+        }
     }
     public void ResetDevStats()
     {
-        currentTileProsperity.text = "this tiles prosperity: static 0.00 contineous: 0.00";
-        currentTileHappiness.text = "this tiles happiness: static 0.00 contineous: 0.00"; 
-        currentTileEnvironment.text = "this tiles environment: static 0.00 contineous: 0.00";
+        if (developerMode)
+        {
+            currentTileProsperity.text = "this tiles prosperity: static 0.00 contineous: 0.00";
+            currentTileHappiness.text = "this tiles happiness: static 0.00 contineous: 0.00";
+            currentTileEnvironment.text = "this tiles environment: static 0.00 contineous: 0.00";
+        }
     }
 }

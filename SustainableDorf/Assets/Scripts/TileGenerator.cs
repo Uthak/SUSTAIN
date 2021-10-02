@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TileGenerator : MonoBehaviour
 {
@@ -26,14 +27,14 @@ public class TileGenerator : MonoBehaviour
         Invoke("GenerateTile3", respawnDelay);
     }
 
-    private void Update() // for testing //delete me?! (spawns new on rightclick)
+   /* private void Update() // for testing //delete me?! (spawns new on rightclick)
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             tile1.GetComponent<Stats>().UpdateStats();
             Debug.Log("Mouse was pressed");
         }
-    }
+    }*/
 
     public void NextSet()
     {
@@ -41,6 +42,7 @@ public class TileGenerator : MonoBehaviour
         Invoke("GenerateTile2", respawnDelay);
         Invoke("GenerateTile3", respawnDelay);
     }
+    
 
     public void GenerateTile1()
     {
