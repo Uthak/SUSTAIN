@@ -131,6 +131,7 @@ public class VictoryScript : MonoBehaviour
     {
         stats_UI.SetActive(false);
         game_UI.SetActive(false);
+        SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
         endGame_UI.SetActive(true);
 
         // --> IF a highscore slot was won, open "name_input" field

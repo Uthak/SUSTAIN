@@ -93,14 +93,16 @@ public class Buttons : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape)/* | Input.GetKeyDown(KeyCode.Space)*/)
             {
-                standardClick.Play();
-                ambientSound.Pause();
+                //standardClick.Play();
+                //ambientSound.Pause();
                 PauseGame();
             }
         }
     }
-    void PauseGame()
+    public void PauseGame()
     {
+        standardClick.Play();
+        ambientSound.Pause();
         // this doesnt need sound, as this gets called WITH sound in the Update
         gameIsPaused = true;
         Time.timeScale = 0;
@@ -215,6 +217,7 @@ public class Buttons : MonoBehaviour
     {
         nextSetButtonCooldown = false;
         getNewSetOfTiles_Button.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        return;
     }
 
     // all of this is for the Tutorial:
