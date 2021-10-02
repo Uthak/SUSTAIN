@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Highscore : MonoBehaviour
 {
     private Transform entryContainer;
     private Transform entryTemplate;
     private List<Transform> highscoreEntryTransformList;
+
+    GameObject SceneManager;
+    GameObject EnterField;
 
     private void Awake()
     {
@@ -17,7 +21,19 @@ public class Highscore : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
-        AddHighscoreEntry(1000000, "CMK");        //einzutragender Highscore
+        //score holen
+        SceneManager = GameObject.Find("SceneManager");
+        int score = SceneManager.GetComponent<CalculateHighscore>().score;
+
+
+        //namen holen
+        InputField txt_Input = GameObject.Find("Enter Highscore Name").GetComponent<InputField>();
+        string playerName = txt_Input.text;
+
+        //EnterField = GameObject.Find("Enter Highscore Name");
+        //string playerName = EnterField.GetComponent<InputField>().text;
+
+        AddHighscoreEntry(score, playerName);        //einzutragender Highscore
         //PlayerPrefs.DeleteAll();                  //liste löschen
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
