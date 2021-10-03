@@ -20,6 +20,11 @@ public class Stats : MonoBehaviour
 
     // used to decide when to play "mooh"-sound
     public bool isCow = false;
+    // currently unused bools:
+    public bool isFactory = false;
+    public bool isForest = false;
+    public bool isSchool = false;
+    public bool isKlaerwerk = false;
 
     // important as it declares which tiles NOT to destroy
     public bool wasPlaced = false;
@@ -190,7 +195,7 @@ public class Stats : MonoBehaviour
         {
             prosperityBonus = ((float)factoryNeighbors * neutralInfluence) + ((float)socialNeighbors * neutralInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * negativeInfluence);
             happinessBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * positiveInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * positiveInfluence);
-            environmentBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * negativeInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * positiveInfluence);
+            environmentBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * negativeInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * positiveInfluence);
 
             /*prosperityBonus = -.0015f * (float)factoryNeighbors; // nature + factory = - prosperity
             happinessBonus = .001f * (float)socialNeighbors; // nature + social = + happyness

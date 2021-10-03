@@ -19,6 +19,7 @@ public class Highscore : MonoBehaviour
      
     public void AllowHighscore()
     {
+        Debug.Log("test");
         //score vom letzten Listen Element holen
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);

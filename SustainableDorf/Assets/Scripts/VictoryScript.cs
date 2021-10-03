@@ -134,7 +134,9 @@ public class VictoryScript : MonoBehaviour
         Invoke("EndGame_UI", 3f); // probably length of the victory sound. Adjust manually
     }
 
-   // overlay called once Logo & Sound were shown
+    // overlay called once Logo & Sound were shown
+    // this GO sits in EndGameScreen > Highscore_UI > Highscore_Background 
+    [SerializeField] GameObject Highscore_carrying_GO;
     void EndGame_UI()
     {
         stats_UI.SetActive(false);
@@ -143,23 +145,15 @@ public class VictoryScript : MonoBehaviour
         podest1.SetActive(false);
         podest2.SetActive(false);
         podest3.SetActive(false);
-
         endGame_UI.SetActive(true);
 
-        // --> IF a highscore slot was won, open "name_input" field
-        // this is to enter your name in case of new highscore
-        // this requires an UPDATE in the background in Jans script so the highscoreAchieved bool can be filled
-        // it opens an input field, this input is then used to call Jans highscore function
-        // this code is not yet functional, but more conceptional:
-
-        // temporary solution (waiting for Jan):
-        enterName_UI.SetActive(true);
-        /*if (SceneManager.GetComponent<JANHIGHSCORESCRIPT>.highscoreAchieved)
+        // this checks if a highscore was achieved/there was still open entries. If so, it opens the name input-field
+        SceneManager.GetComponent<CalculateHighscore>().Calculate();
+        Highscore_carrying_GO.GetComponent<Highscore>().AllowHighscore();
+        if (Highscore_carrying_GO.GetComponent<Highscore>().allowedHS)
         {
             enterName_UI.SetActive(true);
-            string newHighscorePlayer = Input;
-            SceneManager.GetComponent<JANHIGHSCORESCRIPT>.displayHighscore(newHighscorePlayer);
-        }*/
+        }
     }
 }
 

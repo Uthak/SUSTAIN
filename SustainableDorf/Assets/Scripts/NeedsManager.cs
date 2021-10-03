@@ -122,9 +122,6 @@ public class NeedsManager : MonoBehaviour
         // call "VictoryScript"-script to end game if any stat value drops to 0 (or below)
         if (prosperityValue <= 0f || happinessValue <= 0f || environmentValue <= 0f)
         {
-            GameObject SceneManager = GameObject.Find("SceneManager");
-
-            //if (SceneManager.GetComponent<GameManager>().quickWin != true && tileCounter !=  48)
             if (GetComponent<VictoryScript>().gameHasEnded == false)
             {
                 GetComponent<VictoryScript>().Loser();
@@ -199,7 +196,7 @@ public class NeedsManager : MonoBehaviour
 
     void IncreaseDegenerationRates()
     {
-        prosperityDegenerationRate += degenerationIncreaseOverTime; // should add .001 to all degenerationrates
+        prosperityDegenerationRate += degenerationIncreaseOverTime; // should add .00333 to all degenerationrates (doubling base degeneration every 60 secs)
         happinessDegenerationRate += degenerationIncreaseOverTime;
         environmentDegenerationRate += degenerationIncreaseOverTime;
         degenerationWasIncreased = true;

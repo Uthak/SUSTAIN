@@ -199,9 +199,12 @@ public class Buttons : MonoBehaviour
     public void GetNewSetOfTiles()
     {
         GameObject SceneManager = GameObject.Find("SceneManager");
+        Debug.Log("GetNewSetOfTiles_button was pressed");
 
         if (nextSetButtonCooldown == false)
         {
+            Debug.Log("nextSetButtonCooldown is false");
+
             nextSetButtonCooldown = true;
             standardClick.Play();
             SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
@@ -338,7 +341,6 @@ public class Buttons : MonoBehaviour
         SceneManager.GetComponent<VictoryScript>().endGame_UI.SetActive(false);
         highscore_UI.SetActive(true);
         highscore_UI_Buttons.SetActive(true);
-
 
         // --> display all current highscores (maybe 10?) 
         // -------> here an option for "moreInfo" would be awesome, to see relevant stats of your round.
