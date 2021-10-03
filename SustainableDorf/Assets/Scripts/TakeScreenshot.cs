@@ -6,6 +6,7 @@ using UnityEngine;
 public class TakeScreenshot : MonoBehaviour
 {
     GameObject UI;
+    [SerializeField] AudioSource CameraShutter_Sound;
 
     private IEnumerator Screenshot()
     {
@@ -25,6 +26,10 @@ public class TakeScreenshot : MonoBehaviour
     public void MakeScreenshot()
     {
         //UI ausschalten für Screenshot
+        if (CameraShutter_Sound != null)
+        {
+            CameraShutter_Sound.Play();
+        }
         UI = GameObject.Find("SceneObjects");
         UI.SetActive(false);
 

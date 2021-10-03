@@ -328,6 +328,8 @@ public class Buttons : MonoBehaviour
     // buttons at the end of the game:
     // when ending a game by winning/loosing (not exiting) you will have to continue by clicking this
     [SerializeField] GameObject highscore_UI;
+    [SerializeField] GameObject highscore_UI_Buttons;
+
     public void OpenHighscore_UI()
     {
         // could close the "WIN" and "LOSE" Logos here, but may be cool to keep them as overlay for the rest of the round
@@ -335,6 +337,9 @@ public class Buttons : MonoBehaviour
         GameObject SceneManager = GameObject.Find("SceneManager");
         SceneManager.GetComponent<VictoryScript>().endGame_UI.SetActive(false);
         highscore_UI.SetActive(true);
+        highscore_UI_Buttons.SetActive(true);
+
+
         // --> display all current highscores (maybe 10?) 
         // -------> here an option for "moreInfo" would be awesome, to see relevant stats of your round.
         // --> "TakeScreenshot" button to allow a pic (now after being able to see how well you did)

@@ -13,6 +13,14 @@ public class VictoryScript : MonoBehaviour
     [SerializeField] GameObject stats_UI;
     [SerializeField] GameObject game_UI;
 
+    // input Podest Models to deactivate them
+    [SerializeField] GameObject podest1;
+    [SerializeField] GameObject podest2;
+    [SerializeField] GameObject podest3;
+
+    // this carries the input field for names (highscore)
+    [SerializeField] GameObject enterName_UI;
+
 
     public GameObject youWonLogo; // public in case i want to turn off with a button
     [SerializeField] AudioSource youWonSound;
@@ -132,6 +140,10 @@ public class VictoryScript : MonoBehaviour
         stats_UI.SetActive(false);
         game_UI.SetActive(false);
         SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
+        podest1.SetActive(false);
+        podest2.SetActive(false);
+        podest3.SetActive(false);
+
         endGame_UI.SetActive(true);
 
         // --> IF a highscore slot was won, open "name_input" field
@@ -139,16 +151,15 @@ public class VictoryScript : MonoBehaviour
         // this requires an UPDATE in the background in Jans script so the highscoreAchieved bool can be filled
         // it opens an input field, this input is then used to call Jans highscore function
         // this code is not yet functional, but more conceptional:
+
+        // temporary solution (waiting for Jan):
+        enterName_UI.SetActive(true);
         /*if (SceneManager.GetComponent<JANHIGHSCORESCRIPT>.highscoreAchieved)
         {
             enterName_UI.SetActive(true);
             string newHighscorePlayer = Input;
             SceneManager.GetComponent<JANHIGHSCORESCRIPT>.displayHighscore(newHighscorePlayer);
         }*/
-
-
-        // --> "TakeScreenshot" button to allow a pic // ScreenshotButton.SetActive(true);
-        // --> "Continue" button that opens the Highscore UI
     }
 }
 
