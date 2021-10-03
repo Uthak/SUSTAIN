@@ -7,19 +7,22 @@ using TMPro;
 public class Highscore : MonoBehaviour
 {
     private Transform entryContainer;
-    private Transform entryTemplate;
+    [SerializeField] private Transform entryTemplate;
+    [SerializeField] private TMP_InputField txt_Input;
     private List<Transform> highscoreEntryTransformList;
 
     GameObject SceneManager;
     GameObject EnterField;
 
+     
+
     private void Awake()
     {
         entryContainer = transform.Find("EntryContainer");
         //Debug.Log(entryContainer);
-        entryTemplate = entryContainer.Find("EntryTemplate");
+        //entryTemplate = entryContainer.Find("EntryTemplate"); //raus wegen Serialize
 
-        entryTemplate.gameObject.SetActive(false);
+        //entryTemplate.gameObject.SetActive(false);
 
         //score holen
         SceneManager = GameObject.Find("SceneManager");
@@ -27,8 +30,11 @@ public class Highscore : MonoBehaviour
 
 
         //namen holen
-        InputField txt_Input = GameObject.Find("Enter Highscore Name").GetComponent<InputField>();
+        //TMP_InputField txt_Input = GameObject.Find("Enter Highscore Name").GetComponent<TMP_InputField>(); //raus wegen Serilaze
         string playerName = txt_Input.text;
+
+        
+
 
         //EnterField = GameObject.Find("Enter Highscore Name");
         //string playerName = EnterField.GetComponent<InputField>().text;

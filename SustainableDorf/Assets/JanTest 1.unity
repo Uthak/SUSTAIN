@@ -7934,6 +7934,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991305813}
   m_CullTransparentMesh: 1
+--- !u!224 &2039193879 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4041664129471431607, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
+  m_PrefabInstance: {fileID: 4041664130113041149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2043987210
 GameObject:
   m_ObjectHideFlags: 0
@@ -9390,6 +9395,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1566671462}
     m_Modifications:
+    - target: {fileID: 4041664128772379217, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
+      propertyPath: txt_Input
+      value: 
+      objectReference: {fileID: 1168157574}
+    - target: {fileID: 4041664128772379217, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
+      propertyPath: entryTemplate
+      value: 
+      objectReference: {fileID: 2039193879}
     - target: {fileID: 4041664129214921179, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -9480,7 +9493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4041664130767293987, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
       propertyPath: m_Name
-      value: endGameScreen_UI
+      value: Highscore_UI
       objectReference: {fileID: 0}
     - target: {fileID: 4041664130767293987, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
       propertyPath: m_IsActive
