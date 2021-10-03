@@ -14,7 +14,32 @@ public class Highscore : MonoBehaviour
     GameObject SceneManager;
     GameObject EnterField;
 
+    public bool onlyRead = false;
+    public bool allowedHS = false;
      
+    public void AllowHighscore()
+    {
+        //score vom letzten Listen Element holen
+        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+        int number = highscores.highscoreEntriesList.Count;
+        Debug.Log(number);
+        int oldScore = highscores.highscoreEntriesList[number - 1].score;
+        Debug.Log(oldScore);
+
+        //neuen Score mit holen
+        SceneManager = GameObject.Find("SceneManager");
+        int score = SceneManager.GetComponent<CalculateHighscore>().score;
+
+        //schauen ob neuer Score aufgenommen wird
+        if (number < 9 || score > oldScore)
+        {
+            allowedHS = true;
+            
+        }
+        Debug.Log(allowedHS);
+    }
+
 
     private void Awake()
     {
@@ -22,25 +47,27 @@ public class Highscore : MonoBehaviour
         //Debug.Log(entryContainer);
         //entryTemplate = entryContainer.Find("EntryTemplate"); //raus wegen Serialize
 
-        //entryTemplate.gameObject.SetActive(false);
+        entryTemplate.gameObject.SetActive(false);
 
-        //score holen
-        SceneManager = GameObject.Find("SceneManager");
-        int score = SceneManager.GetComponent<CalculateHighscore>().score;
-
-
-        //namen holen
-        //TMP_InputField txt_Input = GameObject.Find("Enter Highscore Name").GetComponent<TMP_InputField>(); //raus wegen Serilaze
-        string playerName = txt_Input.text;
-
-        
+        if (onlyRead == false)
+        {
+            //score holen
+            SceneManager = GameObject.Find("SceneManager");
+            int score = SceneManager.GetComponent<CalculateHighscore>().score;
 
 
-        //EnterField = GameObject.Find("Enter Highscore Name");
-        //string playerName = EnterField.GetComponent<InputField>().text;
+            //namen holen
+            //TMP_InputField txt_Input = GameObject.Find("Enter Highscore Name").GetComponent<TMP_InputField>(); //raus wegen Serilaze
+            string playerName = txt_Input.text;
 
-        AddHighscoreEntry(score, playerName);        //einzutragender Highscore
-        //PlayerPrefs.DeleteAll();                  //liste löschen
+
+
+            //EnterField = GameObject.Find("Enter Highscore Name");
+            //string playerName = EnterField.GetComponent<InputField>().text;
+
+            AddHighscoreEntry(score, playerName);        //einzutragender Highscore
+            //PlayerPrefs.DeleteAll();                  //liste löschen
+        }
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);

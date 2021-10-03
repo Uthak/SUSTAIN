@@ -75,8 +75,8 @@ public class CalculateHighscore : MonoBehaviour
 
     public void DetailWindow()
     {
-        int currentYear = (int)years + 2000;
-        int currentDay = (int)days - ((currentYear - 2000) * 365);
+        int currentYear = (int)years + 2021; //Userfeedback start in 2021 oder Jahre die man gebraucht hat anzeigen
+        int currentDay = (int)days - ((currentYear - 2021) * 365);
 
         YearsEntry = GameObject.Find("Years Entry");
         YearsEntry.GetComponent<TextMeshProUGUI>().text = currentYear.ToString();

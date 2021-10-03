@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level_1.unity
     guid: 8074d7f5d0f927b4593e758fe52afa2f
+  - enabled: 1
+    path: Assets/Highscore_UI.unity
+    guid: 37142e8445fbf3248b5494b11783696a
   m_configObjects: {}
