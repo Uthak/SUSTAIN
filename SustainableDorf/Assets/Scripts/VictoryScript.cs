@@ -53,17 +53,18 @@ public class VictoryScript : MonoBehaviour
     void Update()
     {
         // this whole IF statement is only for Quick Win while testing the game: --> winning by placing 1 tile
-        if (GameManager.developerMode == true && GameManager.quickWin == true && NeedsManager.tileCounter == 1)
+        if (GameManager.quickWin == true && NeedsManager.tileCounter == 1)
         {
             // quickly change all degeneration rates to negative (thus winning-ready)
             NeedsManager.prosperityDegenerationRate -= .005f;
             NeedsManager.happinessDegenerationRate -= .005f;
             NeedsManager.environmentDegenerationRate -= .005f;
 
-            if (NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
+            if (gameHasEnded == false &&  NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
             {
                 Debug.Log("You Won");
                 Winner();
+                gameHasEnded = true;
             }
         }
 
@@ -76,13 +77,16 @@ public class VictoryScript : MonoBehaviour
                 {
                     Debug.Log("You Won"); // if working - delete me
                     Winner();
+                    gameHasEnded = true;
                 }
-            }else // = if any degeneration rate is still going downwards
+            }
+            else // = if any degeneration rate is still going downwards
             {
                 if (gameHasEnded == false)
                 {
                     Debug.Log("Sorry, You Lost"); // if working - delete me
                     Loser();
+                    gameHasEnded = true;
                 }
             }
         }
@@ -91,9 +95,6 @@ public class VictoryScript : MonoBehaviour
 
     public void Winner()
     {
-        // Winner-function can be called only once
-        gameHasEnded = true;
-
         //temporary solution - this will fill up all bars instantly:
         NeedsManager.prosperityDegenerationRate *= 10;
         NeedsManager.happinessDegenerationRate *= 10;
@@ -113,7 +114,7 @@ public class VictoryScript : MonoBehaviour
     }
     public void Loser()
     {
-        // Loser-function can be called only once
+        // needs to be here as this can be called outside of having 48 placed tiles!
         gameHasEnded = true;
 
         //temporary solution - this will fill up all bars instantly:

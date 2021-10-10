@@ -22,10 +22,9 @@ public class ActivateCell : MonoBehaviour
     public Material Material2;
     Renderer[] children;
 
-    private void Start()
+    private void Awake()
     {
         SceneManager = GameObject.Find("SceneManager");
-        
     }
 
     void OnTriggerEnter(Collider other)
@@ -102,8 +101,6 @@ public class ActivateCell : MonoBehaviour
     private void OnMouseExit()
     {
         gameObject.GetComponent<MeshRenderer>().material = Material1;
-        // added by Felix to reset the BonusStatBars when no longer calculating neighboreffect:
-        SceneManager.GetComponent<StatUIDisplay>().ResetBonusStatBars();
 
         foreach (var tile in neighbors)
         {
