@@ -15200,9 +15200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   developerMode: 0
-  quickWin: 1
+  quickWin: 0
   baseStatValue: 10
-  globalDegenerationRate: 0.00333
+  globalDegenerationRate: 0.0006
   degenerationThreshold: 50
   accelleratedDegenerationRate: 1.2
   usingContinuousValues: 1
