@@ -50,7 +50,7 @@ public class Highscore : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
-        if (onlyRead == false)
+        if (allowedHS == true)
         {
             //score holen
             SceneManager = GameObject.Find("SceneManager");

@@ -70,10 +70,10 @@ public class CalculateHighscore : MonoBehaviour
         score = (int)pros + (int)env + (int)hap + (int)playtimeBonus;
         Debug.Log(score);
 
-        //wenn alle DegenarationRates positiv sind, ist score 0
-        if (pros == 0 & env == 0 & hap == 0)
+        // Wenn man nicht alle Felder voll hat und dadurch verloren
+        if (SceneManager.GetComponent < NeedsManager >().tileCounter < 48)//(pros == 0 & env == 0 & hap == 0)//wenn alle DegenarationRates positiv sind, ist score 0
         {
-            score = 0;
+            score = (int)spentTime;
         }
     }
 
