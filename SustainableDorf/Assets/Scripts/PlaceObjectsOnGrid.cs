@@ -29,11 +29,15 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     public GameObject curObject;
     int allCells;
 
+    GameObject StatsDisplay; //felix use fpr casting stats while carrying
+
 
     void Start()
     {
         CreateGrid();
         plane = new Plane(inNormal: Vector3.up, inPoint: transform.position);
+
+        StatsDisplay = GameObject.Find("Stats_UI"); //felix use fpr casting stats while carrying
     }
 
     // Update is called once per frame
@@ -118,12 +122,19 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                             {
                                 // wird gesetzt
                                 curObject.GetComponent<BoxCollider>().enabled = true;
-                            curObject.GetComponent<Stats>().AddNeighborBonus(); // this is new
-                            curObject.GetComponent<Stats>().UpdateStats();
+                                curObject.GetComponent<Stats>().AddNeighborBonus(); // this is new
+                                curObject.GetComponent<Stats>().UpdateStats();
                                 //curObject.GetComponent<Stats>().AddNeighborBonus(); //redundant
                                 curObject.GetComponent<ClickTile>().setFix = true;
                                 //Debug.Log("DDDD");
-                                node.isPlaceable = false;
+                            
+                            // Felix added this to re-enable hover-reading of stats
+                            curObject.GetComponent<ClickTile>().hoverInfoEnabled = true;
+                            StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
+                            StatsDisplay.GetComponent<StatUIDisplay>().ResetBonusStatBars();
+
+
+                            node.isPlaceable = false;
                                 isOnGrid = true;
                                 curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
                                 onMousePrefab = null;
@@ -151,6 +162,25 @@ public class PlaceObjectsOnGrid : MonoBehaviour
             isOnGrid = false;
             onMousePrefab = gameObject.transform;
             //onMousePrefab = Instantiate(cube, mousePosition, Quaternion.identity);
+
+            // Felix Code:
+            /*
+                GameObject Over = curObject; // this is curObject
+                tag = curObject.tag;
+                GameObject StatsDisplay = GameObject.Find("Stats_UI");
+
+                float a = Over.GetComponent<Stats>().prosperityStat;
+                float b = Over.GetComponent<Stats>().environmentStat;
+                float c = Over.GetComponent<Stats>().happinessStat;
+
+                StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, tag, a, b, c);
+
+                // added by Felix to see numerical stats in dev mode while hovering
+                /*if (SceneManager.GetComponent<GameManager>().developerMode)
+                {
+                    SceneManager.GetComponent<GameManager>().ShowDevStats(a, b, c);
+                }*/
+           // }
         }
     }
 

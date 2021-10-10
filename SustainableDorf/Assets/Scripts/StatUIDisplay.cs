@@ -16,9 +16,27 @@ public class StatUIDisplay : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI nameField;
 
+    // this is to display changed STATS through the neihbor-effect:
+    [SerializeField] Slider prosperityBonusBar;
+    [SerializeField] Slider happinessBonusBar;
+    [SerializeField] Slider environmentBonusBar;
+
+    [SerializeField] Slider NEGprosperityBonusBar;
+    [SerializeField] Slider NEGhappinessBonusBar;
+    [SerializeField] Slider NEGenvironmentBonusBar;
+
+    GameObject SceneManager;
+
     float pS;
     float hS;
     float eS;
+
+    private void Start()
+    {
+        ResetStatBars();
+        ResetBonusStatBars();
+        SceneManager = GameObject.Find("SceneManager");
+    }
     public void CastStatsToUI(GameObject gO, string t, float a, float b, float c)
     {
         /*pS = gO.GetComponent<Stats>().prosperityStat;
@@ -91,5 +109,68 @@ public class StatUIDisplay : MonoBehaviour
         NEGenvironmentBar.value = 0f;
 
         nameField.text = null;
+    }
+
+    public void CastNeighborEffectToUI(float prosperityStat, float happinessStat, float environmentStat, float prosperityBonus, float happinessBonus, float environmentBonus)
+        //public void CastNeighborEffectToUI(GameObject currentlyCarriedObject, float prosperityBonus, float happinessBonus, float environmentBonus)
+    {
+
+        if (SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab != null) // prob. redundant, as this only gets called in "ActivateCell" if this condition is true
+        {
+            float newProsperityStat;
+            float newHappinessStat;
+            float newEnvironmentStat;
+
+            //float prosperityStaticValue = currentlyCarriedObject.GetComponent<>(Stats).
+            // calculate amount of static stat +/- neighboreffect
+            if (prosperityStat >= 0)
+            {
+                newProsperityStat = prosperityStat * (1 + prosperityBonus);
+                prosperityBonusBar.value = newProsperityStat;
+                NEGprosperityBonusBar.value = 0f;
+            }else
+            {
+                newProsperityStat = prosperityStat * (1 + (-1 * prosperityBonus));
+                prosperityBonusBar.value = 0f;
+                NEGprosperityBonusBar.value = newProsperityStat * -1;
+            }
+
+            if (happinessStat >= 0)
+            {
+                newHappinessStat = happinessStat * (1 + happinessBonus);
+                happinessBonusBar.value = newHappinessStat;
+                NEGhappinessBonusBar.value = 0f;
+            }else
+            {
+                newHappinessStat = happinessStat * (1 + (-1 * happinessBonus));
+                happinessBonusBar.value = 0f;
+                NEGhappinessBonusBar.value = newHappinessStat * -1;
+            }
+
+            if (environmentStat >= 0)
+            {
+                newEnvironmentStat = environmentStat * (1 + environmentBonus);
+                environmentBonusBar.value = newEnvironmentStat;
+                NEGenvironmentBonusBar.value = 0f;
+            }else
+            {
+                newEnvironmentStat = environmentStat * (1 + (-1 * environmentBonus));
+                environmentBonusBar.value = 0f;
+                NEGenvironmentBonusBar.value = newEnvironmentStat * -1;
+            }
+        }else
+        {
+            ResetBonusStatBars(); // probably redundant, as this is handled in "ActivateCell"-OnMouseOver
+        }
+    }
+    public void ResetBonusStatBars()
+    {
+        prosperityBonusBar.value = 0f;
+        happinessBonusBar.value = 0f;
+        environmentBonusBar.value = 0f;
+
+        NEGprosperityBonusBar.value = 0f;
+        NEGhappinessBonusBar.value = 0f;
+        NEGenvironmentBonusBar.value = 0f;
     }
 }
