@@ -7,7 +7,9 @@ public class TakeScreenshot : MonoBehaviour
 {
     GameObject UI;
     [SerializeField] AudioSource CameraShutter_Sound;
+    GameObject SceneManager;
     int counter = 0;
+    int score = 0;
 
     private IEnumerator Screenshot()
     {
@@ -18,7 +20,7 @@ public class TakeScreenshot : MonoBehaviour
         texture.Apply();
 
         byte[] bytes = texture.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + $"/../Screenshots/Screenshot{counter}.png", bytes);
+        File.WriteAllBytes(Application.dataPath + $"/../Screenshots/Screenshot{counter}{score}.png", bytes);
         counter++;
 
         //UI wieder sichbar machen
@@ -34,6 +36,9 @@ public class TakeScreenshot : MonoBehaviour
         }
         UI = GameObject.Find("SceneObjects");
         UI.SetActive(false);
+
+        SceneManager = GameObject.Find("SceneManager");
+        score = SceneManager.GetComponent<CalculateHighscore>().score;
 
         StartCoroutine("Screenshot");
         Debug.Log("takedScreenshot");
