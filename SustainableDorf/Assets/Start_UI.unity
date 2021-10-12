@@ -4215,6 +4215,7 @@ MonoBehaviour:
   standardClick: {fileID: 1690215664}
   exitClick: {fileID: 0}
   doorClose: {fileID: 0}
+  ambientSound: {fileID: 0}
   kickingSound: {fileID: 0}
   mooh: {fileID: 0}
   soundOfPaper: {fileID: 1690215663}
@@ -4229,7 +4230,24 @@ MonoBehaviour:
   credits_PopUp: {fileID: 0}
   developerName_TextField: {fileID: 0}
   developerSkills_TextField: {fileID: 0}
+  getNewSetOfTiles_Button: {fileID: 0}
   blinkIntervall: 0.3
+  numberOfPages: 9
+  tutorial_page_0: {fileID: 0}
+  tutorial_page_1: {fileID: 0}
+  tutorial_page_2: {fileID: 0}
+  tutorial_page_3: {fileID: 0}
+  tutorial_page_4: {fileID: 0}
+  tutorial_page_5: {fileID: 0}
+  tutorial_page_6: {fileID: 0}
+  tutorial_page_7: {fileID: 0}
+  tutorial_page_8: {fileID: 0}
+  forwardButton: {fileID: 0}
+  backwardButton: {fileID: 0}
+  errorSound: {fileID: 0}
+  tutorial_page_counter: {fileID: 0}
+  highscore_UI: {fileID: 0}
+  highscore_UI_Buttons: {fileID: 0}
 --- !u!4 &1690215662
 Transform:
   m_ObjectHideFlags: 0
@@ -4710,6 +4728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setFix: 0
   Over: {fileID: 0}
+  hoverInfoEnabled: 1
 --- !u!114 &1742473015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4725,6 +4744,7 @@ MonoBehaviour:
   standardClick: {fileID: 0}
   exitClick: {fileID: 0}
   doorClose: {fileID: 0}
+  ambientSound: {fileID: 0}
   kickingSound: {fileID: 0}
   mooh: {fileID: 0}
   soundOfPaper: {fileID: 0}
@@ -4739,7 +4759,24 @@ MonoBehaviour:
   credits_PopUp: {fileID: 0}
   developerName_TextField: {fileID: 0}
   developerSkills_TextField: {fileID: 0}
+  getNewSetOfTiles_Button: {fileID: 0}
   blinkIntervall: 0.3
+  numberOfPages: 9
+  tutorial_page_0: {fileID: 0}
+  tutorial_page_1: {fileID: 0}
+  tutorial_page_2: {fileID: 0}
+  tutorial_page_3: {fileID: 0}
+  tutorial_page_4: {fileID: 0}
+  tutorial_page_5: {fileID: 0}
+  tutorial_page_6: {fileID: 0}
+  tutorial_page_7: {fileID: 0}
+  tutorial_page_8: {fileID: 0}
+  forwardButton: {fileID: 0}
+  backwardButton: {fileID: 0}
+  errorSound: {fileID: 0}
+  tutorial_page_counter: {fileID: 0}
+  highscore_UI: {fileID: 0}
+  highscore_UI_Buttons: {fileID: 0}
 --- !u!4 &1742473016
 Transform:
   m_ObjectHideFlags: 0
@@ -5360,7 +5397,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1690215661}
         m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: Options_UI
+        m_MethodName: About_Sustainabilty_UI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8726,6 +8763,10 @@ MonoBehaviour:
   randomStat1: 0
   randomStat2: 0
   isCow: 0
+  isFactory: 0
+  isForest: 0
+  isSchool: 0
+  isKlaerwerk: 0
   wasPlaced: 0
   prosperityBonus: 0
   happinessBonus: 0

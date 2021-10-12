@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: entryTemplate
       value: 
       objectReference: {fileID: 456486527}
+    - target: {fileID: 4041664128772379223, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4041664130767293986, guid: 30553632c0d2950479a39bced867b4e2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
