@@ -15229,9 +15229,9 @@ MonoBehaviour:
   currentTileProsperity: {fileID: 1382857334}
   currentTileHappiness: {fileID: 1266067951}
   currentTileEnvironment: {fileID: 2078782709}
-  cameraZoomSpeed: 30
+  cameraZoomSpeed: 750
   cameraMaxZoom: 15
-  cameraMinZoom: 70
+  cameraMinZoom: 100
   cameraTransformMetrics1: {fileID: 55970413}
   cameraTransformMetrics2: {fileID: 586254481}
   positiveInfluence: 0.1
