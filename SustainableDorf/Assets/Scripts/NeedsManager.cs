@@ -32,6 +32,10 @@ public class NeedsManager : MonoBehaviour
     Color hapImgBaseColor;
     Color envImgBaseColor;
 
+    // added to calculate score
+    public int cowCounter = 0;
+    public float efficientlyPlaced = 0f;
+
     void Start()
     {
         GameObject SceneManager = GameObject.Find("SceneManager");

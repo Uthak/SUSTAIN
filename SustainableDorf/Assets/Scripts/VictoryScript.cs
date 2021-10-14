@@ -148,8 +148,10 @@ public class VictoryScript : MonoBehaviour
         podest3.SetActive(false);
         endGame_UI.SetActive(true);
 
+
         // this checks if a highscore was achieved/there was still open entries. If so, it opens the name input-field
         SceneManager.GetComponent<CalculateHighscore>().Calculate();
+        SceneManager.GetComponent<CalculateHighscore>().DetailWindow();
         Highscore_carrying_GO.GetComponent<Highscore>().AllowHighscore();
         if (Highscore_carrying_GO.GetComponent<Highscore>().allowedHS)
         {

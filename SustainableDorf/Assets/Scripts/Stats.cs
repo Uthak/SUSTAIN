@@ -19,6 +19,7 @@ public class Stats : MonoBehaviour
 
     // used to decide when to play "mooh"-sound
     public bool isCow = false;
+    public int numberOfCows;
     // currently unused bools:
     public bool isFactory = false;
     public bool isForest = false;
@@ -289,5 +290,15 @@ public class Stats : MonoBehaviour
             environmentStat *= (1 + (-1 * environmentBonus));
         }
         Debug.Log("new environmentStat == " + environmentStat); // test
+
+        // cows and neighbor-efficiency are counted and communicated here
+        GameObject SceneManager = GameObject.Find("SceneManager");
+        SceneManager.GetComponent<NeedsManager>().efficientlyPlaced += prosperityBonus + happinessBonus + environmentBonus;
+        if (isCow)
+        {
+            SceneManager.GetComponent<NeedsManager>().cowCounter += numberOfCows;
+            Debug.Log("current amounts of cows on the map: " + SceneManager.GetComponent<NeedsManager>().cowCounter);
+        }
+        Debug.Log("current total efficientlyPlaced-bonus: " + SceneManager.GetComponent<NeedsManager>().efficientlyPlaced);
     }
 }

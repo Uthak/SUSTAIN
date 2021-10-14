@@ -4220,6 +4220,11 @@ MonoBehaviour:
   randomStat1: 0
   randomStat2: 0
   isCow: 1
+  numberOfCows: 6
+  isFactory: 0
+  isForest: 0
+  isSchool: 0
+  isKlaerwerk: 0
   wasPlaced: 0
   prosperityBonus: 0
   happinessBonus: 0
@@ -4238,6 +4243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setFix: 0
   Over: {fileID: 0}
+  hoverInfoEnabled: 1
 --- !u!65 &3098522714260782274
 BoxCollider:
   m_ObjectHideFlags: 0
