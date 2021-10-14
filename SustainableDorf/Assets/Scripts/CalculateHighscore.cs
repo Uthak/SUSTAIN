@@ -40,7 +40,7 @@ public class CalculateHighscore : MonoBehaviour
     {
         // Zeit berechnen die man gespielt hat
         float currentTime = Time.timeSinceLevelLoad;
-        float spentTime = currentTime - startTime;
+        float spentTime = currentTime;// - startTime;
         days = spentTime * 6.0833f; // this is 9/sec, right? == 1.4795 years per minute // using .12167/frame or 6.0833 here would make 1 Minute = 1 year
         years = days / 365;
         Debug.Log("years " + years); //added "years "

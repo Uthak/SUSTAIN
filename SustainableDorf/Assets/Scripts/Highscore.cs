@@ -11,34 +11,78 @@ public class Highscore : MonoBehaviour
     [SerializeField] private TMP_InputField txt_Input;
     private List<Transform> highscoreEntryTransformList;
 
+    public List<int> irgendwas;
+
+
     GameObject SceneManager;
     GameObject EnterField;
 
     public bool onlyRead = false;
     public bool allowedHS = false;
-     
+    int currentScore;
+    string currentName;
+    public int oldScore;
+
+
     public void AllowHighscore()
     {
-        Debug.Log("test");
-        //score vom letzten Listen Element holen
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
-        int number = highscores.highscoreEntriesList.Count;
-        Debug.Log(number);
-        int oldScore = highscores.highscoreEntriesList[number - 1].score;
-        Debug.Log(oldScore);
-
-        //neuen Score mit holen
-        SceneManager = GameObject.Find("SceneManager");
-        int score = SceneManager.GetComponent<CalculateHighscore>().score;
-
-        //schauen ob neuer Score aufgenommen wird
-        if (number < 9 || score > oldScore)
+        if (highscores != null)// highscore daten abfragen wenn welche durch vorran gegangene spiele existieren
         {
-            allowedHS = true;
+            
+            Debug.Log("test");
+            //score vom letzten Listen Element holen
+
+            for (int i = 0; i < highscores.highscoreEntriesList.Count; i++)
+            {
+
+                for (int j = i + 1; j < highscores.highscoreEntriesList.Count; j++)
+                {
+                    //Debug.Log(highscores.highscoreEntriesList[i].score);
+                    if (highscores.highscoreEntriesList[j].score > highscores.highscoreEntriesList[i].score)  //schaut ob das nachfolgende Listen Element einen größeren Score hat und taucht, wenn nötig deren Position
+                    {
+                        HighscoreEntry tmp = highscores.highscoreEntriesList[i];
+                        highscores.highscoreEntriesList[i] = highscores.highscoreEntriesList[j];
+                        highscores.highscoreEntriesList[j] = tmp;
+                    }
+                }
+            }
+
+            int number = highscores.highscoreEntriesList.Count;
+            Debug.Log(number);
+            if (highscores.highscoreEntriesList.Count < 5)
+            {
+                oldScore = highscores.highscoreEntriesList[number - 1].score;
+                Debug.Log(oldScore);
+            }
+            else
+            {
+                oldScore = highscores.highscoreEntriesList[5].score;
+                Debug.Log(oldScore);
+            }
+        
+
+
+            //neuen Score mit holen
+            SceneManager = GameObject.Find("SceneManager");
+            int score = SceneManager.GetComponent<CalculateHighscore>().score;
+
+            //schauen ob neuer Score aufgenommen wird
+            if (number < 6 || score > oldScore)
+            {
+                allowedHS = true;
+            
+            }
+            Debug.Log(allowedHS);
+
             
         }
-        Debug.Log(allowedHS);
+        else // beim erstmaligen spiele soll allowedHS auf true geschaltet werden ohne die noch nicht vorran gegangenden Highscore daten abzurufen
+        {
+            allowedHS = true;
+            Debug.Log(allowedHS);
+        }
     }
 
 
@@ -55,11 +99,13 @@ public class Highscore : MonoBehaviour
             //score holen
             SceneManager = GameObject.Find("SceneManager");
             int score = SceneManager.GetComponent<CalculateHighscore>().score;
+            currentScore = score;
 
 
             //namen holen
             //TMP_InputField txt_Input = GameObject.Find("Enter Highscore Name").GetComponent<TMP_InputField>(); //raus wegen Serilaze
             string playerName = txt_Input.text;
+            currentName = playerName;
 
 
 
@@ -69,6 +115,7 @@ public class Highscore : MonoBehaviour
             AddHighscoreEntry(score, playerName);        //einzutragender Highscore
             //PlayerPrefs.DeleteAll();                  //liste löschen
         }
+        //PlayerPrefs.DeleteAll();                  //liste löschen
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
@@ -77,8 +124,10 @@ public class Highscore : MonoBehaviour
         //sortiert die Liste nach dem Score
         for (int i = 0; i < highscores.highscoreEntriesList.Count; i++)
         {
+            
             for (int j = i + 1; j < highscores.highscoreEntriesList.Count; j++)
             {
+                //Debug.Log(highscores.highscoreEntriesList[i].score);
                 if (highscores.highscoreEntriesList[j].score > highscores.highscoreEntriesList[i].score)  //schaut ob das nachfolgende Listen Element einen größeren Score hat und taucht, wenn nötig deren Position
                 {
                     HighscoreEntry tmp = highscores.highscoreEntriesList[i];
@@ -93,7 +142,7 @@ public class Highscore : MonoBehaviour
         foreach (HighscoreEntry highscoreEntry in highscores.highscoreEntriesList)
         {
             Index++;
-            if (Index < 9)
+            if (Index < 7)
             {
                 CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
             }
@@ -134,7 +183,7 @@ public class Highscore : MonoBehaviour
         //setze jeden Zweite Zeile mit Background
         entryTransform.Find("background").gameObject.SetActive(rank % 2 == 1);
 
-        if (rank == 1)
+        if (score == currentScore & name == currentName)// wenn die zeile mit dem aktuell neuen score und namen gebaut werden soll, soll diese grün angezeigt werden
         {
             //Highlight ersten Platz
             entryTransform.Find("posText").GetComponent<Text>().color = Color.green;

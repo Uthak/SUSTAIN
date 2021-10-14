@@ -95,6 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb277e2796bbc34ea978ef402edac50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entryTemplate: {fileID: 0}
+  txt_Input: {fileID: 0}
+  irgendwas: 
+  onlyRead: 0
+  allowedHS: 0
 --- !u!1 &4041664128783097505
 GameObject:
   m_ObjectHideFlags: 0
