@@ -20,7 +20,7 @@ public class TakeScreenshot : MonoBehaviour
         texture.Apply();
 
         byte[] bytes = texture.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + $"/../Screenshots/Screenshot{counter}{score}.png", bytes);
+        File.WriteAllBytes(Application.dataPath + $"/../Screenshot{counter}{score}.png", bytes);
         counter++;
 
         //UI wieder sichbar machen
