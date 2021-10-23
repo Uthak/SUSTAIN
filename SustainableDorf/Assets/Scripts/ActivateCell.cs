@@ -46,10 +46,17 @@ public class ActivateCell : MonoBehaviour
     {
         if (SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab != null)
         {
-            
+
             //blau beim hovern
-            gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        
+            Color colorStart = new Color(.5f, .6f, 0.23f);
+            Color colorEnd = new Color(.3f, .4f, 0.21f);
+            float duration = 1.0f;
+
+            float lerp = Mathf.PingPong(Time.time, duration) / duration;
+            gameObject.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, lerp);
+
+            //gameObject.GetComponent<Renderer>().material.color = new Color(1f, 0.85f, 0.35f);//Color.blue;
+
 
             //zählt die jeweiligen Tags der Nachbarn
             //Debug.Log(neighbors.Count);

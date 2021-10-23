@@ -51,7 +51,7 @@ public class Highscore : MonoBehaviour
 
             int number = highscores.highscoreEntriesList.Count;
             Debug.Log(number);
-            if (highscores.highscoreEntriesList.Count < 5)
+            if (highscores.highscoreEntriesList.Count < 6)
             {
                 oldScore = highscores.highscoreEntriesList[number - 1].score;
                 Debug.Log(oldScore);
