@@ -501,7 +501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319.9712, y: -166}
+  m_AnchoredPosition: {x: 484, y: -166}
   m_SizeDelta: {x: 582.0988, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &27704203
@@ -16509,8 +16509,6 @@ MonoBehaviour:
   width: 7
   PlopSound: {fileID: 1295651568}
   moohSound: {fileID: 769229789}
-  ObjFollowMouse: {fileID: 0}
-  Stats: {fileID: 0}
   isOnGrid: 0
   curObject: {fileID: 0}
 --- !u!114 &1865021647
@@ -16542,7 +16540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   developerMode: 0
-  quickWin: 0
+  quickWin: 1
   baseStatValue: 10
   globalDegenerationRate: 0.0006
   degenerationThreshold: 50
@@ -17071,7 +17069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319.9712, y: -219}
+  m_AnchoredPosition: {x: 484, y: -219}
   m_SizeDelta: {x: 582.0988, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916666120
@@ -17595,7 +17593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -153, y: 35}
+  m_AnchoredPosition: {x: -153, y: 62}
   m_SizeDelta: {x: 521.6858, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2018601443
@@ -21101,7 +21099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319.9712, y: -65}
+  m_AnchoredPosition: {x: 484, y: -65}
   m_SizeDelta: {x: 582.0988, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7687287708802985233
@@ -21239,7 +21237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Environment growth:'
+  m_text: 'Environment (annual growth):'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23a088a9ac4a54543acd203d67f07d87, type: 2}
   m_sharedMaterial: {fileID: -4995855430360093710, guid: 23a088a9ac4a54543acd203d67f07d87, type: 2}
@@ -21618,7 +21616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141, y: 29}
+  m_AnchoredPosition: {x: 141, y: 56}
   m_SizeDelta: {x: 504.7633, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7687287709569886080
@@ -22002,7 +22000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319.9712, y: -115}
+  m_AnchoredPosition: {x: 484, y: -115}
   m_SizeDelta: {x: 582.0988, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7687287709647629093
@@ -22136,7 +22134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319.9712, y: -15.539734}
+  m_AnchoredPosition: {x: 484, y: -15.539734}
   m_SizeDelta: {x: 582.0988, y: 74.1458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7687287709652984171
@@ -22185,7 +22183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Happines growth:'
+  m_text: 'Happines (annual growth):'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23a088a9ac4a54543acd203d67f07d87, type: 2}
   m_sharedMaterial: {fileID: -4995855430360093710, guid: 23a088a9ac4a54543acd203d67f07d87, type: 2}
@@ -22319,7 +22317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Prosperity growth:'
+  m_text: 'Prosperity( annual growth):'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23a088a9ac4a54543acd203d67f07d87, type: 2}
   m_sharedMaterial: {fileID: -4995855430360093710, guid: 23a088a9ac4a54543acd203d67f07d87, type: 2}

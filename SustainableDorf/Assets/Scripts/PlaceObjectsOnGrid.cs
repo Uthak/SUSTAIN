@@ -20,8 +20,8 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     [SerializeField] AudioSource PlopSound;
     [SerializeField] AudioSource moohSound;
 
-    [SerializeField] ObjFollowMouse ObjFollowMouse;
-    [SerializeField] Stats Stats;
+    //[SerializeField] ObjFollowMouse ObjFollowMouse;
+    //[SerializeField] Stats Stats;
     //[SerializeField] Material placeable;
     //bool setFix = false;
     public bool isOnGrid;

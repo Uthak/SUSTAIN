@@ -3,13 +3,15 @@ using UnityEngine;
 public class VictoryScript : MonoBehaviour
 {
     // winning and loosing the game are handled here
-    // in general you win by having placed all 48 tiles AND having a positive growth rate of ALL stats
-    // loosing early to to dropping a stat to zero is called by "NeedsManager"-script
+    // in general you win by having placed all 48 tiles
+    // loosing early by dropping a stat to zero is called by "NeedsManager"-script
 
     GameObject SceneManager;
     NeedsManager NeedsManager;
     GameManager GameManager;
-    GameObject ScreenshotButton;
+    //[SerializeField] GameObject statUI; // why?
+    //[SerializeField] GameObject gameUI; // why
+    //GameObject ScreenshotButton; // why?
     [SerializeField] GameObject stats_UI;
     [SerializeField] GameObject game_UI;
 
@@ -28,59 +30,53 @@ public class VictoryScript : MonoBehaviour
     public GameObject youLostLogo; // public in case i want to turn off with a button
     [SerializeField] AudioSource youLostSound;
 
-    //[SerializeField] GameObject statUI; // why?
-    //[SerializeField] GameObject gameUI; // why
+
     //[SerializeField] AudioSource windSound; // this may be cool for after loosing: just a dry wind blowing
     [SerializeField] AudioSource ambienteSound; // to turn off music
-
-
     public GameObject endGame_UI; // public so the "OpenHighscore_UI()" (from BUTTONS) can call it to close it
 
     public bool gameHasEnded = false; // public so the "NeedsManager" can read this information 
 
-    void Start()
+    void Awake()
     {
         SceneManager = GameObject.Find("SceneManager");
         GameManager = SceneManager.GetComponent<GameManager>();
         NeedsManager = SceneManager.GetComponent<NeedsManager>();
-
-        // search screenshot UI
-        //ScreenshotButton = GameObject.Find("Screenshot_Button"); // name has to be exactly the same as in the actual game
-        //ScreenshotButton.SetActive(false); // turns off the button in case its forgotten. Could be redundant
     }
 
 
     void Update()
     {
         // this whole IF statement is only for Quick Win while testing the game: --> winning by placing 1 tile
-        if (GameManager.quickWin == true && NeedsManager.tileCounter == 1)
+        // increased to 3 tiles to check for neighborEfficiencyBonus
+        if (GameManager.quickWin == true && NeedsManager.tileCounter == 3 && gameHasEnded == false)
         {
             // quickly change all degeneration rates to negative (thus winning-ready)
-            NeedsManager.prosperityDegenerationRate -= .005f;
+            /*NeedsManager.prosperityDegenerationRate -= .005f;
             NeedsManager.happinessDegenerationRate -= .005f;
-            NeedsManager.environmentDegenerationRate -= .005f;
+            NeedsManager.environmentDegenerationRate -= .005f;*/
 
-            if (gameHasEnded == false &&  NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
-            {
+            //if (gameHasEnded == false &&  NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
+            //{
                 Debug.Log("You Won");
                 Winner();
                 gameHasEnded = true;
-            }
+            //}
         }
 
         // checks for real winning condition
-        if (NeedsManager.tileCounter == 48)
+        if (NeedsManager.tileCounter == 48 && gameHasEnded == false)
         {
-            if (NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
-            {
-                if (gameHasEnded == false)
-                {
+            //if (NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
+            //{
+               // if (gameHasEnded == false)
+               // {
                     Debug.Log("You Won"); // if working - delete me
                     Winner();
                     gameHasEnded = true;
-                }
-            }
-            else // = if any degeneration rate is still going downwards
+               // }
+        }
+           /* else // = if any degeneration rate is still going downwards
             {
                 if (gameHasEnded == false)
                 {
@@ -88,17 +84,19 @@ public class VictoryScript : MonoBehaviour
                     Loser();
                     gameHasEnded = true;
                 }
-            }
-        }
+            }*/
+        
     }
 
 
     public void Winner()
     {
         //temporary solution - this will fill up all bars instantly:
-        NeedsManager.prosperityDegenerationRate *= 10;
-        NeedsManager.happinessDegenerationRate *= 10;
-        NeedsManager.environmentDegenerationRate *= 10;
+
+        //NeedsManager.prosperityDegenerationRate *= 10;
+        //NeedsManager.happinessDegenerationRate *= 10;
+        //NeedsManager.environmentDegenerationRate *= 10;
+
         // better would be filling them up in like 3 seconds
         // maxVal - currVal = openVal / 50 = X (how much Val per tic needed to fill openVal in 1 sec)
         // X / 3 = Y (how much Val per tic needed to fill openVal in 3 sec)
@@ -118,13 +116,10 @@ public class VictoryScript : MonoBehaviour
         gameHasEnded = true;
 
         //temporary solution - this will fill up all bars instantly:
-        NeedsManager.prosperityDegenerationRate *= 10;
-        NeedsManager.happinessDegenerationRate *= 10;
-        NeedsManager.environmentDegenerationRate *= 10;
-        // better would be filling them up in like 3 seconds
-        // maxVal - currVal = openVal / 50 = X (how much Val per tic needed to fill openVal in 1 sec)
-        // X / 3 = Y (how much Val per tic needed to fill openVal in 3 sec)
-        // newDegRate = Y --> this should fill all bars, no matter how high they are, in 3 seconds each
+
+        //NeedsManager.prosperityDegenerationRate *= 10;
+        //NeedsManager.happinessDegenerationRate *= 10;
+        //NeedsManager.environmentDegenerationRate *= 10;
         
         // 1. "You Won"/"you lose" Logo
         youLostLogo.SetActive(true);
@@ -157,6 +152,19 @@ public class VictoryScript : MonoBehaviour
         {
             enterName_UI.SetActive(true);
         }
+        FillDepleteStats();
+    }
+
+    void FillDepleteStats()
+    {
+        NeedsManager.prosperityDegenerationRate *= 10;
+        NeedsManager.happinessDegenerationRate *= 10;
+        NeedsManager.environmentDegenerationRate *= 10;
+
+        // better would be filling them up in like 3 seconds
+        // maxVal - currVal = openVal / 50 = X (how much Val per tic needed to fill openVal in 1 sec)
+        // X / 3 = Y (how much Val per tic needed to fill openVal in 3 sec)
+        // newDegRate = Y --> this should fill all bars, no matter how high they are, in 3 seconds each
     }
 }
 
