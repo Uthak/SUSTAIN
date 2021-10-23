@@ -33,7 +33,7 @@ public class CalculateHighscore : MonoBehaviour
     void Awake()
     {
         startTime = Time.timeSinceLevelLoad;
-        Debug.Log(startTime);
+        //Debug.Log("Starttime: " + startTime);
     }
 
     public void Calculate()
@@ -43,7 +43,7 @@ public class CalculateHighscore : MonoBehaviour
         float spentTime = currentTime;// - startTime;
         days = spentTime * 6.0833f; // this is 9/sec, right? == 1.4795 years per minute // using .12167/frame or 6.0833 here would make 1 Minute = 1 year
         years = days / 365;
-        Debug.Log("years " + years); //added "years "
+        //Debug.Log("years " + years);
 
         SceneManager = GameObject.Find("SceneManager");
         float pros = SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate;
@@ -120,11 +120,16 @@ public class CalculateHighscore : MonoBehaviour
         cowCount = SceneManager.GetComponent<NeedsManager>().cowCounter; // just for fun
 
         score = (int)pros + (int)env + (int)hap + (int)playtimeBonus + (int)neighborEfficiencyBonus;
-       // Debug.Log("prosperity score " + (int)pros); // testing
-       // Debug.Log("environment score " + (int)env); // testing
-       // Debug.Log("happiness score " + (int)hap); // testing
-       // Debug.Log("time score " + (int)playtimeBonus); // testing
-       // Debug.Log("neighbor score " + (int)neighborEfficiencyBonus); // testing
+        // Debug.Log("prosperity score " + (int)pros); // testing
+        // Debug.Log("environment score " + (int)env); // testing
+        // Debug.Log("happiness score " + (int)hap); // testing
+        // Debug.Log("time score " + (int)playtimeBonus); // testing
+        // Debug.Log("neighbor score " + (int)neighborEfficiencyBonus); // testing
+        Debug.Log("prosScore " + pros);
+        Debug.Log("envScore " + env);
+        Debug.Log("hapScore " + hap);
+        Debug.Log("timeScore " + playtimeBonus);
+        Debug.Log("neighborScore " + neighborEfficiencyBonus);
 
 
 

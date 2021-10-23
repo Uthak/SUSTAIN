@@ -28,7 +28,7 @@ public class PutSelectedTileBack : MonoBehaviour
             Vector3 myTrans = curMaptile.GetComponent<Stats>().myPosition;
             
             
-            Debug.Log(myTrans);
+            //Debug.Log(myTrans);
             curMaptile.transform.position = myTrans;
             //myGo.transform.position = gameObject.transform.position;
 

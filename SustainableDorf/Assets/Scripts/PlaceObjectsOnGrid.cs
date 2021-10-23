@@ -208,7 +208,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         //setze city in die mitte
         int half = width * height / 2;
         GameObject middle = GameObject.Find("Cell" + half);
-        Debug.Log(middle);
+        //Debug.Log("Centerpiece number: " + middle);
         Instantiate(City, new Vector3(0, 0.1f,0) /*new Vector3(x: width/2, y: 0, z: height/2)*/, Quaternion.identity);
         nodes[width / 2, height / 2].isPlaceable = false;
         nodes[width / 2, height / 2].activeFix = true;

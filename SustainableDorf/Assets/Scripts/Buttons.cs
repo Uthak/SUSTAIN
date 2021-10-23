@@ -140,7 +140,7 @@ public class Buttons : MonoBehaviour
         ResumeGame();
         // this restarts current Level
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Debug.Log("this scene was just restarted");
+        //Debug.Log("this scene was just restarted");
     }
 
     // Opens Credit Screen
@@ -199,11 +199,11 @@ public class Buttons : MonoBehaviour
     public void GetNewSetOfTiles()
     {
         GameObject SceneManager = GameObject.Find("SceneManager");
-        Debug.Log("GetNewSetOfTiles_button was pressed");
+        //Debug.Log("GetNewSetOfTiles_button was pressed");
 
         if (nextSetButtonCooldown == false)
         {
-            Debug.Log("nextSetButtonCooldown is false");
+            //Debug.Log("nextSetButtonCooldown is false");
 
             nextSetButtonCooldown = true;
             standardClick.Play();

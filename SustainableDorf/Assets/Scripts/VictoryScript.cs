@@ -9,20 +9,16 @@ public class VictoryScript : MonoBehaviour
     GameObject SceneManager;
     NeedsManager NeedsManager;
     GameManager GameManager;
-    //[SerializeField] GameObject statUI; // why?
-    //[SerializeField] GameObject gameUI; // why
-    //GameObject ScreenshotButton; // why?
-    [SerializeField] GameObject stats_UI;
-    [SerializeField] GameObject game_UI;
 
     // input Podest Models to deactivate them
     [SerializeField] GameObject podest1;
     [SerializeField] GameObject podest2;
     [SerializeField] GameObject podest3;
+    [SerializeField] GameObject stats_UI;
+    [SerializeField] GameObject game_UI;
 
     // this carries the input field for names (highscore)
     [SerializeField] GameObject enterName_UI;
-
 
     public GameObject youWonLogo; // public in case i want to turn off with a button
     [SerializeField] AudioSource youWonSound;
@@ -51,83 +47,104 @@ public class VictoryScript : MonoBehaviour
         // increased to 3 tiles to check for neighborEfficiencyBonus
         if (GameManager.quickWin == true && NeedsManager.tileCounter == 3 && gameHasEnded == false)
         {
-            // quickly change all degeneration rates to negative (thus winning-ready)
-            /*NeedsManager.prosperityDegenerationRate -= .005f;
-            NeedsManager.happinessDegenerationRate -= .005f;
-            NeedsManager.environmentDegenerationRate -= .005f;*/
+            Winner();
+            gameHasEnded = true;
 
-            //if (gameHasEnded == false &&  NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
-            //{
-                Debug.Log("You Won");
-                Winner();
-                gameHasEnded = true;
-            //}
+            // pulled up early
+            stats_UI.SetActive(false);
+            game_UI.SetActive(false);
+            SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
+            podest1.SetActive(false);
+            podest2.SetActive(false);
+            podest3.SetActive(false);
+            SceneManager.GetComponent<CalculateHighscore>().Calculate();
+            //SceneManager.GetComponent<CalculateHighscore>().DetailWindow();
+            Highscore_carrying_GO.GetComponent<Highscore>().AllowHighscore();
+            if (Highscore_carrying_GO.GetComponent<Highscore>().allowedHS)
+            {
+                enterName_UI.SetActive(true);
+            }
+            else
+            {
+                Invoke("EndGame_UI", 3f);
+            }
         }
 
         // checks for real winning condition
         if (NeedsManager.tileCounter == 48 && gameHasEnded == false)
         {
-            //if (NeedsManager.environmentDegenerationRate < 0f && NeedsManager.happinessDegenerationRate < 0f && NeedsManager.prosperityDegenerationRate < 0f)
-            //{
-               // if (gameHasEnded == false)
-               // {
-                    Debug.Log("You Won"); // if working - delete me
-                    Winner();
-                    gameHasEnded = true;
-               // }
-        }
-           /* else // = if any degeneration rate is still going downwards
+            Winner();
+            gameHasEnded = true;
+
+            // pulled up early
+            stats_UI.SetActive(false);
+            game_UI.SetActive(false);
+            SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
+            podest1.SetActive(false);
+            podest2.SetActive(false);
+            podest3.SetActive(false);
+            SceneManager.GetComponent<CalculateHighscore>().Calculate();
+            //SceneManager.GetComponent<CalculateHighscore>().DetailWindow();
+            Highscore_carrying_GO.GetComponent<Highscore>().AllowHighscore();
+            if (Highscore_carrying_GO.GetComponent<Highscore>().allowedHS)
             {
-                if (gameHasEnded == false)
-                {
-                    Debug.Log("Sorry, You Lost"); // if working - delete me
-                    Loser();
-                    gameHasEnded = true;
-                }
-            }*/
-        
+                enterName_UI.SetActive(true);
+            }else
+            {
+                Invoke("EndGame_UI", 3f);
+            }
+        }
     }
 
 
     public void Winner()
     {
-        //temporary solution - this will fill up all bars instantly:
-
-        //NeedsManager.prosperityDegenerationRate *= 10;
-        //NeedsManager.happinessDegenerationRate *= 10;
-        //NeedsManager.environmentDegenerationRate *= 10;
-
-        // better would be filling them up in like 3 seconds
-        // maxVal - currVal = openVal / 50 = X (how much Val per tic needed to fill openVal in 1 sec)
-        // X / 3 = Y (how much Val per tic needed to fill openVal in 3 sec)
-        // newDegRate = Y --> this should fill all bars, no matter how high they are, in 3 seconds each
-
-        // 1. "You Won"/"you lose" Logo
         youWonLogo.SetActive(true);
-        // play victory sound/melody
         ambienteSound.Stop(); //--> not turning off ambient music, because i guess its cool!?
         youWonSound.Play();
         // invoke: open proceed UI: (with dramatic delay
-        Invoke("EndGame_UI", 3f); // probably length of the victory sound. Adjust manually
+        // trying to have this happen when game ends IF NO highscore was achieved
+        //Invoke("EndGame_UI", 3f); // probably length of the victory sound. Adjust manually
     }
     public void Loser()
     {
-        // needs to be here as this can be called outside of having 48 placed tiles!
-        gameHasEnded = true;
-
-        //temporary solution - this will fill up all bars instantly:
-
-        //NeedsManager.prosperityDegenerationRate *= 10;
-        //NeedsManager.happinessDegenerationRate *= 10;
-        //NeedsManager.environmentDegenerationRate *= 10;
-        
-        // 1. "You Won"/"you lose" Logo
+        gameHasEnded = true;// needs to be here as this can be called outside of having 48 placed tiles!
+        Debug.Log("THIS STILL WORKS 1");
         youLostLogo.SetActive(true);
-        // play victory sound/melody
+        Debug.Log("THIS STILL WORKS 2");
         ambienteSound.Stop();
+        Debug.Log("THIS STILL WORKS 3");
         youLostSound.Play();
-        // invoke: open proceed UI: (with dramatic delay
-        Invoke("EndGame_UI", 3f); // probably length of the victory sound. Adjust manually
+        Debug.Log("THIS STILL WORKS 4");
+        //Invoke("EndGame_UI", 3f); // probably length of the victory sound. Adjust manually
+
+        stats_UI.SetActive(false);
+        Debug.Log("THIS STILL WORKS 5");
+        game_UI.SetActive(false);
+        Debug.Log("THIS STILL WORKS 6");
+        //SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
+        Debug.Log("THIS STILL WORKS 7");
+        podest1.SetActive(false);
+        Debug.Log("THIS STILL WORKS 8");
+        podest2.SetActive(false);
+        Debug.Log("THIS STILL WORKS 9");
+        podest3.SetActive(false);
+        Debug.Log("THIS STILL WORKS 10");
+        SceneManager.GetComponent<CalculateHighscore>().Calculate();
+        Debug.Log("THIS STILL WORKS 11");
+        //SceneManager.GetComponent<CalculateHighscore>().DetailWindow();
+        Highscore_carrying_GO.GetComponent<Highscore>().AllowHighscore();
+        Debug.Log("THIS STILL WORKS 12");
+        if (Highscore_carrying_GO.GetComponent<Highscore>().allowedHS)
+        {
+            enterName_UI.SetActive(true);
+            Debug.Log("THIS STILL WORKS 13");
+        }
+        else
+        {
+            Invoke("EndGame_UI", 3f);
+            Debug.Log("THIS STILL WORKS 14");
+        }
     }
 
     // overlay called once Logo & Sound were shown
@@ -135,7 +152,12 @@ public class VictoryScript : MonoBehaviour
     [SerializeField] GameObject Highscore_carrying_GO;
     void EndGame_UI()
     {
-        stats_UI.SetActive(false);
+        endGame_UI.SetActive(true);
+        SceneManager.GetComponent<CalculateHighscore>().Calculate();
+        SceneManager.GetComponent<CalculateHighscore>().DetailWindow();
+        FillDepleteStats();
+
+        /*stats_UI.SetActive(false);
         game_UI.SetActive(false);
         SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
         podest1.SetActive(false);
@@ -152,7 +174,7 @@ public class VictoryScript : MonoBehaviour
         {
             enterName_UI.SetActive(true);
         }
-        FillDepleteStats();
+        FillDepleteStats();*/
     }
 
     void FillDepleteStats()
@@ -165,6 +187,17 @@ public class VictoryScript : MonoBehaviour
         // maxVal - currVal = openVal / 50 = X (how much Val per tic needed to fill openVal in 1 sec)
         // X / 3 = Y (how much Val per tic needed to fill openVal in 3 sec)
         // newDegRate = Y --> this should fill all bars, no matter how high they are, in 3 seconds each
+    }
+
+    // button function to continue after entering a name scoring a highscore
+    public void ContinueFromEnterNameUI()
+    {
+        string playerName = Highscore_carrying_GO.GetComponent<Highscore>().txt_Input.text;
+        if (playerName != null)
+        {
+            enterName_UI.SetActive(false);
+            EndGame_UI();
+        }
     }
 }
 

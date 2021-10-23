@@ -8,7 +8,7 @@ public class Highscore : MonoBehaviour
 {
     private Transform entryContainer;
     [SerializeField] private Transform entryTemplate;
-    [SerializeField] private TMP_InputField txt_Input;
+    public TMP_InputField txt_Input; // had to make public so I could check if anything was entered without another SerializeField
     private List<Transform> highscoreEntryTransformList;
 
     public List<int> irgendwas;
@@ -20,7 +20,7 @@ public class Highscore : MonoBehaviour
     public bool onlyRead = false;
     public bool allowedHS = false;
     int currentScore;
-    string currentName;
+    public string currentName;
     public int oldScore;
 
 
@@ -31,7 +31,7 @@ public class Highscore : MonoBehaviour
         if (highscores != null)// highscore daten abfragen wenn welche durch vorran gegangene spiele existieren
         {
             
-            Debug.Log("test");
+            //Debug.Log("test");
             //score vom letzten Listen Element holen
 
             for (int i = 0; i < highscores.highscoreEntriesList.Count; i++)
@@ -50,16 +50,16 @@ public class Highscore : MonoBehaviour
             }
 
             int number = highscores.highscoreEntriesList.Count;
-            Debug.Log(number);
+            //Debug.Log(number);
             if (highscores.highscoreEntriesList.Count < 6)
             {
                 oldScore = highscores.highscoreEntriesList[number - 1].score;
-                Debug.Log(oldScore);
+                //Debug.Log(oldScore);
             }
             else
             {
                 oldScore = highscores.highscoreEntriesList[5].score;
-                Debug.Log(oldScore);
+                //Debug.Log(oldScore);
             }
         
 
@@ -74,7 +74,7 @@ public class Highscore : MonoBehaviour
                 allowedHS = true;
             
             }
-            Debug.Log(allowedHS);
+            //Debug.Log(allowedHS);
 
             
         }

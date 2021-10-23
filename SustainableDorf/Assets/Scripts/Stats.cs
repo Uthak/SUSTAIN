@@ -261,7 +261,7 @@ public class Stats : MonoBehaviour
     // ex: base value -1.9 * (1 + (-1 * bonus .2)) = new value -1.52, as a 20% bonus was applied
     public void AddNeighborBonus()
     {
-        Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
+        //Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
         if (prosperityStat >= 0)
         {
             prosperityStat = prosperityStat * (1 + prosperityBonus);
@@ -269,9 +269,9 @@ public class Stats : MonoBehaviour
         {
             prosperityStat = prosperityStat * (1 + (-1 * prosperityBonus));
         }
-        Debug.Log("new prosperityStat == " + prosperityStat); // test
+        //Debug.Log("new prosperityStat == " + prosperityStat); // test
 
-        Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
+        //Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
         if (happinessStat >= 0)
         {
             happinessStat *= (1 + happinessBonus);
@@ -279,9 +279,9 @@ public class Stats : MonoBehaviour
         {
             happinessStat *= (1 + (-1 * happinessBonus));
         }
-        Debug.Log("new happinessStat == " + happinessStat); // test
+        //Debug.Log("new happinessStat == " + happinessStat); // test
 
-        Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
+        //Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
         if (environmentStat >= 0)
         {
             environmentStat *= (1 + environmentBonus);
@@ -289,7 +289,7 @@ public class Stats : MonoBehaviour
         {
             environmentStat *= (1 + (-1 * environmentBonus));
         }
-        Debug.Log("new environmentStat == " + environmentStat); // test
+        //Debug.Log("new environmentStat == " + environmentStat); // test
 
         // cows and neighbor-efficiency are counted and communicated here
         GameObject SceneManager = GameObject.Find("SceneManager");
@@ -297,8 +297,8 @@ public class Stats : MonoBehaviour
         if (isCow)
         {
             SceneManager.GetComponent<NeedsManager>().cowCounter += numberOfCows;
-            Debug.Log("current amounts of cows on the map: " + SceneManager.GetComponent<NeedsManager>().cowCounter);
+            //Debug.Log("current amounts of cows on the map: " + SceneManager.GetComponent<NeedsManager>().cowCounter);
         }
-        Debug.Log("current total efficientlyPlaced-bonus: " + SceneManager.GetComponent<NeedsManager>().efficientlyPlaced);
+        //Debug.Log("current total efficientlyPlaced-bonus: " + SceneManager.GetComponent<NeedsManager>().efficientlyPlaced);
     }
 }
