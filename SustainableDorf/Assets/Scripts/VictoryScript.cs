@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class VictoryScript : MonoBehaviour
 {
@@ -190,14 +191,29 @@ public class VictoryScript : MonoBehaviour
     }
 
     // button function to continue after entering a name scoring a highscore
+    bool canContinue = false;
     public void ContinueFromEnterNameUI()
     {
-        string playerName = Highscore_carrying_GO.GetComponent<Highscore>().txt_Input.text;
-        if (playerName != null)
+        if (canContinue)
         {
             enterName_UI.SetActive(false);
             EndGame_UI();
+        }else
+        {
+            AudioSource errorSound = GameObject.Find("Error_Sound").GetComponent<AudioSource>();
+            errorSound.Play();
         }
+    }
+    // this gets enabled by the OnValueChange variable in the input field, enabling the continue button
+    public void EnableContinueButton()
+    {
+        canContinue = true;
+    }
+    // called when done editing input field (when you hit enter)
+    public void DoneEnteringName()
+    {
+        AudioSource successSound = GameObject.Find("Winning_Sound").GetComponent<AudioSource>();
+        successSound.Play();
     }
 }
 
