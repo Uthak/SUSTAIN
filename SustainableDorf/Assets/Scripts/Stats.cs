@@ -261,7 +261,24 @@ public class Stats : MonoBehaviour
     // ex: base value -1.9 * (1 + (-1 * bonus .2)) = new value -1.52, as a 20% bonus was applied
     public void AddNeighborBonus()
     {
-        //Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
+        // this applies neighborBonus as a static value + or - of their already generated stats
+        //-------------------------------------------------------------------------
+        Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
+            prosperityStat += prosperityBonus;
+        Debug.Log("new prosperityStat == " + prosperityStat); // test
+
+        Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
+            happinessStat += happinessBonus;
+        Debug.Log("new happinessStat == " + happinessStat); // test
+
+        Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
+            environmentStat += environmentBonus;
+        Debug.Log("new environmentStat == " + environmentStat); // test
+
+
+        // this applies neighborBonus as 10% + or - of their already generated stats
+        //-------------------------------------------------------------------------
+        /*//Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
         if (prosperityStat >= 0)
         {
             prosperityStat = prosperityStat * (1 + prosperityBonus);
@@ -290,6 +307,8 @@ public class Stats : MonoBehaviour
             environmentStat *= (1 + (-1 * environmentBonus));
         }
         //Debug.Log("new environmentStat == " + environmentStat); // test
+        */
+
 
         // cows and neighbor-efficiency are counted and communicated here
         GameObject SceneManager = GameObject.Find("SceneManager");

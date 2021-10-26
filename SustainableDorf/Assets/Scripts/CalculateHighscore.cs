@@ -5,31 +5,29 @@ using TMPro;
 
 public class CalculateHighscore : MonoBehaviour
 {
+    // private variables:
     GameObject SceneManager;
     GameObject YearsEntry;
-    //GameObject DaysEntry; // combined this with years
     GameObject ProsEntry;
     GameObject EnvEntry;
     GameObject HapEntry;
-
-    public int score;
-
-    float years;
-    float days;
-    public float detailPros;
-    public float detailEnv;
-    public float detailHap;
-
-    // Felix added this:
     GameObject timeEntry;
     GameObject neighborCountDisplay;
     GameObject cowCountDisplay;
     GameObject scoreEntry;
+
+    float startTime;
+    float days;
+    float years;
     float neighborCount;
     int cowCount;
 
+    // public variables:
+    public float detailPros;
+    public float detailEnv;
+    public float detailHap;
+    public int score;
 
-    float startTime;
     void Awake()
     {
         startTime = Time.timeSinceLevelLoad;
@@ -41,7 +39,10 @@ public class CalculateHighscore : MonoBehaviour
         // Zeit berechnen die man gespielt hat
         float currentTime = Time.timeSinceLevelLoad;
         float spentTime = currentTime;// - startTime;
-        days = spentTime * 6.0833f; // this is 9/sec, right? == 1.4795 years per minute // using .12167/frame or 6.0833 here would make 1 Minute = 1 year
+        days = spentTime * 6.0833f; // currently a round takes about 6-8 minutes
+        // 9/s would be 1.4795 years per minute
+        // 3.041667/s would be .5 years per minute
+        
         years = days / 365;
         //Debug.Log("years " + years);
 
@@ -50,14 +51,14 @@ public class CalculateHighscore : MonoBehaviour
         float env = SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate;
         float hap = SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate;
 
-        // Values for Display
+        // Values for Display:
         // takes degenRate * 50 (fixed Framerate/pS) * 60 seconds
         // = degenrate of 1 year (ingame) == player get annual growth value!
         detailPros = ((pros * 50 * 60) * 10) * -1;
         detailEnv = ((env * 50 * 60) * 10) * -1;
         detailHap = ((hap * 50 * 60) * 10) * -1;
 
-        // NEW Highscore Calculation (ask Felix):
+        // NEW Highscore Calculation:
         // these values represent score-points, not feedback values for players (as in X % growth per year).
         // at 0.00 degeneration rate you get 1000 points
         // worse than that you subtract points from 1000, if better you add them

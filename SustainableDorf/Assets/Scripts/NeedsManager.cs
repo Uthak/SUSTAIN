@@ -200,12 +200,15 @@ public class NeedsManager : MonoBehaviour
 
     void IncreaseDegenerationRates()
     {
-        prosperityDegenerationRate += degenerationIncreaseOverTime; // should add .00333 to all degenerationrates (doubling base degeneration every 60 secs)
-        happinessDegenerationRate += degenerationIncreaseOverTime;
-        environmentDegenerationRate += degenerationIncreaseOverTime;
-        degenerationWasIncreased = true;
-        Invoke("ResetDegenerationIncreaser", speedUpDegenerationTime);
-        Debug.Log("degeneration rates were increased");
+        if(GetComponent<VictoryScript>().gameHasEnded == false) // don't change values after game has ended
+        {
+            prosperityDegenerationRate += degenerationIncreaseOverTime; // should add .00333 to all degenerationrates (doubling base degeneration every 60 secs)
+            happinessDegenerationRate += degenerationIncreaseOverTime;
+            environmentDegenerationRate += degenerationIncreaseOverTime;
+            degenerationWasIncreased = true;
+            Invoke("ResetDegenerationIncreaser", speedUpDegenerationTime);
+            Debug.Log("degeneration rates were increased");
+        }
     }
     void ResetDegenerationIncreaser()
     {

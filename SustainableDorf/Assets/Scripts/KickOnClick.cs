@@ -53,7 +53,7 @@ public class KickOnClick : MonoBehaviour
         // this part is to make a cow wobble after being kicked:
         _startScale = transform.localScale;
         _difScale = maxScale - minScale;
-        Debug.Log(_difScale.ToString());
+        //Debug.Log(_difScale.ToString());
 
         // this is to save a respawn position if you fell out of the map:
         spawn_Position = GameObject.Find("Spawn_Position").GetComponent<Transform>().position;

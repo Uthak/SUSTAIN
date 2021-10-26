@@ -16815,10 +16815,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5889dae446386f0418b6be944a1da4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   detailPros: 0
   detailEnv: 0
   detailHap: 0
+  score: 0
 --- !u!114 &1865021650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16834,7 +16834,7 @@ MonoBehaviour:
   developerMode: 0
   quickWin: 0
   baseStatValue: 10
-  globalDegenerationRate: 0.0006
+  globalDegenerationRate: 0.0015
   degenerationThreshold: 50
   accelleratedDegenerationRate: 1.2
   usingContinuousValues: 1
@@ -16866,9 +16866,9 @@ MonoBehaviour:
   cameraMinZoom: 100
   cameraTransformMetrics1: {fileID: 55970413}
   cameraTransformMetrics2: {fileID: 586254481}
-  positiveInfluence: 0.1
+  positiveInfluence: 0.5
   neutralInfluence: 0
-  negativeInfluence: -0.1
+  negativeInfluence: -0.5
 --- !u!114 &1865021651
 MonoBehaviour:
   m_ObjectHideFlags: 0
