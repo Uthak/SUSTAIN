@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     // used to reset the UI-display at the start of the game
     private GameObject StatsDisplay;
+    public bool hoverInfoEnabled = true;
 
     // these are used by the "STATS" script on terrain tiles to determine the amount of impact neighbors have
     //float greatInfluence = -.002f; // currently not used

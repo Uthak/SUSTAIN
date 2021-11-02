@@ -52,11 +52,14 @@ public class StatUIDisplay : MonoBehaviour
         }
         if (t == "factory")
         {
-            nameField.text = "Factory";
+            nameField.text = "Industry";
         }
         if (t == "social")
         {
-            nameField.text = "Social";
+            nameField.text = "Living Space"; // or: "Village"?
+
+            // old:
+            //nameField.text = "Social";
         }
         if (t == "sustainable")
         {
@@ -67,34 +70,48 @@ public class StatUIDisplay : MonoBehaviour
             nameField.text = "Pagotopia"; // "\n" to add another line 
         }
 
-        if (hS > 0f) // show happiness
+        // this displays Stats of Tiles that are hovered over
+        //if (SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab = null) // this should make it so it only displays old stats if nothing is being carried
+            //if (SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab = null)
+            //{
+            if (hS > 0f) // show happiness
+            {
+                happinessBar.value = hS;
+                NEGhappinessBar.value = 0f;
+            }
+            else
+            {
+                happinessBar.value = 0f;
+                NEGhappinessBar.value = hS * -1;
+            }
+
+            if (pS > 0f) // show prosperity
+            {
+                prosperityBar.value = pS;
+                NEGprosperityBar.value = 0f;
+            }
+            else
+            {
+                prosperityBar.value = 0f;
+                NEGprosperityBar.value = pS * -1;
+            }
+
+            if (eS > 0f) // show environment
+            {
+                environmentBar.value = eS;
+                NEGenvironmentBar.value = 0f;
+            }
+            else
+            {
+                environmentBar.value = 0f;
+                NEGenvironmentBar.value = eS * -1;
+            }
+        //}
+
+        //test:
+        if (SceneManager.GetComponent<GameManager>().hoverInfoEnabled == false)
         {
-            happinessBar.value = hS;
-            NEGhappinessBar.value = 0f;
-        }else
-        {
-            happinessBar.value = 0f;
-            NEGhappinessBar.value = hS * -1;
-        }
-        
-        if (pS > 0f) // show prosperity
-        {
-            prosperityBar.value = pS;
-            NEGprosperityBar.value = 0f;
-        }else
-        {
-            prosperityBar.value = 0f;
-            NEGprosperityBar.value = pS * -1;
-        }
-        
-        if (eS > 0f) // show environment
-        {
-            environmentBar.value = eS;
-            NEGenvironmentBar.value = 0f;
-        }else
-        {
-            environmentBar.value = 0f;
-            NEGenvironmentBar.value = eS * -1;
+            Debug.Log("CastStatsToUI is being called, even though it shouldnt");
         }
     }
 
@@ -112,16 +129,13 @@ public class StatUIDisplay : MonoBehaviour
     }
 
     public void CastNeighborEffectToUI(float prosperityStat, float happinessStat, float environmentStat, float prosperityBonus, float happinessBonus, float environmentBonus)
-        //public void CastNeighborEffectToUI(GameObject currentlyCarriedObject, float prosperityBonus, float happinessBonus, float environmentBonus)
     {
-
         if (SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab != null) // prob. redundant, as this only gets called in "ActivateCell" if this condition is true
         {
             float newProsperityStat;
             float newHappinessStat;
             float newEnvironmentStat;
 
-            //float prosperityStaticValue = currentlyCarriedObject.GetComponent<>(Stats).
             // calculate amount of static stat +/- neighboreffect
             if (prosperityStat >= 0)
             {

@@ -57,18 +57,14 @@ public class Stats : MonoBehaviour
         neutralInfluence = sceneManager.GetComponent<GameManager>().neutralInfluence;
         negativeInfluence = sceneManager.GetComponent<GameManager>().negativeInfluence;
 
-        // checks whether we use one-time or contineous modifiers to stats
-        //if (sceneManager.GetComponent<GameManager>().usingContinuousValues)
-        //{
-            //randomFloat = Random.Range(SceneManager.GetComponent<GameManager>().minInfluencePerTile, SceneManager.GetComponent<GameManager>().maxInfluencePerTile);
-            randomFloat = Random.Range(sceneManager.GetComponent<GameManager>().minStatsPerTile, sceneManager.GetComponent<GameManager>().maxStatsPerTile);
+        randomFloat = Random.Range(sceneManager.GetComponent<GameManager>().minStatsPerTile, sceneManager.GetComponent<GameManager>().maxStatsPerTile);
 
-            //mainStat = randomFloat / 2 + Random.Range(0f, (randomFloat / 2f)); // why this complicated math?
-            mainStat = randomFloat;
-            randomStat1 = randomFloat * Random.Range(-.5f, .5f); // second multiplyer to allow negative outcome
-            randomStat2 = randomFloat * Random.Range(-.5f, .5f); // second multiplyer to allow negative outcome
+        mainStat = randomFloat;
+        randomStat1 = randomFloat * Random.Range(-.5f, .5f); // second multiplyer to allow negative outcome
+        randomStat2 = randomFloat * Random.Range(-.5f, .5f); // second multiplyer to allow negative outcome
 
             // this prevents all stats from being positive or the same
+            // may need to be cancelled for new social stats
             if (randomStat1 >= 0f && randomStat2 >= 0f | randomStat1 == randomStat2)
             {
                 int randomStat = Random.Range(1, 2);
@@ -80,64 +76,67 @@ public class Stats : MonoBehaviour
                     randomStat2 *= -1;
                 }
             }
-        //}
 
         // stats are generated depending on tile-tag
         if (CompareTag("factory"))
         {
-            prosperityStat = mainStat;
-            happinessStat = randomStat1;
-            environmentStat = randomFloat * -1 /*Random.Range(-1f, 0f)*/; // factorys always cost environment
+            prosperityStat = mainStat * Random.Range(.1f, 1f);
+            happinessStat = randomFloat * Random.Range(-.5f, -0.1f); // factorys always cost space
+            environmentStat = randomFloat * Random.Range(-.5f, -0.1f); // factorys always cost environment
+
+            // old:
+            //prosperityStat = mainStat;
+            //happinessStat = randomStat1;
+            //environmentStat = randomFloat * -1 /*Random.Range(-1f, 0f)*/; // factorys always cost environment
         }
         else if (CompareTag("nature"))
         {
-            prosperityStat = randomFloat * Random.Range(-1f, -0.5f); // nature always costs money
-            happinessStat = randomFloat * Random.Range(0f, .5f); // nature always makes people happy
-            environmentStat = mainStat;
+            prosperityStat = randomFloat * Random.Range(-.5f, -0.1f); // nature always costs money
+            happinessStat = randomFloat * Random.Range(-.5f, -0.1f); // nature always costs space
+            environmentStat = mainStat * Random.Range(.1f, 1f);
+
+            // old:
+            //prosperityStat = randomFloat * Random.Range(-1f, -0.5f); // nature always costs money
+            //happinessStat = randomFloat * Random.Range(0f, .5f); // nature always makes people happy
+            //environmentStat = mainStat;
         }
         else if (CompareTag("social"))
         {
-            prosperityStat = randomFloat * Random.Range(-1f, -0.5f); // social always costs money
-            happinessStat = mainStat;
-            environmentStat = randomStat2;
+            prosperityStat = randomFloat * Random.Range(-.5f, -0.1f); // livingSpace always costs money
+            happinessStat = mainStat * Random.Range(.1f, 1f);
+            environmentStat = randomFloat * Random.Range(-.5f, -0.1f); // livingSpace always costs money
+            
+            // old:
+            //prosperityStat = randomFloat * Random.Range(-1f, -0.5f); // social always costs money
+            //happinessStat = mainStat;
+            //environmentStat = randomStat2;
         }
-        else if (CompareTag("sustainable")) // does this make sense? essentially the same as environment-tile
+        else if (CompareTag("sustainable"))
         {
-            prosperityStat = randomStat2;
-            happinessStat = randomStat1;
+            prosperityStat = randomStat2 * Random.Range(.1f, 1.5f);
+            happinessStat = randomFloat * Random.Range(-.5f, -0.1f); // sustainable always costs space
             environmentStat = randomFloat * Random.Range(0f, .5f); // sustainability always aims to improve the environment
-        }
 
+            // old:
+            //prosperityStat = randomStat2;
+            //happinessStat = randomStat1;
+            //environmentStat = randomFloat * Random.Range(0f, .5f); // sustainability always aims to improve the environment
+        }
     }
 
     // called when placing tile to transmit Stats
     // called in Jans "PlaceObjectsOnGrid"-Script
     public void UpdateStats()
     {
-
         // this bool tells the "TileGenerator"-script NOT to destroy a placed tile
         wasPlaced = true;
+        //sceneManager.GetComponent<GameManager>().hoverInfoEnabled = true; // allready in PlaceObjectsOnGrid
 
 
         // this Counter works in connection with a timer to increase game difficulty over time
         sceneManager.GetComponent<NeedsManager>().tileCounter += 1;
 
         degenerationFactor = sceneManager.GetComponent<GameManager>().degenerationFactor;
-
-        // add the one-time stats of a tile with its neighbor-effects and add them once to the NEEDSMANAGER
-        // this is the basis to derive the contineous influence (10% of the one-time-stats)
-        /*Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
-        prosperityStat += prosperityBonus;
-        Debug.Log("new prosperityStat == " + prosperityStat); // test
-
-        Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
-        happinessStat += happinessBonus;
-        Debug.Log("new happinessStat == " + happinessStat); // test
-
-        Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
-        environmentStat += environmentBonus;
-        Debug.Log("new environmentStat == " + environmentStat); // test*/
-
 
         sceneManager.GetComponent<NeedsManager>().prosperityValue += prosperityStat;
         if (sceneManager.GetComponent<NeedsManager>().prosperityValue > 10f)
@@ -168,13 +167,12 @@ public class Stats : MonoBehaviour
         return;
     }
 
-    // beginning of neighbor-effects:
 
+    // beginning of neighbor-effects:
     public void NeighborEffect(int factoryNeighbors, int socialNeighbors, int natureNeighbors, int sustainableNeighbors)
     {
         if (CompareTag("factory"))
         {
-            // welchen Einfluss hat eine Factory als Nachbar auf die sustainable-Stats der Gesellschaft in Abhängigkeit seiner Location? 
             prosperityBonus = ((float)factoryNeighbors * positiveInfluence) + ((float)socialNeighbors * positiveInfluence) + ((float)natureNeighbors * neutralInfluence) + ((float)sustainableNeighbors * negativeInfluence);
             happinessBonus = ((float)factoryNeighbors * neutralInfluence) + ((float)socialNeighbors * negativeInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * neutralInfluence);
             environmentBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * neutralInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * positiveInfluence);
@@ -184,81 +182,27 @@ public class Stats : MonoBehaviour
             prosperityBonus = ((float)factoryNeighbors * neutralInfluence) + ((float)socialNeighbors * neutralInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * negativeInfluence);
             happinessBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * positiveInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * positiveInfluence);
             environmentBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * negativeInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * positiveInfluence);
-
-            /*prosperityBonus = -.0015f * (float)factoryNeighbors; // nature + factory = - prosperity
-            happinessBonus = .001f * (float)socialNeighbors; // nature + social = + happyness
-            environmentBonus = .001f * (float)natureNeighbors; // nature + nature = ++ environment*/
         }
-        else if (CompareTag("social"))
+        else if (CompareTag("social")) // now: verfügbare Wohnfläche
         {
             prosperityBonus = ((float)factoryNeighbors * positiveInfluence) + ((float)socialNeighbors * negativeInfluence) + ((float)natureNeighbors * neutralInfluence) + ((float)sustainableNeighbors * positiveInfluence);
             happinessBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * positiveInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * negativeInfluence);
             environmentBonus = ((float)factoryNeighbors * neutralInfluence) + ((float)socialNeighbors * neutralInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * neutralInfluence);
-
-            //prosperityBonus = .001f * (float)factoryNeighbors; // factory + factory = mehr prosperity
-            //happinessBonus = -.001f * (float)socialNeighbors; // factory + social = weniger happyness
-            //environmentBonus = -.0015f * (float)natureNeighbors; // factory + nature = weniger environment
         }
-        else if (CompareTag("sustainable")) // does this make sense? essentially the same as environment-tile
+        else if (CompareTag("sustainable"))
         {
             prosperityBonus = ((float)factoryNeighbors * negativeInfluence) + ((float)socialNeighbors * positiveInfluence) + ((float)natureNeighbors * negativeInfluence) + ((float)sustainableNeighbors * positiveInfluence);
             happinessBonus = ((float)factoryNeighbors * neutralInfluence) + ((float)socialNeighbors * negativeInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * positiveInfluence);
             environmentBonus = ((float)factoryNeighbors * positiveInfluence) + ((float)socialNeighbors * neutralInfluence) + ((float)natureNeighbors * positiveInfluence) + ((float)sustainableNeighbors * positiveInfluence);
-
-            //prosperityBonus = .001f * (float)factoryNeighbors; // factory + factory = mehr prosperity
-            //happinessBonus = -.001f * (float)socialNeighbors; // factory + social = weniger happyness
-            //environmentBonus = -.0015f * (float)natureNeighbors; // factory + nature = weniger environment
         }
 
-        /*if (sustainableNeighbors > 0f)
-        {
-            if (prosperityBonus >= 0f)
-            {
-                prosperityBonus *= (1f - ((float)sustainableNeighbors * .2f));
-            }
-            else if (prosperityBonus < 0f)
-            {
-                prosperityBonus *= (1f + ((float)sustainableNeighbors * .2f));
-            }
-            if (happinessBonus >= 0f)
-            {
-                happinessBonus *= (1f - ((float)sustainableNeighbors * .2f));
-            }
-            else if (happinessBonus < 0f)
-            {
-                happinessBonus *= (1f + ((float)sustainableNeighbors * .2f));
-            }
-            if (environmentBonus >= 0f)
-            {
-                environmentBonus *= (1f - ((float)sustainableNeighbors * .2f));
-            }
-            else if (environmentBonus < 0f)
-            {
-                environmentBonus *= (1f + ((float)sustainableNeighbors * .2f));
-            }
-        }*/
-
-
         GameObject StatsDisplay = GameObject.Find("Stats_UI");
-        StatsDisplay.GetComponentInParent<StatUIDisplay>().CastNeighborEffectToUI(prosperityStat, happinessStat, environmentStat, prosperityBonus, happinessBonus, environmentBonus);
-        //StatsDisplay.GetComponentInParent<StatUIDisplay>().CastNeighborEffectToUI(sceneManager.GetComponent<PlaceObjectsOnGrid>().curObject, prosperityBonus, happinessBonus, environmentBonus);
-
-        // hier kann man es anzeigen lassen:
-        //--> cast to UI, die Stats von curObj aus PlaceObjOn Grid abholen +die neighboreffect
-        // muss man immer zurücksetzen! --> problem: differenz von neighbor/ohne neighbor wird nicht klar. man braucht 
-        // 2 sets von anzeigen!  
-        // new set of anzeigen die hinter den HAUPT anzeigen liegen und NUR den enighboreffect anzeigen 
-        /*if (SceneManager.GetComponent<GameManager>().usingContinuousValues)
+        if (sceneManager.GetComponent<GameManager>().hoverInfoEnabled == false)
         {
-            SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate += prosperityBonus;
-            SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate += environmentBonus;
-            SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate += happinessBonus;
-        }*/
+            StatsDisplay.GetComponentInParent<StatUIDisplay>().CastNeighborEffectToUI(prosperityStat, happinessStat, environmentStat, prosperityBonus, happinessBonus, environmentBonus);
+        }
     }
 
-    // depending on if a stat is pos. or neg. the bonus will be multiplied with the static on a 10% basis.
-    // ex: base value 1.7 * (1 + bonus .2) = new value 2.04, as a 20% bonus was applied
-    // ex: base value -1.9 * (1 + (-1 * bonus .2)) = new value -1.52, as a 20% bonus was applied
     public void AddNeighborBonus()
     {
         // this applies neighborBonus as a static value + or - of their already generated stats
@@ -276,48 +220,85 @@ public class Stats : MonoBehaviour
         Debug.Log("new environmentStat == " + environmentStat); // test
 
 
-        // this applies neighborBonus as 10% + or - of their already generated stats
-        //-------------------------------------------------------------------------
-        /*//Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
-        if (prosperityStat >= 0)
-        {
-            prosperityStat = prosperityStat * (1 + prosperityBonus);
-        }else
-        {
-            prosperityStat = prosperityStat * (1 + (-1 * prosperityBonus));
-        }
-        //Debug.Log("new prosperityStat == " + prosperityStat); // test
-
-        //Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
-        if (happinessStat >= 0)
-        {
-            happinessStat *= (1 + happinessBonus);
-        }else
-        {
-            happinessStat *= (1 + (-1 * happinessBonus));
-        }
-        //Debug.Log("new happinessStat == " + happinessStat); // test
-
-        //Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
-        if (environmentStat >= 0)
-        {
-            environmentStat *= (1 + environmentBonus);
-        }else
-        {
-            environmentStat *= (1 + (-1 * environmentBonus));
-        }
-        //Debug.Log("new environmentStat == " + environmentStat); // test
-        */
-
-
         // cows and neighbor-efficiency are counted and communicated here
         GameObject SceneManager = GameObject.Find("SceneManager");
         SceneManager.GetComponent<NeedsManager>().efficientlyPlaced += prosperityBonus + happinessBonus + environmentBonus;
         if (isCow)
         {
             SceneManager.GetComponent<NeedsManager>().cowCounter += numberOfCows;
-            //Debug.Log("current amounts of cows on the map: " + SceneManager.GetComponent<NeedsManager>().cowCounter);
         }
         //Debug.Log("current total efficientlyPlaced-bonus: " + SceneManager.GetComponent<NeedsManager>().efficientlyPlaced);
     }
 }
+
+
+
+
+
+// add the one-time stats of a tile with its neighbor-effects and add them once to the NEEDSMANAGER
+// this is the basis to derive the contineous influence (10% of the one-time-stats)
+/*Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
+prosperityStat += prosperityBonus;
+Debug.Log("new prosperityStat == " + prosperityStat); // test
+
+Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
+happinessStat += happinessBonus;
+Debug.Log("new happinessStat == " + happinessStat); // test
+
+Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
+environmentStat += environmentBonus;
+Debug.Log("new environmentStat == " + environmentStat); // test*/
+
+
+
+
+//StatsDisplay.GetComponentInParent<StatUIDisplay>().CastNeighborEffectToUI(sceneManager.GetComponent<PlaceObjectsOnGrid>().curObject, prosperityBonus, happinessBonus, environmentBonus);
+
+// hier kann man es anzeigen lassen:
+//--> cast to UI, die Stats von curObj aus PlaceObjOn Grid abholen +die neighboreffect
+// muss man immer zurücksetzen! --> problem: differenz von neighbor/ohne neighbor wird nicht klar. man braucht 
+// 2 sets von anzeigen!  
+// new set of anzeigen die hinter den HAUPT anzeigen liegen und NUR den enighboreffect anzeigen 
+/*if (SceneManager.GetComponent<GameManager>().usingContinuousValues)
+{
+    SceneManager.GetComponent<NeedsManager>().prosperityDegenerationRate += prosperityBonus;
+    SceneManager.GetComponent<NeedsManager>().environmentDegenerationRate += environmentBonus;
+    SceneManager.GetComponent<NeedsManager>().happinessDegenerationRate += happinessBonus;
+}*/
+
+
+// depending on if a stat is pos. or neg. the bonus will be multiplied with the static on a 10% basis.
+// ex: base value 1.7 * (1 + bonus .2) = new value 2.04, as a 20% bonus was applied
+// ex: base value -1.9 * (1 + (-1 * bonus .2)) = new value -1.52, as a 20% bonus was applied
+// this applies neighborBonus as 10% + or - of their already generated stats
+//-------------------------------------------------------------------------
+/*//Debug.Log("prosperityStat = " + prosperityStat + " + prosperityBonus = " + prosperityBonus); // test
+if (prosperityStat >= 0)
+{
+    prosperityStat = prosperityStat * (1 + prosperityBonus);
+}else
+{
+    prosperityStat = prosperityStat * (1 + (-1 * prosperityBonus));
+}
+//Debug.Log("new prosperityStat == " + prosperityStat); // test
+
+//Debug.Log(" happinessStat = " + happinessStat + " + happinessBonus = " + happinessBonus); // test
+if (happinessStat >= 0)
+{
+    happinessStat *= (1 + happinessBonus);
+}else
+{
+    happinessStat *= (1 + (-1 * happinessBonus));
+}
+//Debug.Log("new happinessStat == " + happinessStat); // test
+
+//Debug.Log("environmentStat = " + environmentStat + " + environmentBonus = " + environmentBonus); // test
+if (environmentStat >= 0)
+{
+    environmentStat *= (1 + environmentBonus);
+}else
+{
+    environmentStat *= (1 + (-1 * environmentBonus));
+}
+//Debug.Log("new environmentStat == " + environmentStat); // test
+*/

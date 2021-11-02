@@ -16834,7 +16834,7 @@ MonoBehaviour:
   developerMode: 0
   quickWin: 0
   baseStatValue: 10
-  globalDegenerationRate: 0.0015
+  globalDegenerationRate: 0.001
   degenerationThreshold: 50
   accelleratedDegenerationRate: 1.2
   usingContinuousValues: 1
@@ -16866,6 +16866,7 @@ MonoBehaviour:
   cameraMinZoom: 100
   cameraTransformMetrics1: {fileID: 55970413}
   cameraTransformMetrics2: {fileID: 586254481}
+  hoverInfoEnabled: 1
   positiveInfluence: 0.5
   neutralInfluence: 0
   negativeInfluence: -0.5

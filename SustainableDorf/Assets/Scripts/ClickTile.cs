@@ -9,18 +9,24 @@ public class ClickTile : MonoBehaviour
     private GameObject StatsDisplay;
     public GameObject Over;
 
-    public bool hoverInfoEnabled = true;
+    //public bool hoverInfoEnabled = true;
     GameObject SceneManager;
 
+    private void Awake()
+    {
+        SceneManager = GameObject.Find("SceneManager");
+    }
     public void OnMouseDown()
         //übergibt angeklicktes Object an OnMouse Funktion aus PlaceObjectsOnGrid
     {
         Object = gameObject;
-        SceneManager = GameObject.Find("SceneManager");
+        //SceneManager = GameObject.Find("SceneManager");
+        SceneManager.GetComponent<GameManager>().hoverInfoEnabled = false;
+        Debug.Log("hover Info OFF");
         SceneManager.GetComponent<PlaceObjectsOnGrid>().OnMouse(Object);
 
         // Felix added this 9.10.21 to cast stats to UI while carrying:
-        hoverInfoEnabled = false;
+        //hoverInfoEnabled = false;
     }
 
     // Felix added this 10.10.21 to cast stats to UI while carrying:
@@ -36,10 +42,10 @@ public class ClickTile : MonoBehaviour
     private void OnMouseOver()
     // Liest Stats von MapTile beim Hovern aus 
     {
-        GameObject SceneManager = GameObject.Find("SceneManager");
-        if (SceneManager.GetComponent<GameManager>().usingContinuousValues) // can be deleted if we chose continous-effects for good
-        {
-            if (hoverInfoEnabled)
+        //GameObject SceneManager = GameObject.Find("SceneManager");
+        //if (SceneManager.GetComponent<GameManager>().usingContinuousValues) // can be deleted if we chose continous-effects for good
+        //{
+            if (SceneManager.GetComponent<GameManager>().hoverInfoEnabled == true)
             {
                 if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
                 {
@@ -57,10 +63,10 @@ public class ClickTile : MonoBehaviour
                     float b = Over.GetComponent<Stats>().environmentStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
                     float c = Over.GetComponent<Stats>().happinessStat * SceneManager.GetComponent<GameManager>().statDisplayMultiplicator; //makes miniscule values visible
 
-                    if (hoverInfoEnabled) // only show stats while hovering if NOTHING is carried
-                    {
+                    //if (hoverInfoEnabled) // only show stats while hovering if NOTHING is carried
+                    //{
                         StatsDisplay.GetComponentInParent<StatUIDisplay>().CastStatsToUI(Over, tag, a, b, c);
-                    }
+                    //}
 
                     // added by Felix to see numerical stats in dev mode while hovering
                     if (SceneManager.GetComponent<GameManager>().developerMode)
@@ -70,8 +76,8 @@ public class ClickTile : MonoBehaviour
                 }
             }
             
-        }
-        if (SceneManager.GetComponent<GameManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
+        //}
+        /*if (SceneManager.GetComponent<GameManager>().usingOneTimeValues) // can be deleted if we chose continous-effects for good
         {
             if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
             {
@@ -97,7 +103,7 @@ public class ClickTile : MonoBehaviour
                     SceneManager.GetComponent<GameManager>().ShowDevStats(a, b, c);
                 }
             }
-        }
+       }*/
     }
 
     private void OnMouseExit()
@@ -106,7 +112,7 @@ public class ClickTile : MonoBehaviour
         //Debug.Log("OnMouseExit");
         //statsDisplay.transform.GetChild(0).gameObject.SetActive(false);
         //statsDisplay = null;
-        if (hoverInfoEnabled)
+        if (SceneManager.GetComponent<GameManager>().hoverInfoEnabled == true)
         {
             StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
         }
@@ -122,11 +128,11 @@ public class ClickTile : MonoBehaviour
 
 
     // ist das hier abfall?:
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (gameObject.CompareTag("nature") || gameObject.CompareTag("factory") || gameObject.CompareTag("social") || gameObject.CompareTag("sustainable") || gameObject.CompareTag("city"))
         {
             //Debug.Log("nachbar");
         }
-    }
+    }*/
 }

@@ -29,15 +29,16 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     public GameObject curObject;
     int allCells;
 
-    GameObject StatsDisplay; //felix use fpr casting stats while carrying
-
+    GameObject StatsDisplay;
+    GameObject sceneManager;
 
     void Start()
     {
+        StatsDisplay = GameObject.Find("Stats_UI");
+        sceneManager = GameObject.Find("SceneManager");
+
         CreateGrid();
         plane = new Plane(inNormal: Vector3.up, inPoint: transform.position);
-
-        StatsDisplay = GameObject.Find("Stats_UI"); //felix use fpr casting stats while carrying
     }
 
     // Update is called once per frame
@@ -80,10 +81,9 @@ public class PlaceObjectsOnGrid : MonoBehaviour
             */
         }
         //allCells = width * height;    //allCells wieder voll machen für nächsten Loop
-        
     }
 
-    RaycastHit hit;
+    RaycastHit hit; // is this used?
 
     void GetMousePositionOnGrid()
     {
@@ -118,33 +118,28 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                         if (Input.GetMouseButtonUp(0))
                         {
                             //Debug.Log("CCCC");
-                            if (onMousePrefab != null)
+                            if (onMousePrefab != null) // tile gets placed
                             {
-                                // wird gesetzt
-                                curObject.GetComponent<BoxCollider>().enabled = true;
-                                curObject.GetComponent<Stats>().AddNeighborBonus(); // this is new
-                                curObject.GetComponent<Stats>().UpdateStats();
-                                //curObject.GetComponent<Stats>().AddNeighborBonus(); //redundant
-                                curObject.GetComponent<ClickTile>().setFix = true;
-                                //Debug.Log("DDDD");
-                            
-                            // Felix added this to re-enable hover-reading of stats
-                            curObject.GetComponent<ClickTile>().hoverInfoEnabled = true;
+                            curObject.GetComponent<BoxCollider>().enabled = true;
+                            curObject.GetComponent<Stats>().AddNeighborBonus();
+                            curObject.GetComponent<Stats>().UpdateStats();
+                            curObject.GetComponent<ClickTile>().setFix = true;
+                            sceneManager.GetComponent<GameManager>().hoverInfoEnabled = true;
+                            Debug.Log("hover Info ON (tile was placed)");
+
                             StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
                             StatsDisplay.GetComponent<StatUIDisplay>().ResetBonusStatBars();
 
-
                             node.isPlaceable = false;
-                                isOnGrid = true;
-                                curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
-                                onMousePrefab = null;
+                            isOnGrid = true;
+                            curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
+                            onMousePrefab = null;
 
-                                
-                                PlopSound.Play();
-                            if(curObject.GetComponent<Stats>().isCow == true)
-                            {
-                                moohSound.Play();
-                            }
+                            PlopSound.Play();
+                                if(curObject.GetComponent<Stats>().isCow == true)
+                                {
+                                    moohSound.Play();
+                                }
                             }
                         }
                         

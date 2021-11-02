@@ -60,9 +60,14 @@ public class Buttons : MonoBehaviour
     public AudioSource errorSound; // also used by the tileGenerator script when pressing the NewSet button in Error
     [SerializeField] TextMeshProUGUI tutorial_page_counter;
 
+    // used to reset Stat-Bars when requesting new set of tiles
+    GameObject StatsDisplay;
+
     // this Start function is only to turn off your pop_ups in case you forgot
     private void Start()
     {
+        StatsDisplay = GameObject.Find("Stats_UI");
+
         if (pop_up_screen_1 != null)
         {
             pop_up_screen_1.SetActive(false);
@@ -208,6 +213,10 @@ public class Buttons : MonoBehaviour
             nextSetButtonCooldown = true;
             standardClick.Play();
             SceneManager.GetComponent<TileGenerator>().DestroyRemainingTiles();
+            SceneManager.GetComponent<GameManager>().hoverInfoEnabled = true;
+            SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab = null;
+            StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
+            StatsDisplay.GetComponent<StatUIDisplay>().ResetBonusStatBars();
             SceneManager.GetComponent<TileGenerator>().NextSet();
             getNewSetOfTiles_Button.GetComponent<Image>().color = new Color32(100, 100, 100, 100);
             Invoke("ResetNextSetButtonCooldown", 5f);
