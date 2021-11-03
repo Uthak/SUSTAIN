@@ -677,8 +677,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3520843861698006603}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.010277234, y: 0.2065487, z: 0.04408493}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 0.010105, y: 0.20647, z: 0.04393}
+  m_LocalScale: {x: 160.04, y: 160.04, z: 160.04}
   m_Children: []
   m_Father: {fileID: 5083103373907736118}
   m_RootOrder: 22
@@ -1084,8 +1084,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4292380566674332098}
   m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.010563861, y: 0.2066777, z: 0.045019966}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 0.010564, y: 0.2066777, z: 0.045427}
+  m_LocalScale: {x: 160.04, y: 160.04, z: 160.04}
   m_Children: []
   m_Father: {fileID: 5083103373907736118}
   m_RootOrder: 26
@@ -1117,7 +1117,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 725804396391725484, guid: 844a3621b8e1c5842b1f9cde0c9c5ffa, type: 3}
+  - {fileID: 2100000, guid: a5df89144362d4ba7953110ad18d82eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1198,7 +1198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8693172909504858975, guid: 844a3621b8e1c5842b1f9cde0c9c5ffa, type: 3}
+  - {fileID: 2100000, guid: a5df89144362d4ba7953110ad18d82eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1246,8 +1246,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4330947046172193358}
   m_LocalRotation: {x: 0.50000006, y: 0.50000006, z: -0.49999994, w: -0.5}
-  m_LocalPosition: {x: -0.001473818, y: 0.20662148, z: 0.045555066}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: -0.0087016, y: 0.20659, z: 0.046283}
+  m_LocalScale: {x: 160.04, y: 160.04, z: 160.04}
   m_Children: []
   m_Father: {fileID: 5083103373907736118}
   m_RootOrder: 9
@@ -1543,6 +1543,11 @@ MonoBehaviour:
   randomStat1: 0
   randomStat2: 0
   isCow: 0
+  numberOfCows: 0
+  isFactory: 0
+  isForest: 0
+  isSchool: 0
+  isKlaerwerk: 0
   wasPlaced: 0
   prosperityBonus: 0
   happinessBonus: 0
