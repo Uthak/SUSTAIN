@@ -53,7 +53,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: 14
+    value: 18
   tint:
     overrideState: 1
     value: 10
@@ -65,25 +65,25 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 16
+    value: 22
   brightness:
     overrideState: 1
-    value: 18
+    value: 12
   postExposure:
     overrideState: 0
     value: 0
   contrast:
     overrideState: 1
-    value: 19
+    value: 1
   mixerRedOutRedIn:
     overrideState: 1
-    value: 100
+    value: 75
   mixerRedOutGreenIn:
     overrideState: 1
-    value: 16
+    value: 25
   mixerRedOutBlueIn:
     overrideState: 1
-    value: -21
+    value: -5
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0
@@ -1329,13 +1329,13 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 7.79
+    value: 1.81
   threshold:
     overrideState: 1
-    value: 0.96
+    value: 0.75
   softKnee:
     overrideState: 1
-    value: 0.52
+    value: 0.59
   clamp:
     overrideState: 0
     value: 65472
@@ -1379,10 +1379,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1.02
+    value: 0.53
   color:
     overrideState: 1
-    value: {r: 0, g: 0.00933506, b: 0.7830189, a: 1}
+    value: {r: 0.14971161, g: 0, b: 1, a: 1}
   ambientOnly:
     overrideState: 0
     value: 1
@@ -1397,7 +1397,7 @@ MonoBehaviour:
     value: -12
   thicknessModifier:
     overrideState: 1
-    value: 3.95
+    value: 1
   directLightingStrength:
     overrideState: 0
     value: 0
@@ -1437,13 +1437,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   focusDistance:
     overrideState: 1
-    value: 15
+    value: 50
   aperture:
     overrideState: 0
     value: 5.6
@@ -1474,10 +1474,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.6
+    value: 0.47
   size:
     overrideState: 1
-    value: 0.85
+    value: 0.68
   lumContrib:
     overrideState: 0
     value: 1
