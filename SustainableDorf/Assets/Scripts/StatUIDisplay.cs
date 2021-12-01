@@ -132,12 +132,42 @@ public class StatUIDisplay : MonoBehaviour
     {
         if (SceneManager.GetComponent<PlaceObjectsOnGrid>().onMousePrefab != null) // prob. redundant, as this only gets called in "ActivateCell" if this condition is true
         {
-            float newProsperityStat;
-            float newHappinessStat;
-            float newEnvironmentStat;
+            float newProsperityStat = prosperityStat + prosperityBonus;
+            float newHappinessStat = happinessStat + happinessBonus;
+            float newEnvironmentStat = environmentStat + environmentBonus;
 
             // calculate amount of static stat +/- neighboreffect
-            if (prosperityStat >= 0)
+            if (newHappinessStat > 0f) // show happiness
+            {
+                happinessBonusBar.value = newHappinessStat;
+                NEGhappinessBonusBar.value = 0f;
+            }else
+            {
+                happinessBonusBar.value = 0f;
+                NEGhappinessBonusBar.value = newHappinessStat;
+            }
+
+            if (newProsperityStat > 0f) // show prosperity
+            {
+                prosperityBonusBar.value = newProsperityStat;
+                NEGprosperityBonusBar.value = 0f;
+            }else
+            {
+                prosperityBonusBar.value = 0f;
+                NEGprosperityBonusBar.value = newProsperityStat;
+            }
+
+            if (newEnvironmentStat > 0f) // show environment
+            {
+                environmentBonusBar.value = newEnvironmentStat;
+                NEGenvironmentBonusBar.value = 0f;
+            }else
+            {
+                environmentBonusBar.value = 0f;
+                NEGenvironmentBonusBar.value = newEnvironmentStat;
+            }
+
+            /*if (prosperityStat >= 0)
             {
                 newProsperityStat = prosperityStat * (1 + prosperityBonus);
                 prosperityBonusBar.value = newProsperityStat;
@@ -171,7 +201,7 @@ public class StatUIDisplay : MonoBehaviour
                 newEnvironmentStat = environmentStat * (1 + (-1 * environmentBonus));
                 environmentBonusBar.value = 0f;
                 NEGenvironmentBonusBar.value = newEnvironmentStat * -1;
-            }
+            }*/
         }else
         {
             ResetBonusStatBars(); // probably redundant, as this is handled in "ActivateCell"-OnMouseOver
