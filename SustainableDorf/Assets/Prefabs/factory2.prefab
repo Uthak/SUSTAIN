@@ -327,7 +327,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setFix: 0
   Over: {fileID: 0}
-  hoverInfoEnabled: 1
 --- !u!65 &8091232553259371714
 BoxCollider:
   m_ObjectHideFlags: 0

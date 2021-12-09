@@ -22,9 +22,12 @@ public class ActivateCell : MonoBehaviour
     public Material Material2;
     Renderer[] children;
 
+    GameObject StatsDisplay;
+
     private void Awake()
     {
         SceneManager = GameObject.Find("SceneManager");
+        StatsDisplay = GameObject.Find("Stats_UI");
     }
 
     void OnTriggerEnter(Collider other)
@@ -92,7 +95,6 @@ public class ActivateCell : MonoBehaviour
                         break;
                 }
             }
-        
             SceneManager.GetComponent<PlaceObjectsOnGrid>().curObject.GetComponent<Stats>().NeighborEffect(factory, social, nature, sustainable); // this casts the neighbor effect
             //Debug.Log("factory" + factory);
             //Debug.Log("social" + social);
@@ -108,6 +110,8 @@ public class ActivateCell : MonoBehaviour
     private void OnMouseExit()
     {
         gameObject.GetComponent<MeshRenderer>().material = Material1;
+
+        //StatsDisplay.GetComponent<StatUIDisplay>().ResetBonusStatBars(); // not working, dunno why
 
         foreach (var tile in neighbors)
         {
