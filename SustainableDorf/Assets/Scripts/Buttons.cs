@@ -283,6 +283,14 @@ public class Buttons : MonoBehaviour
             tutorial_page_8.SetActive(true);
             forwardButton.GetComponent<Image>().color = new Color32(100, 100, 100, 100);
         }
+        if(tutorialPage == numberOfPages + 1)
+        {
+            Debug.Log(tutorialPage + " vs " + numberOfPages);
+            forwardButton.GetComponent<Image>().color = new Color32(100, 100, 100, 100);
+        }else
+        {
+            forwardButton.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
     }
     public void Backward()
     {
