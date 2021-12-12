@@ -19,6 +19,9 @@ TagManager:
   - BackGround_UI
   - Skill_UI
   - Title
+  - happiness
+  - environment
+  - energy
   layers:
   - Default
   - TransparentFX

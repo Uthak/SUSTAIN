@@ -12,10 +12,11 @@ public class StatsManager : MonoBehaviour
     [Header("(handshakes - don't touch)")]
     public int tileCounter = 0;
 
-    private int startingMoney;
-    public int availableMoney;
+    private float _startingMoney;
+    public float availableMoney;
     public float availableResources;
     private float _globalCostOfLiving;
+    public float upkeep = 0f; // how much production-tiles cost
     //private GameObject _sceneManager;
 
     #endregion
@@ -28,6 +29,9 @@ public class StatsManager : MonoBehaviour
     private float energyValue;
     private float happinessValue;
     private float environmentValue;
+    private float energyProductionRate;
+    private float happinessProductionRate;
+    private float environmentProductionRate;
 
     //float accelleratedDegenerationRate;
     //float degenerationThreshold;
@@ -51,8 +55,8 @@ public class StatsManager : MonoBehaviour
     void Start()
     {
         availableResources = GetComponent<NewGameManager>().baseStatValue;
-        startingMoney = GetComponent<NewGameManager>().startingMoneyValue;
-        availableMoney = startingMoney;
+        _startingMoney = GetComponent<NewGameManager>().startingMoneyValue;
+        availableMoney = _startingMoney;
         _globalCostOfLiving = GetComponent<NewGameManager>().baseCostOfLivingPerMinute / 50f / 60f; // this accounts for the base-tile of Pagotopia
 
         // determines basic stat values:
@@ -75,14 +79,21 @@ public class StatsManager : MonoBehaviour
         {
             StartCoroutine("SpeedUpDegeneration");
         }*/
+        Debug.Log("the bar shows " + baseStatValue);
     }
 
     // this updates the game stats at a rate of 50/s
     void FixedUpdate()
     {
-        energyValue -= _globalCostOfLiving;
-        happinessValue -= _globalCostOfLiving;
-        environmentValue -= _globalCostOfLiving;
+        energyValue -= _globalCostOfLiving + energyProductionRate;
+        //happinessValue -= _globalCostOfLiving + happinessProductionRate;
+        happinessValue += happinessProductionRate - _globalCostOfLiving;
+        environmentValue -= _globalCostOfLiving + environmentProductionRate;
+        availableMoney -= upkeep;
+
+        //Debug.Log("energy Bar " + energyValue + " happiness Bar " + happinessValue + " and available money is: " + availableMoney);
+        //Debug.Log("efficiency " + efficientlyPlaced);
+
 
         // as long as stat values are above the degeneration-threshold the normal degeneration-rate applies
         /*if (prosperityValue > degenerationThreshold && happinessValue > degenerationThreshold && environmentValue > degenerationThreshold)
@@ -227,5 +238,17 @@ public class StatsManager : MonoBehaviour
     public void UpdateCostOfLiving(float additionalCosts)
     {
         _globalCostOfLiving += additionalCosts;
+    }
+    public void UpdateEnergyProduction(float additionalProduction)
+    {
+        energyProductionRate += additionalProduction;
+    }
+    public void UpdateHappinessProduction(float additionalProduction)
+    {
+        happinessProductionRate += additionalProduction;
+    }
+    public void UpdateEnvironmentProduction(float additionalProduction)
+    {
+        environmentProductionRate += additionalProduction;
     }
 }

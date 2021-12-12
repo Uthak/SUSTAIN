@@ -6,17 +6,33 @@ public class NewGameManager : MonoBehaviour
     #region variables
     [Header("General Settings:")]
     // have metric displays of all variables
-    public bool developerMode = true;
-    public bool quickWin = false;
-
-    // controls global maximum of stats (and starting condition)
+    
     public float baseStatValue = 100f;
-    public int startingMoneyValue = 1000;
+    public float startingMoneyValue = 1000;
+    
+    [Header("Village-Tile Settings:")]
     public float baseCostOfLivingPerMinute = 25f;
-    public int baseTaxesGeneratedPerMinute = 100;
-    public int bonusTaxes = 50;
+    public float baseTaxesGeneratedPerMinute = 100;
+    public float bonusTaxes = 50;
     [Tooltip("(in seconds)")]
     public float taxationFrequency = 60f;
+
+    [Header("Production-Tile Settings:")]
+    public float baseConstructionCost = 300;
+    public float baseProductionValuePerMinute = 20f;
+    public float baseProductionCostPerMinute = 35f;
+    
+    [Header("Tier-II Settings:")]
+    public float tier2ProductionValuePerMinute = 10f;
+    public float tier2ProductionCostPerMinute = 15f;
+    [Header("Tier-III Settings:")]
+    public float tier3ProductionValuePerMinute = 15f;
+    public float tier3ProductionCostPerMinute = 15f;
+
+
+    [Header("Testing:")]
+    public bool developerMode = false;
+    public bool quickWin = false;
 
 
 
@@ -52,8 +68,8 @@ public class NewGameManager : MonoBehaviour
     // Separate, optional display that lets you read out the actual degeneration rates of all stats
     // becomes activated if using numerical degeneration-rates or stat-values (see above)
     //[Tooltip("becomes activated if using numerical degeneration-rates or stat-values (see above)")]
-    
-    [SerializeField] GameObject developmentStatUI;
+
+    //[SerializeField] GameObject developmentStatUI;
 
     //[SerializeField] bool showDegenerationRates = true;
     //[SerializeField] TextMeshProUGUI prosperityDegenerationRateField;

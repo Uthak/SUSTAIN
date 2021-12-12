@@ -25,10 +25,10 @@ public class VillageStats : MonoBehaviour
     public bool influencedByNeighbors = false;
     private GameObject _sceneManager;
     private float _costOfLiving;
-    private int _taxesToPay;
-    private int _bonusTaxes;
+    private float _taxesToPay;
+    private float _bonusTaxes;
     private float _frequencyToPay;
-    //private bool _isInCoroutine = false;
+    private bool _isInCoroutine = false;
     #endregion
 
     void Awake()
@@ -41,58 +41,61 @@ public class VillageStats : MonoBehaviour
     }
 
     // subtract costs of living 50times per second
-    /*private void FixedUpdate()
+    private void FixedUpdate()
     {
         if (wasPlaced && !_isInCoroutine)
         {
-            _sceneManager.GetComponent<StatsManager>().energyValue -= _costOfLiving;
-            _sceneManager.GetComponent<StatsManager>().happinessValue -= _costOfLiving;
-            _sceneManager.GetComponent<StatsManager>().environmentValue -= _costOfLiving;
+            //_sceneManager.GetComponent<StatsManager>().energyValue -= _costOfLiving;
+            //_sceneManager.GetComponent<StatsManager>().happinessValue -= _costOfLiving;
+            //_sceneManager.GetComponent<StatsManager>().environmentValue -= _costOfLiving;
             StartCoroutine("GenerateIncome"); // starts coRoutine only if tile is placed
         }
-    }*/
+    }
 
     // generate income:
     IEnumerator GenerateIncome()
     {
-        //_isInCoroutine = true;
+        _isInCoroutine = true;
+
+        float currentBonus = 0;
+
         yield return new WaitForSeconds(_frequencyToPay);
         
         // add bonus-income based on influences:
         if (influencedByEnergy)
         {
-            _taxesToPay += _bonusTaxes;
+            currentBonus += _bonusTaxes;
             _sceneManager.GetComponent<StatsManager>().efficientlyPlaced++;
         }
         if (influencedByHappiness)
         {
-            _taxesToPay += _bonusTaxes;
+            currentBonus += _bonusTaxes;
             _sceneManager.GetComponent<StatsManager>().efficientlyPlaced++;
         }
         if (influencedByNature)
         {
-            _taxesToPay += _bonusTaxes;
+            currentBonus += _bonusTaxes;
             _sceneManager.GetComponent<StatsManager>().efficientlyPlaced++;
         }
         if (influencedByNeighbors)
         {
-            _taxesToPay += _bonusTaxes;
+            currentBonus += _bonusTaxes;
             _sceneManager.GetComponent<StatsManager>().efficientlyPlaced++;
         }
 
-        _sceneManager.GetComponent<StatsManager>().availableMoney += _taxesToPay;
-        ShowGeneratedTaxes(_taxesToPay);
-        _bonusTaxes = 0; // reset to prevent bonus climbing endlessly
-        
-        StartCoroutine("GenerateIncome"); // start over
+        _sceneManager.GetComponent<StatsManager>().availableMoney += (_taxesToPay + currentBonus);
+        ShowGeneratedTaxes(_taxesToPay + currentBonus);
+        //StartCoroutine("GenerateIncome"); // start over
 
-        //_isInCoroutine = false; // starts coRoutine inside Update again
+        _isInCoroutine = false; // starts coRoutine inside Update again
     }
 
     // (juice) audiovisual feedback to player:
-    private void ShowGeneratedTaxes(int _taxesToPay)
+    private void ShowGeneratedTaxes(float _taxesToPay)
     {
         cashRegister_Sound.Play();
+        Debug.Log("I generated " + _taxesToPay);
+
         // show taxAmt popup using _taxesToPay
     }
 
