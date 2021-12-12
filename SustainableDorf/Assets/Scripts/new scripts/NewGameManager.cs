@@ -9,8 +9,14 @@ public class NewGameManager : MonoBehaviour
     
     public float baseStatValue = 100f;
     public float startingMoneyValue = 1000;
-    
+    public float pointsForEfficiency = 100f; // used in StatsManager to calculate points for efficiency at game-end
+
+    [Header("Map Settings:")]
+    public GameObject pagotopia;
+
     [Header("Village-Tile Settings:")]
+    public float baseVillageConstructionCost = 10f;
+    public float upgradeCost = 300f;
     public float baseCostOfLivingPerMinute = 25f;
     public float baseTaxesGeneratedPerMinute = 100;
     public float bonusTaxes = 50;

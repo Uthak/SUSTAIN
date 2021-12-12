@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,67 +9,60 @@ public class StatsManager : MonoBehaviour
 {
     #region variables
     [Header("Stats Settings:")]
-
-    [Header("(handshakes - don't touch)")]
-    public int tileCounter = 0;
-
-    private float _startingMoney;
-    public float availableMoney;
-    public float availableResources;
-    private float _globalCostOfLiving;
-    public float upkeep = 0f; // how much production-tiles cost
-    //private GameObject _sceneManager;
-
-    #endregion
-
-
-    //float speedUpDegenerationTime;
-    //float degenerationIncreaseOverTime;
-    //bool degenerationWasIncreased = false;
-
-    private float energyValue;
-    private float happinessValue;
-    private float environmentValue;
-    private float energyProductionRate;
-    private float happinessProductionRate;
-    private float environmentProductionRate;
-
-    //float accelleratedDegenerationRate;
-    //float degenerationThreshold;
-    private float baseStatValue;
-
-    [SerializeField] Slider prosperityBar;
+    [SerializeField] Slider energyBar;
     [SerializeField] Slider happinessBar;
     [SerializeField] Slider environmentBar;
-    [SerializeField] Image proImg;
-    [SerializeField] Image hapImg;
-    [SerializeField] Image envImg;
+    [SerializeField] Image energyBarFilling;
+    [SerializeField] Image happinessBarFilling;
+    [SerializeField] Image environmentBarFilling;
 
+    [Header("(handshakes - don't touch)")]
+    public float energyValue;
+    public float happinessValue;
+    public float environmentValue;
+    public float availableMoney;
+    public float[] availableResources;
+    public float upkeep = 0f; // how much production-tiles cost
+    public float smallestAvailableValue;
+    public int tileCounter = 0;
+    private float _baseStatValue;
+    private float _globalCostOfLiving;
+    private float _startingMoney;
+    private float _energyProductionRate;
+    private float _happinessProductionRate;
+    private float _environmentProductionRate;
     Color proImgBaseColor;
     Color hapImgBaseColor;
     Color envImgBaseColor;
 
+    //float accelleratedDegenerationRate;
+    //float degenerationThreshold;
+    //float speedUpDegenerationTime;
+    //float degenerationIncreaseOverTime;
+    //bool degenerationWasIncreased = false;
+
     // added to calculate score
     public int cowCounter = 0;
     public int efficientlyPlaced = 0;
+    //public int efficiencePoints; // calculate when round ends: efficiencePoints = efficientlyPlaced * GetComponent<NewGameManager>().pointsForEfficiency;
+    #endregion
 
     void Start()
     {
-        availableResources = GetComponent<NewGameManager>().baseStatValue;
         _startingMoney = GetComponent<NewGameManager>().startingMoneyValue;
         availableMoney = _startingMoney;
         _globalCostOfLiving = GetComponent<NewGameManager>().baseCostOfLivingPerMinute / 50f / 60f; // this accounts for the base-tile of Pagotopia
 
-        // determines basic stat values:
-        baseStatValue = GetComponent<NewGameManager>().baseStatValue; // this is used to stop overgrowth
-        energyValue = baseStatValue;
-        happinessValue = baseStatValue;
-        environmentValue = baseStatValue;
+        // basic stat values:
+        _baseStatValue = GetComponent<NewGameManager>().baseStatValue; // this is used to stop overgrowth
+        energyValue = _baseStatValue;
+        happinessValue = _baseStatValue;
+        environmentValue = _baseStatValue;
 
-        // determines basic stat-bar colors (green):
-        proImgBaseColor = proImg.color;
-        hapImgBaseColor = hapImg.color;
-        envImgBaseColor = envImg.color;
+        // basic stat-bar colors (green):
+        proImgBaseColor = energyBarFilling.color;
+        hapImgBaseColor = happinessBarFilling.color;
+        envImgBaseColor = environmentBarFilling.color;
 
         // pick up the timer-setting from GameManager to accellerate degeneration rates over time
         //speedUpDegenerationTime = SceneManager.GetComponent<GameManager>().speedUpDegenerationTime;
@@ -79,16 +73,17 @@ public class StatsManager : MonoBehaviour
         {
             StartCoroutine("SpeedUpDegeneration");
         }*/
-        Debug.Log("the bar shows " + baseStatValue);
+        //Debug.Log("the bar shows " + _baseStatValue);
     }
 
-    // this updates the game stats at a rate of 50/s
+    // this updates the game stats at a rate of 50/s:
     void FixedUpdate()
     {
-        energyValue -= _globalCostOfLiving + energyProductionRate;
-        //happinessValue -= _globalCostOfLiving + happinessProductionRate;
-        happinessValue += happinessProductionRate - _globalCostOfLiving;
-        environmentValue -= _globalCostOfLiving + environmentProductionRate;
+        energyValue += _energyProductionRate - _globalCostOfLiving;
+        happinessValue += _happinessProductionRate - _globalCostOfLiving;
+        environmentValue += _environmentProductionRate - _globalCostOfLiving;
+        float[] currentAvailableResources = {energyValue, happinessValue, environmentValue};
+        smallestAvailableValue = Mathf.Min(currentAvailableResources); // returns the lowest available resource value
         availableMoney -= upkeep;
 
         //Debug.Log("energy Bar " + energyValue + " happiness Bar " + happinessValue + " and available money is: " + availableMoney);
@@ -122,24 +117,23 @@ public class StatsManager : MonoBehaviour
         }*/
 
 
-        // displays updated stat values in UI
-        // was previously in the if/else statement above. if this works - DELETE this comment! (!!!!!!)
-        prosperityBar.value = energyValue;
+        // displays updated stat values in UI:
+        energyBar.value = energyValue;
         happinessBar.value = happinessValue;
         environmentBar.value = environmentValue;
 
         // ensures that the stat caps cannot be surpassed
-        if (energyValue > baseStatValue)
+        if (energyValue > _baseStatValue)
         {
-            energyValue = baseStatValue;
+            energyValue = _baseStatValue;
         }
-        if (happinessValue > baseStatValue)
+        if (happinessValue > _baseStatValue)
         {
-            happinessValue = baseStatValue;
+            happinessValue = _baseStatValue;
         }
-        if (environmentValue > baseStatValue)
+        if (environmentValue > _baseStatValue)
         {
-            environmentValue = baseStatValue;
+            environmentValue = _baseStatValue;
         }
 
         // call "VictoryScript"-script to end game if any stat value drops to 0 (or below)
@@ -156,40 +150,40 @@ public class StatsManager : MonoBehaviour
         // 25.01%-50% orange
         // 0%-25% red
 
-        //PROSPERITY
-        if (energyValue > (baseStatValue / 2))
+        // PROSPERITY:
+        if (energyValue > (_baseStatValue / 2))
         {
-            proImg.color = proImgBaseColor; // green
-        }else if (energyValue <= (baseStatValue / 2) && energyValue > (baseStatValue / 4))
+            energyBarFilling.color = proImgBaseColor; // green
+        }else if (energyValue <= (_baseStatValue / 2) && energyValue > (_baseStatValue / 4))
         {
-            proImg.color = new Color32(255, 116, 0, 150); // orange
-        }else if (energyValue <= (baseStatValue / 4))
+            energyBarFilling.color = new Color32(255, 116, 0, 150); // orange
+        }else if (energyValue <= (_baseStatValue / 4))
         {
-            proImg.color = new Color32(188, 0, 0, 200); // red
+            energyBarFilling.color = new Color32(188, 0, 0, 200); // red
         }
 
-        //HAPPINESS
-        if (happinessValue > (baseStatValue / 2))
+        // HAPPINESS:
+        if (happinessValue > (_baseStatValue / 2))
         {
-            hapImg.color = hapImgBaseColor;
-        }else if (happinessValue <= (baseStatValue / 2) && happinessValue > (baseStatValue / 4))
+            happinessBarFilling.color = hapImgBaseColor;
+        }else if (happinessValue <= (_baseStatValue / 2) && happinessValue > (_baseStatValue / 4))
         {
-            hapImg.color = new Color32(255, 116, 0, 150);
-        }else if (happinessValue <= (baseStatValue / 4))
+            happinessBarFilling.color = new Color32(255, 116, 0, 150);
+        }else if (happinessValue <= (_baseStatValue / 4))
         {
-            hapImg.color = new Color32(188, 0, 0, 200);
+            happinessBarFilling.color = new Color32(188, 0, 0, 200);
         }
 
-        //ENVIRONMENT
-        if (environmentValue > (baseStatValue / 2))
+        // ENVIRONMENT:
+        if (environmentValue > (_baseStatValue / 2))
         {
-            envImg.color = envImgBaseColor;
-        }else if (environmentValue <= (baseStatValue / 2) && environmentValue > (baseStatValue / 4))
+            environmentBarFilling.color = envImgBaseColor;
+        }else if (environmentValue <= (_baseStatValue / 2) && environmentValue > (_baseStatValue / 4))
         {
-            envImg.color = new Color32(255, 116, 0, 150);
-        }else if (environmentValue <= (baseStatValue / 4))
+            environmentBarFilling.color = new Color32(255, 116, 0, 150);
+        }else if (environmentValue <= (_baseStatValue / 4))
         {
-            envImg.color = new Color32(188, 0, 0, 200);
+            environmentBarFilling.color = new Color32(188, 0, 0, 200);
         }
 
         /*if (tileCounter == 5 | tileCounter == 10 | tileCounter == 15 | tileCounter == 20 | tileCounter == 25 | tileCounter == 30 | tileCounter == 35 | tileCounter == 40 | tileCounter == 45)
@@ -241,14 +235,14 @@ public class StatsManager : MonoBehaviour
     }
     public void UpdateEnergyProduction(float additionalProduction)
     {
-        energyProductionRate += additionalProduction;
+        _energyProductionRate += additionalProduction;
     }
     public void UpdateHappinessProduction(float additionalProduction)
     {
-        happinessProductionRate += additionalProduction;
+        _happinessProductionRate += additionalProduction;
     }
     public void UpdateEnvironmentProduction(float additionalProduction)
     {
-        environmentProductionRate += additionalProduction;
+        _environmentProductionRate += additionalProduction;
     }
 }

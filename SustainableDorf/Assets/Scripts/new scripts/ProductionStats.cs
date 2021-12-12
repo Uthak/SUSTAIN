@@ -11,7 +11,7 @@ public class ProductionStats : MonoBehaviour
 
     [Header("Tile Sounds:")]
     [SerializeField] AudioSource build_Sound;
-    [SerializeField] AudioSource operation_Sound;
+    [SerializeField] AudioSource upgrade_Sound;
 
     [Header("(handshakes - don't touch)")]
     public bool wasPlaced = false;
@@ -29,24 +29,26 @@ public class ProductionStats : MonoBehaviour
         _constructionCost = _sceneManager.GetComponent<NewGameManager>().baseConstructionCost;
         _productionCostPerMinute = _sceneManager.GetComponent<NewGameManager>().baseProductionCostPerMinute / 50 / 60;
     }
+
+    // called when Upgrade-Tile is placed onto this built tile:
     public void Upgrade()
     {
         if(tierLevel == 1)
         {
-            tierLevel++; // tier II
+            tierLevel++; // now: tier II
             _productionValue += _sceneManager.GetComponent<NewGameManager>().tier2ProductionValuePerMinute / 50f / 60f;
             _sceneManager.GetComponent<StatsManager>().upkeep += _sceneManager.GetComponent<NewGameManager>().tier2ProductionCostPerMinute / 50 / 60;
             TierII.GetComponent<MeshRenderer>().enabled = true;
-            operation_Sound.Play();
+            upgrade_Sound.Play();
             Debug.Log("upkeep shall now be " + _sceneManager.GetComponent<StatsManager>().upkeep);
         }
         else if (tierLevel == 2)
         {
-            tierLevel++; // tier III
+            tierLevel++; // now: tier III
             _productionValue += _sceneManager.GetComponent<NewGameManager>().tier3ProductionValuePerMinute / 50f / 60f;
             _sceneManager.GetComponent<StatsManager>().upkeep += _sceneManager.GetComponent<NewGameManager>().tier3ProductionCostPerMinute / 50 / 60;
             TierIII.GetComponent<MeshRenderer>().enabled = true;
-            operation_Sound.Play();
+            upgrade_Sound.Play();
             Debug.Log("upkeep shall now be " + _sceneManager.GetComponent<StatsManager>().upkeep);
         }
     }
@@ -78,7 +80,7 @@ public class ProductionStats : MonoBehaviour
             {
                 _sceneManager.GetComponent<StatsManager>().UpdateEnvironmentProduction(_productionValue);
             }
-            tierLevel++; // tier I
+            tierLevel++; // now: tier I
         }
     }
 }
