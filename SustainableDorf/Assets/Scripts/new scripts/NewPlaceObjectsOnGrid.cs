@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceObjectsOnGrid : MonoBehaviour
+public class NewPlaceObjectsOnGrid : MonoBehaviour
 {
     public Transform City;
     public Transform gridCellPrefab;
@@ -13,7 +13,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
     [SerializeField] int width;
 
     private Vector3 mousePosition;
-    private Node[,] nodes;
+    private Tile[,] nodes;
     private Plane plane;
 
     //My Var.
@@ -56,12 +56,12 @@ public class PlaceObjectsOnGrid : MonoBehaviour
 
         foreach (var node in nodes)
         {
-            if (node.activeFix == false)
+            if (node.new_activeFix == false)
             {
-                if (node.obj.GetComponent<ActivateCell>().Active == true)
+                if (node.new_obj.GetComponent<ActivateCell>().Active == true)
                 {
-                    node.isPlaceable = true;
-                    node.activeFix = true;
+                    node.new_isPlaceable = true;
+                    node.new_activeFix = true;
                 }
             }
             //winning Condition
@@ -112,7 +112,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
             foreach (var node in nodes)
             {
                 
-                    if (node.cellPosition == mousePosition && node.isPlaceable)
+                    if (node.new_cellPosition == mousePosition && node.new_isPlaceable)
                     {
                         //Debug.Log("BBBB");
                         if (Input.GetMouseButtonUp(0))
@@ -130,9 +130,9 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                             StatsDisplay.GetComponent<StatUIDisplay>().ResetStatBars();
                             StatsDisplay.GetComponent<StatUIDisplay>().ResetBonusStatBars();
 
-                            node.isPlaceable = false;
+                            node.new_isPlaceable = false;
                             isOnGrid = true;
-                            curObject.transform.position = node.cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
+                            curObject.transform.position = node.new_cellPosition + new Vector3(x: 0, y: 0.1f, z: 0);
                             onMousePrefab = null;
 
                             PlopSound.Play();
@@ -183,7 +183,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
 
     private void CreateGrid()
     {
-        nodes = new Node[width, height];
+        nodes = new Tile[width, height];
         var name = 0;
         for (int i = 0; i < width; i++)
         {
@@ -192,7 +192,7 @@ public class PlaceObjectsOnGrid : MonoBehaviour
                 Vector3 worldPosition = new Vector3(x: i - width/2, y: 0, z: j - height/2);
                 Transform obj = Instantiate(gridCellPrefab, worldPosition, Quaternion.identity);
                 obj.name = "Cell" + name;
-                nodes[i, j] = new Node(isPlaceable: false, worldPosition, obj, activeFix: false);
+                nodes[i, j] = new Tile(new_isPlaceable: false, worldPosition, obj, new_activeFix: false);
                 name++;
 
                 //Anzahl an Zellen wird belegt, damit es für die WinningCondition überprüft werden kann
@@ -205,33 +205,36 @@ public class PlaceObjectsOnGrid : MonoBehaviour
         GameObject middle = GameObject.Find("Cell" + half);
         //Debug.Log("Centerpiece number: " + middle);
         Instantiate(City, new Vector3(0, 0.1f,0) /*new Vector3(x: width/2, y: 0, z: height/2)*/, Quaternion.identity);
-        nodes[width / 2, height / 2].isPlaceable = false;
-        nodes[width / 2, height / 2].activeFix = true;
+        nodes[width / 2, height / 2].new_isPlaceable = false;
+        nodes[width / 2, height / 2].new_activeFix = true;
         City.GetComponent<ClickTile>().setFix = true;
 
 
         //Set rocks on random positions
+        /*
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log("hey");
+            Instantiate(cube, new Vector3( Tile[Random.Range(0, allCells)]. ), Quaternion.identity);
+            Debug.Log("im a rock");
         }
+        */
     }
 }
 
 
 
-public class Node
+public class Tile
 {
-    public bool isPlaceable;
-    public Vector3 cellPosition;
-    public Transform obj;
-    public bool activeFix;
+    public bool new_isPlaceable;
+    public Vector3 new_cellPosition;
+    public Transform new_obj;
+    public bool new_activeFix;
 
-    public Node(bool isPlaceable, Vector3 cellPosition, Transform obj, bool activeFix)
+    public Tile(bool new_isPlaceable, Vector3 new_cellPosition, Transform new_obj, bool new_activeFix)
     {
-        this.isPlaceable = isPlaceable;
-        this.cellPosition = cellPosition;
-        this.obj = obj;
-        this.activeFix = activeFix;
+        this.new_isPlaceable = new_isPlaceable;
+        this.new_cellPosition = new_cellPosition;
+        this.new_obj = new_obj;
+        this.new_activeFix = new_activeFix;
     }
 }
